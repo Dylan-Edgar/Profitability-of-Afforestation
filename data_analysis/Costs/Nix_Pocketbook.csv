@@ -1,0 +1,30 @@
+﻿Metric,min,max,Unit
+Broadleaf tree stock,400,650,£ / 1000
+Conifer tree stock,400,500,£ / 1000
+Fencing - Rabbit,4.4,6.3,£ / m
+Fencing - Stock,4.35,5.4,£ / m
+Fencing - Deer,6.8,8.9,£ / m
+Fencing - Deer + Rabbit,8.4,11,£ / m
+Fencing - Split Post + Rail,5.7,8.9,£ / m
+Tree Guard - Spiral + Cane,40,45,£ / 100
+Tree Guard - Plastic Tube,140,190,£ / 100
+Tree Guard - Softwood Stakes,75,100,£ / 100
+Spot spraying,60,90,£ / 1000
+Hand Planting - Broadleaf,600,900,£ / 1000
+Hand Planting - Conifer,600,900,£ / 1000
+Machine Planting,110,215,£ / 1000
+Beating up - labour,115,210,£ / ha
+Beating up - stock,95,160,£ / ha
+Herbicide,75,135,£ / ha
+Inter-row Mowing,75,210,£ / ha
+Upland - Ploughing,140,220,£ / ha
+Upland - Moulding,290,405,£ / ha
+Upland - Drainage,90,115,£ / ha
+Upland - Scrub Clearance,300,400,£ / ha
+Upland - Fertilising,132,297,£ / ha
+Lowland - Ploughing,70,105,£ / ha
+Lowland - Moulding,290,405,£ / ha
+Lowland - Drainage,0,0,£ / ha
+Lowland - Scrub Clearance,250,350,£ / ha
+Lowland - Fertilising,0,0,£ / ha
+Access road,13500,33000,£ / km

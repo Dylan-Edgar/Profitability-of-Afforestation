@@ -1,0 +1,2987 @@
+---
+output:
+  bookdown::pdf_book:
+    fig_caption: TRUE
+    number_sections: TRUE
+    toc: FALSE
+    keep_tex: FALSE # RStudio creates a .tex file on knit. TRUE keeps it. FALSE deletes.
+  bookdown::html_book:
+    df_print: paged
+    toc: FALSE
+  bookdown::word_document2:
+    toc: FALSE
+bibliography: Dissertation_v1.bib
+csl: "Citation Style Language/harvard-cite-them-right-with-overhang.csl"
+link-citations: TRUE
+indent: TRUE
+documentclass: article
+classoption: a4paper
+urlcolor: blue
+linkcolor: blue
+fontsize: 12 pt
+geometry: "top = 2.5cm, left = 3cm, bottom = 2.5cm, right = 3cm"
+header-includes:
+- \usepackage{placeins}
+- \usepackage{fancyhdr}
+- \usepackage{setspace}
+- \usepackage{chngcntr}
+- \usepackage{microtype}
+- \usepackage{xcolor}
+- \usepackage{parskip}
+- \onehalfspacing
+- \counterwithin{figure}{section}
+- \counterwithin{table}{section}
+editor_options:
+  markdown:
+    wrap: 72
+---
+
+<!-- https://bookdown.org/yihui/rmarkdown/pdf-document.html#table-of-contents-1 -->
+
+<!-- https://cocky-elion-5880fb.netlify.app/2016/03/18/writing-your-thesis-with-r-markdown-3-figures-r-code-and-tables/ -->
+
+```{r libraries, include=FALSE}
+library(wordcountaddin) # Library used to insert word count on to the title page.
+library(bookdown) # used for 'output:bookdown::pdf_book' so that I can cross reference things
+library(here) # use for here()
+library(tidyverse) # read_csv()
+library(knitr) # used for kable()
+library(kableExtra) # used for kable()
+library(rgdal) # readOGR()
+library(broom) # tidy()
+library(ggplot2) # ggplot()
+library(plotly)
+library(scales)
+library(janitor) # tidy()
+library(viridis)
+
+# rm(list=ls())  # Clear the rstudio environemnt (data frames etc.)
+# cat("\014") # Clear the console (just makes things look nice and new and tidy)
+# gc() # Free up unused memory (RStudio starts hoarding memory if running for a long time... apparently)
+# try(dev.off(dev.list()["RStudioGD"]), silent=TRUE) # Clear all plots (and silence the error if there are none to clear)
+```
+
+```{r global_options, include=FALSE}
+opts_chunk$set(fig.path = 'figures/',
+                      echo = FALSE, # prevent R code from being printed
+                      warning = FALSE, # warnings won’t be printed
+                      message = FALSE) # messages (similar to warnings) won’t be printed either
+```
+
+```{=tex}
+\pagenumbering{gobble}
+\color{black}
+```
+```{r Set-Colours}
+# Set the colours to be used in plots and figures
+
+Primary_Colour <- "black"
+Secondary_Colour <- "red"
+
+# --------------------------------------------------------
+# ----------------------- NOTES --------------------------
+# --------------------------------------------------------
+
+# kableExtra() table formatting guide
+# https://haozhu233.github.io/kableExtra/
+
+```
+
+<style>
+p.caption {font-size: 0.6em;}
+</style>
+
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ----------------------------- TITLE PAGE ------------------------------ -->
+
+<!-- ----------------------------------------------------------------------- -->
+
+```{r GlobalAcademy-Fig, out.width = '55%', fig.align = 'center'}
+include_graphics(here("images/GA Logo 4.png"))
+```
+
+```{=tex}
+\begin{centering}
+
+\vspace{1 cm}
+
+\line(1,0){350} \\
+[6mm]
+\large{\bfseries The Comparative Profitability of Afforestation for Carbon} \\
+\large{\bfseries Sequestration versus Existing Farm Production} \\
+\large{\bfseries on UK Agricultural Land} \\
+[2.6mm]
+\line(1,0){200} \\
+
+\vspace{2 cm}
+
+\normalsize{B139086}
+
+\normalsize{May 2022}
+
+\vspace{2 cm}
+
+\textsc{\Large The University of Edinburgh}
+
+\textsc{\large Global Academy of Agriculture and Food Systems}
+
+\vspace{1 cm}
+
+\textsc{\large Agricultural Science}
+
+\textsc{\normalsize (Global Agriculture and Food Security)}
+
+\textsc{\large Undergraduate Dissertation}
+
+\vspace{4 cm}
+
+Word Count: `r word_count("Dissertation.Rmd")`
+
+\end{centering}
+```
+
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ------------------------------ ABSTRACT ------------------------------- -->
+
+<!-- ----------------------------------------------------------------------- -->
+
+```{=tex}
+\newpage
+\pagenumbering{Roman}
+\pagestyle{fancy}
+\fancyhead[L,R]{}
+\fancyhead[L,R]{}
+\setlength{\headheight}{15pt}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+```
+\fancyhead[CO,CE]{}
+
+<!-- \doublespacing -->
+
+# Abstract {.unnumbered}
+
+\doublespacing
+
+In response to recent agricultural land purchases by corporations and investment firms expressly for purposes of afforestation, this dissertation sets out to explore the motive behind such purchases by assessing the current state of UK carbon markets and attempting to determine the price at which it becomes more profitable to sell carbon offsets through afforestation than to produce food on UK agricultural land.
+
+One of the key drivers of recent land purchases is found to stem from an increase in the government targeted rates of afforestation in the UK, the justification for which is partially attributed to carbon sequestration for use as emissions offsets in achieving "Net Zero" ambitions. Though regulation of the creation of carbon offset units in the UK seems robust, regulation governing the transparency of the nascent market for trading those units seems less comprehensive. This lack of transparency has created a highly speculative market, with publicly reported sale prices for *ex-ante* units ranging from £10 to £40. This variation seems to be largely driven by limits on market knowledge, and has a considerable impact on the profitability of, and incentivisation for, afforestation projects, with those few in possession of greater market knowledge able to make bolder investment decisions such as land purchases. Currently, only a small portion of total emissions are capable of being offset through carbon units in the UK, however, the IPCC has recently stated that limiting global warming to 1.5 $^{\circ}C$ cannot be achieved without carbon removals, and the framework governing international trade of carbon offsets, Article 6 of the Paris Agreement, was finally agreed at COP26 in 2021. Both events suggest a near-term proliferation in both domestic and global carbon markets, with implications on farm profitability, land use change, tenant farming, and food security. Since the objective of carbon markets is to maximise carbon removals, not profit, there is a need for greater transparency in the operation of these markets to encourage competition and to ensure that opportunities can be equally realised by all.
+
+This work finds that, although an estimate of the price at which it becomes more profitable to grow trees than food can be made using publicly available secondary data - around £50/unit in the Scottish Highlands and £100/unit in the South of England at current farm income levels - the considerable uncertainty surrounding input variables limits confidence in these results, and it is expected that primary data would vastly improve the accuracy of the calculations.
+
+\singlespacing
+
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ------------------- DECLARATION and ACKNOWLEDGEMENTS ------------------ -->
+
+<!-- ----------------------------------------------------------------------- -->
+
+```{=tex}
+\newpage
+\fancyhead[C]{}
+\section*{Declaration}
+\addcontentsline{toc}{section}{Declaration, Acknowledgements  \&  Glossary}
+\singlespacing
+```
+
+I confirm that all this work is my own except where indicated, and that:
+
+1.	I have read and understood the University’s regulations in relation to academic misconduct;
+
+2.	I have clearly referenced/listed all sources as appropriate;
+
+3.	I have referenced and appropriately indicated all quoted text (from books, web, etc), making appropriate use of quotation marks;
+
+4.	I have given the sources of all pictures, data, etc., that are not my own;
+
+5.	I have not made any use of the course work assessment material of any other student(s) either past or present, or colluded with others;
+
+6.	I have not submitted for assessment work previously submitted for this or any other course, degree or qualification, with the exception of materials from my Dissertation Plans and Literature reviews submitted in Professional Skills 4 and this course.
+
+7.	I have not incorporated any work from or used the help of any external professional agencies, including essay mills, other than extracts from attributed sources and proof-reading agencies whose services comply with University Regulations;
+
+8.	I have acknowledged in appropriate places any help that I have received from others (e.g. fellow students, teachers in schools, external sources);
+
+9.	I have complied with any other requirements specified in the course and programme handbooks;
+
+10.	I understand that the University of Edinburgh and TurnitinUK may make an electronic copy of my submitted work for assessment, similarity reporting and archiving purposes;
+
+11.	I understand that any false claim for any of the above will mean that the relevant piece of work will be penalised in accordance with the University regulations.
+
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ------------------------- Acknowledgements ---------------------------- -->
+
+<!-- ----------------------------------------------------------------------- -->
+
+\newpage
+\section*{Acknowledgements}
+
+This RMarkdown document is based on the guide and example provided here:
+
+<http://rosannavanhespenresearch.wordpress.com>
+
+Alfy said it is often nice to acknowledge your supervisor...
+
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ------------------------------ GLOSSARY ------------------------------- -->
+
+<!-- ----------------------------------------------------------------------- -->
+
+\newpage
+\section*{Glossary}
+
+BECCS
+
+:   Bioenergy with Carbon Capture and Storage (\@ref(FuturePriceDiscussion))
+
+CCC
+
+:   Committee on Climate Change (\@ref(SectionIntroduction))
+
+CCS
+
+:   Carbon Capture and Storage (\@ref(FuturePriceDiscussion))
+
+CDM
+
+:   Clean Development Mechanism (\@ref(Lit-Review))
+
+COP
+
+:   Conference of the Parties (\@ref(Lit-Review))
+
+DACCS
+
+:   Direct Air Carbon Capture and Storage (\@ref(FuturePriceDiscussion))
+
+NDC
+
+:   Nationally Determined Contribution
+
+NUTS
+
+:   Nomenclature of Territorial Units for Statistics (\@ref(NUTS-Methods))
+
+PIU
+
+:   Pending Issuance Unit (\@ref(WCC-Methods))
+
+TIFF
+
+:   Total Income From Farming (\@ref(TIFF-Methods))
+
+WCC
+
+:   Woodland Carbon Code (\@ref(WCC-Methods))
+
+WCU
+
+:   Woodland Carbon Unit (\@ref(WCC-Methods))
+
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ------------------------------ CONTENTS ------------------------------- -->
+
+<!-- ----------------------------------------------------------------------- -->
+
+```{=tex}
+\small
+\newpage
+\fancyhead[C]{}
+\setcounter{tocdepth}{2}
+\tableofcontents
+\normalsize
+```
+
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ---------------------- LIST of TABLES and FIGURES --------------------- -->
+
+<!-- ----------------------------------------------------------------------- -->
+
+```{=tex}
+\newpage
+\fancyhead[C]{}
+\listoffigures
+\addcontentsline{toc}{section}{List of Figures \& Tables}
+\listoftables
+```
+
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ---------------------------- INTRODUCTION ----------------------------- -->
+
+<!-- ----------------------------------------------------------------------- -->
+
+```{=tex}
+\newpage
+\pagenumbering{arabic}
+\fancyhead[C]{Part 1 - Introduction}
+```
+
+# Introduction {#SectionIntroduction}
+
+\doublespacing
+
+Achieving "Net Zero", commonly used to mean a balancing of anthropogenic carbon emissions and removals over a set period [@ipccAnnexGlossaryGlobal2018] though lacking an internationally agreed definition [@carbontrustNetZero2022; @climatepartnerWhatDoesNet2020], is increasingly cited as an aspirational target to be met by 2050. At least 100 national governments [@vansoestNetzeroEmissionTargets2021], including the UK [@dbeisNetZeroStrategy2021]; 826 cities and 1,565 companies [@nciandddelNavigatingNuancesNetzero2020], including 60 of the 100 largest companies in the UK [@edie60BritainLargest2021]; industry bodies [@nfuAchievingNETZERO2020]; and even a University of Edinburgh lecturer [@westonCarbonMyThing2021a] have either set or are considering the goal of Net Zero, and obtaining the right to emit carbon by paying others to reduce or remove it, otherwise known as carbon offsetting, is proposed to be one of the key pathways to achieving it. Though 91% of countries, 79% of cities and 48% of companies fail to declare if offsets will be used in their Net Zero strategies [@haleCarbonOffsetMarket2022], 308 companies, 54 cities, and 28 countries have stated they will, based on data collected by Net Zero Tracker [-@netzerotrackerDownloadData2022]. Mark Carney's *Taskforce for Scaling Voluntary Carbon Markets* has gone further, and is calling on organisations to commit not just to becomming 'Net Zero' by 2050, but to fully neutralize all emissions on the path to 'Net Zero' through carbon reductions and removals [-@taskforceforscalingvoluntarycarbonmarketsCallingHighAmbition2021], and Working Group III of the IPCC have stated "rapid deployment of [land-based sequestration] measures is essential in all pathways staying within the limits of the... 1.5 $^{\circ}C$ target" [@ipccClimateChange20222022]. Offsetting is particularly consequential for the agricultural sector, both due to the difficulty of eliminating many sources of carbon emissions in the necessary time frame (e.g., methane emissions from ruminant livestock), and because of the extent of land available to the sector for carbon removal. The UK Committee on Climate Change (CCC) *Sector Summary for Agriculture and Land Use, Land Use Change and Forestry* (LULUCF) from their Sixth Carbon Budget [@cccSectorSummaryAgriculture2020] states that in order to approach Net Zero in the UK by 2050, rates of afforestation must reach 30,000 ha/year by 2025 (a target the government has already committed to [@defraThousandsTreesBe2020], despite reaching just 29% of their 5,000 ha planting target in 2019 [@harveyTreeplantingEnglandFalls2019a]) and 50,000 ha/year by 2035. This includes the integration of trees on 10% of farmland by 2050, up from an estimated 1% in 2020 [@cccSectorSummaryAgriculture2020]. If these targets are achieved, combined emissions from the UK's LULUCF sector could fall to 16 MtCO2e by 2050, compared to 67.4 MtCO2e in 2018; this represents positive agricultural emissions of 35 MtCO2e and removal of 19 MtCO2e through nature-based sequestration.
+
+The NFU's Achieving NET ZERO plan [-@nfuAchievingNETZERO2020] also calls for increased on-farm afforestation (among other commitments) if farming is to reach net zero. It estimates agricultural GHG savings of up to 9 MtCO2e/year through on-farm carbon sequestration alone. Both of these plans [@cccSectorSummaryAgriculture2020; @nfuAchievingNETZERO2020] appear to assume that all emissions sequestered by the UK LULUCF sector will be counted against the sector's own considerable irreducible emissions, as evidenced by neither document mentioning carbon trading. More explicitly, the CCC have opposed inclusion of "land-based GHG removals like afforestation" in carbon trading schemes from a fear that these "solutions might not be available to offset emissions sources which are truly expensive and/or diffcult to decarbonise” [@cccAnnexFutureCarbon2019]; Mark Carney, ex-govenor of the Bank of England, has stated that offsets must be limited to residual emissions [@treloarCarneySaysCarbon2021], and the IPCC have stated that land-based sequestration “cannot be used to compensate for delayed emission reductions in other sectors” [@ipccClimateChange20222022]. The UK Government, however, appears to be encouraging land owners (including farmers) to sell this captured carbon through voluntary carbon markets (types of carbon market are explained in Section \@ref(carbon-markets)). For example, the Woodland Carbon Guarantee, states that it is designed to "accelerate woodland planting rates and develop the domestic market for woodland carbon" [@defraEnglandTreesAction2021]; the Woodland Carbon Code, the government-backed woodland certification scheme, states that "we believe all companies should have the opportunity to compensate for their emissions" [@wccWhyBuyWCCverified2022]; and as the UK's Basic Payment subsidy scheme is replaced by the Environmental Land Management payment system, the UK Government stated a desire to place a greater reliance on private money in agricultural subsidy, in part through "growing markets for the sale of carbon or biodiversity credits" [@defraEnvironmentalLandManagement2022].
+
+Seemingly in response to these government schemes and encouragement, headlines are being made by investment firms buying land with the explicit intention of afforestation [@caseWelshGovernmentAccused2022; @garsideTreeplantingWhyAre2021; @jamesProductiveFarmsBeing2021], and the Scottish Land Comission, a government body concerned with land rights, has found that non-farming actors, including corporations and investment firms, have purchased over 40% of UK land since 2017, and over 50% of Scottish land in 2021 alone, resulting in > 30% year-on-year increase in average per/acre land value, and > 60% in "poor livestock land" and "plantable hill ground", driven in large part by a perceived "potential for carbon offsetting and developing carbon credits at large scales" [@scottishlandcomissionMajorReportShows2022].
+
+With these land purchases in mind, and the scientific warning against misuse of carbon trading, this dissertation sets out to explore the motive behind such purchases by assessing the current state of UK carbon markets and attempts to determine the price at which it becomes more profitable to sell carbon units through afforestation than to produce food on UK agricultural land.
+
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ------------------------- LITERATURE_REVIEW --------------------------- -->
+
+<!-- ----------------------------------------------------------------------- -->
+
+```{=tex}
+\FloatBarrier
+\newpage
+\fancyhead[C]{Part 2 - Literature Review}
+```
+# Literature Review {#Lit-Review}
+
+There are two key reasons that it has not been possible to conduct a traditional systematic literature review for this project. First, the majority of publications on this topic fall within the classification of 'grey literature' and are not listed in academic databases; they primarily comprise of news articles and government, NGO, company, or charity reports. Secondly, in the words of Sir Dieter Helm, Professor of Energy Policy at the University of Oxford and author of multiple, well-respected books including "Net Zero" and "The Carbon Crunch", states that "a huge amount of guff is talked about carbon offsetting", which makes filtering out the cite-worthy sources something of a challenge  [@scottishlandandestatesScottishLandEstates2021].
+
+Instead, Policy Commons, an indexed database of "uncatalogued, undiscoverable, uncitable, prone to link rot, and likely to disappear" sources, was used in a non systematic way to search relevant grey literature [@coherentdigitalOurMission2022], and perhaps too great a reliance was placed on the editorial teams of news outlets such as Project Syndicate, The Financial Times and The Guardian, and on the algorithmic search engine DuckDuckGo. All of these sources will have introduced bias to the selection of publications included, but it is isn't clear how else the search could have been conducted given the novelty, and guff-content, of publications in the field.
+
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+## A Brief History of International Carbon Markets
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+
+In 1992, 140 countries collectively agreed to attempt to limit the impact of anthropogenic GHG emissions on the climate. By 1997, this collective had developed the Kyoto Protocol [@dechazournesIntroductoryNoteKyoto1997], a collection of legally binding emissions targets that applied to the wealthiest 39 industrialised countries (referred to as Annex I Parties) and permitted these Parties to offset their emissions through (among other things) land based sequestration. All other countries, though not legally required to reduce their own emissions, could engage in similar projects with the option of trading their emissions reductions to Annex I Parties under the Clean Development Mechanism (CDM) [@orlandoCarbonForestsPeople2002]. To expand the number of countries included under emissions reductions targets and to overcome "often contentious negotiations" over the legally binding nature of these targets [@bodanskyIntroductoryNoteParis2015], the 2015 Paris Agreement opted to adopt the 2009 Copenhagen Accord's bottom-up approach to climate policy and replaced the top-down, prescriptive emissions targets of the Kyoto Protocol with 'Nationally Determined Contributions' (NDCs), a country-specific collection of targets that are set and periodically refined by each country individually and that have received "virtually universal acceptance" [@bodanskyIntroductoryNoteParis2015]. Although the 2015 Paris Agreement laid out an intention to allow for the international trade of offsets, as was permitted under the Kyoto Protocol's CDM, the heterogeneity of regionally specific NDCs meant that final agreement on Article 6 of the Paris Agreement, a regulatory framework in part designed to avoid double counting during trading (two or more parties claiming the same emissions offset), was not achieved until COP26 in 2021 [@oekoinstitutCOP26GlasgowDelivered2021]. In their Sixth Assessment Report, Working Group III of the IPCC have stated that "the rapid deployment of [Agriculture, Forestry and Other Land Use sequestration] measures is essential in all pathways staying within the limits of the remaining [emissions] budget for a 1.5◦C target" [@ipccClimateChange20222022], and the recent agreement of Article 6 suggests that such measures won't be limited to offsetting domestic emissions for much longer, in turn suggesting an expansion in the international market for carbon offsets (previously, offsets could be sold internationally through private transactions, but could not be counted towards a country's NDCs). 
+
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+## What are Carbon Credits and Markets?
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+
+### Carbon Credits
+
+Carbon credits, representing the avoidance, reduction or removal of one metric tonne of carbon dioxide, are traded through carbon markets as carbon offsets. Both carbon credits and carbon markets come in multiple forms:
+
+The Oxford Principles for Net Zero Aligned Carbon Offsetting [-@allenOxfordPrinciplesNet2020] outlines five types of carbon credit:
+
+1. **Avoided Emissions**
+    + e.g. Renewable energy
+2. **Short-Lived Reduced Emissions**
+    + e.g. Prevention of environmental degredation
+3. **Long-Lived Reduced Emissions**
+    + e.g. Carbon Capture and Storage (CCS) (of point-source emissions)
+4. **Short-Lived Removed Emissions**
+    + e.g. Afforestation
+5. **Long-Lived Removed Emissions**
+    + e.g. Direct Air Carbon Capture and Storage (DACCS) (of nonpoint-source emissions)
+
+Where 'short-lived' is on the order of decades, and 'long-lived', centuries or millennia.
+
+### Carbon Markets {#carbon-markets}
+
+Carbon markets come in two main forms: voluntary and compliance markets.
+
+Participants of a compliance market are legally required to limit their emissions and face punitive measures if they don't. Carbon taxes are a form of compliance market, as are 'cap and trade' systems, where a national government sets a maximum limit on sectoral emissions (the cap) and allocates tradable emissions permits to organisations within the sector, allowing high emitting actors to trade permits with low emitting actors (the trade), benefiting both but maintaining the emissions ceiling [@defraParticipatingUKETS2022]. Typically, the total permissible amount of emission falls each year, incentivising organisations to reduce their emissions. The method of allocating permits within cap and trade systems is subject to some controversy [@helmNetZeroHow2021]. The UK and EU Emissions Trading Schemes (ETS) are examples of compliance markets, as is the Clean Development Mechanism (CDM) established under the 1997 Kyoto Protocol.
+
+Currently, the UK ETS covers one third of national emissions and levys a fine of £100 per tonne for exceeding the allowance [@ngIntroducingUKEmissions2021]. Three sectors are covered by the UK ETS: power generation, heavy industry and aviation [@hmtreasuryNetZeroReview2021]. Compliance markets in New Zealand and South Korea include additional sectors, such as heating, transport, waste, and agriculture & forestry, covering 50% and 70% of emissions respectively [@hmtreasuryNetZeroReview2021]. The EU has proposed to expand their ETS scheme to cover around 85% of regional emissions [@hmtreasuryNetZeroReview2021].
+
+Voluntary markets exist in addition to legally mandated emissions reductions. Actors within the voluntary market are incentivised by either moral or commercial objectives to purchase carbon credits and voluntarily offset emissions produced within their organisation or supply chain.
+
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+## Criticisms of Carbon Markets
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+
+Though there a wide variety of criticisms of carbon markets, specifics for the majority of which have been removed due to space limitations, they generally highlight specific faults in implementation, rather than critiquing the idea of trading carbon directly. A number of studies have found  that the design of carbon markets and the certification of carbon credits requires strong and robust oversight and standards, without which perverse incentives are allowed to flourish [@mortonOneFiveCarbon2021; @mendelsohnHowRepairWorld2021; @calelCarbonOffsetsOffset2021; reyesCarbonTradingHow2010; @streckHowVoluntaryCarbon2021; @mathewsHowCarbonCredits2008], and additionality is not ensured (additionality being a certification that the carbon removed would not have occurred without the financial incentive of carbon trading) [@mendelsohnHowRepairWorld2021].
+
+Not so easily dismissed criticisms centre around the idea that offsetting is being used as excuse not to reduce emissions [@fairlieGreedItsOffsets2021]; the idea that the money could be better spent [@grantCostReductionsRenewables2021; dasguptaHoldTreePlanting2021]; and that paying for reduced emissions "crowds out civic norms" and should be incentivised morally, not financially [@markcarneyBBCRadioReith2020].
+
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+## In Defense of Carbon Markets {#DefenseLitRev}
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+
+No more reliable source than the IPCC is needed to back the claim that "rapid deployment of [land-based sequestration] measures is essential in all pathways staying within the limits of the... 1.5 $^{\circ}C$ target" [@ipccClimateChange20222022], however, all of these organisations agree [@griscomWhyWeCan2021; @carbonoffsetguideWhyUseCarbon; @nargiCashCowCould2020; @matthewsTemporaryNaturebasedCarbon2022]. That said, one should not conflate land based sequestration with carbon trading, the latter is justified as a funding mechanism for the underfunded former. This dissertation is not an endorsement for or against carbon trading. Instead, since carbon markets are rapidly growing in the UK, this dissertation seeks to objectively assess the current state of these markets.
+
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+## Funding of Afforestation
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+
+As mentioned in Section \@ref(DefenseLitRev), land-based sequestration is limited by funding and carbon trading is seen as a means to introduce private funding streams - “privatizing natural capital and ecosystem services... enlists self-interest and the profit motive in the cause of the environment.” [@boccalettiNewLandEconomy2022; @chichilniskyEconomicReturnsBiosphere1998]. DEFRA believes that "our goals can only be met through greater investment by the private sector in woodland creation" [@defraEnglandTreesAction2021], and the UK Government's £50 million Woodland Carbon Guarantee "helps accelerate woodland planting rates and develop the domestic market for woodland carbon by giving landowners the option to sell their captured carbon in the form of verified carbon credits" [@defraEnglandTreesAction2021]. This statement is reiterated in the UK Government's Net Zero Strategy: "Our Key Commitments: [to] mobilise private investment into tree planting, including through the Woodland Carbon Code (see Section \@ref(WCC-Details)), with the support of government’s Woodland Carbon Guarantee..." [@dbeisNetZeroStrategy2021].
+
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+## The Woodland Carbon Code {#WCC-Details}
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+
+For the full details of the Woodland Carbon Code (WCC), see the 'Standard and Guidance' page of the WCC website [-@wccStandardGuidance2021]. What follows is a brief summary of the information contained there.
+
+The Woodland Carbon Code (WCC) is a Government backed quality assurance standard for woodland creation projects in the UK. It was developed to support independent verification of carbon units, sometimes called carbon credits by other systems. Under the Woodland Carbon Code, carbon units come in two forms: Pending Issuance Units (PIUs) and Woodland Carbon Units (WCUs). A PIU represents an expectation that 1 tonne of $CO_2$ will be sequestered by a given project at some time in the future. A WCU represents a guarantee that 1 $tCO_2$ has already been sequestered by a given project. Only WCUs, not PIUs, can be used to offset emissions, however, PIUs can be sold *ex-ante* as an unguaranteed promise of a project's offset potential. Since a WCU represents a tangible current offset, and a PIU represents a promise to deliver a future offset, WCUs are generally worth more than PIUs. The sale value of PIUs and WCUs is not currently regulated or systematically recorded and is agreed between the seller and buyer for each transaction. To certify a project through the WCC, all proposed projects must initially be *validated* by an accredited independent body, typically within 3 years of the first tree being planted (the project start date). During *validation*, the total number of PIUs that are expected to be generated by the project is calculated and issued to the project owner, after which they are listed on the UK Land Carbon Registry, where they can be viewed and purchased. Each PIU belongs to a 'vintage', or time period during which it is expected to mature, meaning that the unit will transition from representing potential to actual sequestration (i.e., from a PIU to a WCU). To make this transition the unit must be *verified*, again by an accredited independent body, at which time the PIU is cancelled and the WCU issued. All projects last a maximum of 100 years; less if the intention is to harvest the timber, and the first vintage period ends 5 years after the project start date. For a 100 year project, each subsequent vintage lasts 10 years, until the final vintage, which lasts 5 years again. It is important to note that not all PIU are allocated to the project owner for sale. Version 2.0 of the Woodland Carbon Code stipulates that 20% of a project's units must be allocated to a communal 'buffer' account, owned by Scottish Forestry, to guarantee against unanticipated losses of stored carbon (for example, through forest fires). To demonstrate the concept of vintage periods and buffer accounts, an example project, taken from [@wccStandardGuidance2021], is provided in Table \@ref(tab:WCC-Example-Table).
+
+```{r WCC-Example-Table}
+
+Example_WCC_Project <- read_csv(here("data_analysis/WCC/Example_Project.csv"))
+
+Example_WCC_tab <- kable(Example_WCC_Project,
+      format = 'latex',
+      digits = 0,
+      format.args = list(big.mark = ","),
+      caption = "Vitage periods and unit allocation of a hypothetical project estimated to sequester 50,000 tCO2e under the the Woodland Carbon Code.",
+      booktabs = TRUE,
+      linesep = "")
+
+Example_WCC_tab %>%
+  kable_styling(latex_options = c("striped", "hold_position"), font_size = 8, full_width = F) %>%
+  column_spec(2:6 , width = "1.2cm") %>%
+  column_spec(1 , width = "2cm") %>%
+  row_spec(11, hline_after = TRUE)
+
+```
+
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+## The Limits of Nature Based Solutions
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+
+There is only a limited amount of carbon that can be offset through sequestration in the biosphere (and a limited amount of time for me to write this properly, sorry).
+
+- "There are significant difficulties in exceeding 60-70 MtCO2/yr of removals in 2050 with land based [sequestration]" [@ukcentreforecologyandhydrologyGreenhouseGasRemoval2021]
+
+- "The Royal Society is more optimistic, aiming for 10 Mt per year through soil carbon capture. To put this into context, the UK’s current carbon emissions total 350 Mt" [@fairlieGreedItsOffsets2021]
+
+- At a global level: "...large-scale afforestation and reforestation efforts could remove between 40 and 100 GtC from the atmosphere once forests reach maturity (Lewis et al., 2019a; Veldman et al., 2019) – an impressive quantity that nonetheless represents only a decade’s worth of anthropogenic emissions at current rates." [@waringForestsDecarbonizationRoles2020a]
+
+- "it would take “fifty acres of trees planted in tropical areas, to absorb the emissions produced by an average American in her lifetime." [@[@fairlieGreedItsOffsets2021]]
+
+There has been only a limited increase in Savanna carbon stocks despite decades of fire suppression [@zhouLimitedIncreasesSavanna2022].
+
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+## Carbon Markets in Theory {#TheoryofCMarkets}
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+
+Those thinking carefully about carbon markets want credits to be reserved for unavoidable emissions.
+
+- "if land-based GHG removals like afforestation... were included in an ETS, the upper bound of what is desirable in terms of take-up... could be quickly reached, meaning that land-based solutions might not be available to offset emissions sources which are truly expensive and/or difficult to decarbonise in the long-run" [@cccAnnexFutureCarbon2019]
+
+- “Carbon Dioxide Removal (CDR) is necessary to achieve net zero CO2 and GHG emissions both globally and nationally, counterbalancing ‘hard-to-abate’ residual emissions. CDR is also an essential element of scenarios that limit warming to 1.5°C or likely below 2°C by 2100, regardless of whether global emissions reach near zero, net zero or net negative levels.” [@ipccClimateChange20222022]
+
+- Mark Carney agrees that offsets should be limited to "residual emissions" [@treloarCarneySaysCarbon2021]
+
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+## Carbon Markets in Practice
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+
+Currently, those implementing carbon markets (government) are not restricting the sale of credits by emission source, as suggested by the IPCC and UK CCC (Section \@ref(TheoryofCMarkets)).
+
+- "We believe all companies should have the opportunity to compensate for their emissions" [@wccWhyBuyWCCverified2022]
+
+- The Woodland Carbon Guarantee, states that it is designed to "accelerate woodland planting rates and develop the domestic market for woodland carbon" [@defraEnglandTreesAction2021]
+
+- The UK Government has stated a desire to place a greater reliance on private money in agricultural subsidies, in part through "growing markets for the sale of carbon or biodiversity credits" [@defraEnvironmentalLandManagement2022]
+  
+- "The UK government has made clear its intention to use voluntary carbon markets to scale up land-based emissions reduction and carbon sequestration..." [@greenallianceOpportunitiesAgriCarbonMarkets2022]
+
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+## Exploitation
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+
+- People seem to be beginning to exploit carbon markets:
+
+- BP, through the Scottish Forest Alliance, own around 37% of Woodland Carbon Code units [@greenallianceNaturalCapitalBattle2022a].
+    + BP initiated the "Scottish Forest Alliance" to "use a small proportion of its revenue from North Sea oil operations to put something back, by creating new forests in Scotland." [@scottishforestallianceCreatingWoodlandsWildlife2010]
+    + "BP took a bold decision: to step out of line with the rest of the oil industry and acknowledge that climate change was happening and the burning of fossil fuels was at least partly responsible. This was a brave admission, both within the oil and gas industry and within the company." [@scottishforestallianceCreatingWoodlandsWildlife2010]
+  + It isn't clear if BP is selling units, but they've claimed them, so if not selling will likely use them to offset own emissions, which seems to go against their professed philanthropic incentive for creating the woodlands.
+
+- Investment firms are buying up land for afforestation projects
+  + [@jamesProductiveFarmsBeing2021]
+  + [@garsideTreeplantingWhyAre2021]
+  + [@caseWelshGovernmentAccused2022]
+  
+- The Scottish Land Comission, a government body concerned with land rights, has found that non-farming actors, including corporations and investment firms, have purchased over 40% of UK land since 2017, and over 50% of Scottish land in 2021 alone, resulting in > 30% year-on-year increase in average per/acre land value, and > 60% in "poor livestock land" and "plantable hill ground", driven in large part by a perceived "potential for carbon offsetting and developing carbon credits at large scales" [@scottishlandcomissionMajorReportShows2022].
+
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+## Warnings
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+
+Organisation and individuals are trying to get farmers to increase on-farm sequestration but also prevent them from misusing the system:
+
+- Deiter Helm, Professor of Energy Policy at the University of Oxford, is trying to appeal to farmers to engage in afforestation but to not just take the money, asking them to sell credits only to sources of truly irreducible emissions [@scottishlandandestatesScottishLandEstates2021]
+
+- "We conclude that farmers should be wary of selling carbon offset credits to buyers upfront as this could harm their own decarbonisation efforts" [@greenallianceOpportunitiesAgriCarbonMarkets2022]
+
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+## Profit
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+
+Trading carbon credits promises be a highly lucrative income stream in the future:
+
+- “Today’s UK ETS prices are [already] sufficient to maintain farm incomes in the Fens without growing food." [@greenallianceNaturalCapitalBattle2022a]
+
+- "It is cost effective to plant lots and lots of woodlands in the British uplands at much less than £30/tonne of CO2" [@farmingtodayFarmingTodayNatural2022]
+
+- DEFRA radio advert: "If you're a farmer or land manager you could recieve over £10,000 for every hectare of woodland you create and you don't need to take your best agricultural land out of use, because when you plant trees, you plant the future." [@farmingtodayBBCRadioFarming2022; @farmersweeklyDEFRAGetFunding2022]
+
+- "Research by UCL and Trove Research suggests voluntary carbon market prices will need to reach 30 to 50 USD per tonne (£23-38) but could reach up to 100 USD per tonne (£76) for some projects [to be viable]" [@greenallianceOpportunitiesAgriCarbonMarkets2022]
+
+- Globally, the size of global voluntary carbon markets exceeded 1 billion USD in 2021 [@ecosystemmarketplaceVoluntaryCarbonMarkets2021] and are predicted by some to reach 50 billion by 2030 [@blaufelderBlueprintScalingVoluntary2021]
+
+- "It is likely that net zero targets and net zero compliance will tighten up and increase the demand for carbon offsets." [@helmValuingCarbonOffsets2021]
+
+- "With a vast and growing demand chasing a scarce, poorly defined supply, the conditions are ripe for a bubble" [@boccalettiNewLandEconomy2022]
+
+But no one seems to have provided a calculation for profitability of afforestation versus existing farm practices. That is what this dissertation sets out to achieve.
+
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ------------------------------ METHODS -------------------------------- -->
+
+<!-- ----------------------------------------------------------------------- -->
+
+```{=tex}
+\FloatBarrier
+\newpage
+\fancyhead[C]{Part 3 - Methods}
+```
+# Materials and Methods {#Materials-and-Methods}
+
+Every figure, plot and table in this document is an original visualisation of publicly available secondary data, or estimations and calculations based on that data. All have been created using the programming language *R* [@rcoreteamLanguageEnvironmentStatistical2021] and the software *RStudio* [@rstudioteamRStudioIntegratedDevelopment2021], though the data analysis and calculation has been performed using a mix of R and Microsoft Excel [@microsoftcorporationMicrosoftExcel2022]. To maximise legibility for the colourblind, the R package Viridis [@garnierViridisColorblindFriendlyColor2021] has been used for all coloured plots, and to maximise transparency and reproducibility, the text of this dissertation has been produced as a single rmarkdown document (`.rmd`) with the code for calculations, figures, plots and tables inserted throughout. A full list of R packages used can be found in Appendix \@ref(Appendix-1).1. Where Excel has been used, the output of analysis has been saved as a `.csv` file and imported to R. All `.csv` input data files, the Excel `.xlsx` spreadsheet and the full `.rmd` text file can be found at:
+
+> https://github.com/Dylan-Edgar/Profitability_of_Afforestation/
+
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ------------------- Profitability of Afforestation -------------------- -->
+
+<!-- ----------------------------------------------------------------------- -->
+
+## The Profitability of Afforestation {#Profitability-Afforestation-Methods}
+
+Calculating the price received per tonne of $CO_2$ sequestered at which it becomes more profitable to plant trees than to continue with the current agricultural production system requires first that the price at which the two systems are equally profitable be calculated (referred to here as the transition price). Calculating an exact transition price, however, is not possible without primary data for several reasons: first, the amount of carbon sequestered per unit area is highly variable, as shown if Table \@ref(tab:Presentable-WCC-BP-data); second, the exact profitability of the farm is not known, giving nothing but the regional average to compare the profitability of afforestation to; and third, the costs of afforestation vary greatly depending on the requirements of the project. However, by using publicly available secondary data, a range within which the transition price for any given farm is likely to occur can be estimated.
+
+### The Transition Price
+
+The transition price represents the price received per tonne of $CO_2$ sequestered through afforestation (i.e., the carbon price) at which the estimated profitability of farming ($\zeta$) equals the estimated profitability of afforestation ($\eta$) over a given period,
+
+```{=tex}
+\begin{equation}
+\ \zeta = \eta
+(\#eq:Transition-Price-Simple)
+\end{equation}
+```
+
+Where estimated profitability of farming ($\zeta$) is equal to Total Income from Farming ($\theta$) (see Section \@ref(TIFF-Methods) for details) multiplied by the total project area ($\iota$) and project period ($\kappa$),
+
+```{=tex}
+\begin{equation}
+\ \zeta = \theta \times \iota \times \kappa
+(\#eq:Profit-of-Farming)
+\end{equation}
+```
+
+\newpage
+
+Estimated profitability of afforestation ($\eta$) is equal to the total profits from afforestation minus the total costs, i.e., the combined income from carbon sales ($\lambda$) and woodland creation grants ($\mu$) (Section  \@ref(SoF-Methods)), minus the combined costs of establishment ($\nu$) (\@ref(Nix-Methods)), management ($\pi$) (\@ref(Management-Costs-Methods)), and maintenance ($\rho$) (\@ref(Maintenance-Costs-Methods)),
+
+```{=tex}
+\begin{equation}
+\ \eta = ( \lambda + \mu ) - ( \nu + \pi + \rho )
+(\#eq:Profit-of-Afforestation)
+\end{equation}
+```
+
+And income from carbon sales ($\lambda$) is equal to the average rate of sequestration ($\sigma$) (\@ref(Seq-Methods)) multiplied by project area ($\iota$), project period ($\kappa$) and the carbon price ($\tau$), then further multiplied by 0.8 to reflect that 20% of units are issued to a communal buffer account (\@ref(WCC-Details)),
+
+```{=tex}
+\begin{equation}
+\ \lambda = \sigma \times \iota \times \kappa \times \tau \times 0.8
+(\#eq:Income-From-Carbon)
+\end{equation}
+```
+
+Equation \@ref(eq:Transition-Price-Simple) can therefore be rewritten as,
+
+```{=tex}
+\begin{equation}
+\ \theta \times \iota \times \kappa = (( \sigma \times \iota \times \kappa \times \tau \times 0.8 ) + \mu ) - ( \nu + \pi + \rho )
+(\#eq:Transition-Price-Full)
+\end{equation}
+```
+
+As laid out in the methods below, all other information in this equation can be estimated using publicly available secondary data, meaning the equation can be rearranged to calculate the transition price ($\tau$) for any given set of inputs,
+
+```{=tex}
+\begin{equation}
+\ \tau = \frac{( ( \theta \times \iota \times \kappa ) + ( \nu + \pi + \rho )) - \mu}{\sigma \times \iota \times \kappa \times 0.8 }
+(\#eq:Carbon-Price)
+\end{equation}
+```
+
+The results of this calculation are recorded in Section \@ref(Profitability-Afforestation-Results).
+
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ---------------------------- NUTS Methods ----------------------------- -->
+
+<!-- ----------------------------------------------------------------------- -->
+
+## Nomenclature of Territorial Units for Statistics {#NUTS-Methods}
+
+UK farm profitability data is provided in accordance with the Nomenclature of Territorial Units for Statistics (NUTS), a three-tiered hierarchical system used to divide the economic territories of the EU and the UK [@eurostatBackgroundNUTS2021]. Shapefiles for each of the three NUTS levels are provided by the Office for National Statistics [@onsNUTSLevelJanuary2019; @onsNUTSLevelJanuary2019b;
+@onsNUTSLevelJanuary2019a] and have been used to produce all maps. These three shapefiles are plotted in Figure \@ref(fig:NUTS-Three-Levels-Figure).
+
+```{r NUTS-Three-Levels-Figure, fig.cap = "Plot of all three NUTS boundary levels (ONS 2019a,b,c)", out.width = '100%', fig.align = 'center'}
+include_graphics(here("images/NUTS all levels.png"))
+```
+
+\FloatBarrier
+
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ---------------------------- TIFF Methods ----------------------------- -->
+
+<!-- ----------------------------------------------------------------------- -->
+
+## Total Income From Farming {#TIFF-Methods}
+
+Total Income from Farming (TIFF) is a government sourced estimate of farm profitability including costs, profits and subsidies, and broken down by NUTS region. Multiple sources were needed to gather TIFF data for the whole of the UK. TIFF data for England is provided at a resolution corresponding to NUTS level 3 by DEFRA [-@defraTotalIncomeFarming2022]. NUTS Level 2 TIFF data is provided for Scotland by the Scottish Government in their 2019 'Total Income from Farming Estimates' publication [@scottishgovernmentTotalIncomeFarming2019], but not in their 2021 revision [@scottishgovernmentTotalIncomeFarming2021], where NUTS Level 1 data is provided instead. It was decided to maximise spacial rather than temporal accuracy so data for Scotland has been extracted from the older, but higher resolution, 2019 document [@scottishgovernmentTotalIncomeFarming2019]. TIFF data for Wales and Northern Ireland could not be found published by their respective governments, however, the Scottish Government includes NUTS Level 1 estimates for both regions in their 2021 TIFF publication [@scottishgovernmentTotalIncomeFarming2021].
+
+To enable all regional data to be plotted on the same map, all values were converted to conform to the NUTS level 2 boundaries. Northern Ireland is treated as a single region at NUTS level 2, meaning that Level 1 data was suitable, however, Wales is divided into East and West subregions Due to time constraints, Wales has been treated as though it were a single NUTS level 2 region and identical TIFF values have been assigned to East and West Wales, meaning data for Wales should be interpreted as though it were a single region, not as it is represented in the Figure \@ref(fig:TIFF-Map-Figure) as two regions.
+
+Conversion between boundaries was achieved using a lookup table sourced through correspondence with the Office of National Statistics (REFRENCE), a small section of which is provided in Table \@ref(tab:NUTS-Lookup-Table) (and is provided in full in the GitHub repository).
+
+\FloatBarrier
+
+```{r NUTS-Lookup-Table}
+NUTS_Lookup <- read_csv(here("data_analysis/TIFF/NUTS_Lookup.csv"))
+
+NUTS_Lookup_Example <- NUTS_Lookup[1:14,c(2,6,10)]
+
+NUTS_Lookup_Example <- NUTS_Lookup_Example %>% add_row("NUTS1 Official Name" = "...",
+                                                       "NUTS2 Official Name" = "...",
+                                                       "NUTS3 Official Name" = "...")
+
+NUTS_Lookup_tab <- kable(NUTS_Lookup_Example,
+      format = 'latex',
+      digits = 0,
+      format.args = list(big.mark = ","),
+      caption = "UK NUTS Region lookup table, Levels 1, 2, 3",
+      booktabs = TRUE,
+      linesep = "")
+
+NUTS_Lookup_tab %>%
+  kable_styling(latex_options = c("striped", "hold_position"), font_size = 8, full_width = F) %>%
+  footnote(general = "A section of the full lookup table which can be found in this document's GitHub repository.", threeparttable = TRUE)
+```
+
+\FloatBarrier
+
+This lookup table was used to calculate the mean TIFF for each NUTS Level 2 region based on data for associated NUTS Level 3 subregions. An example calculation is shown in \@ref(tab:Tees-Valley-Table). A full table of collected and calculated NUTS level 2 TIFF values can be found in Table \@ref(tab:TIFF-Table); a plot of which can be found in Figure \@ref(fig:TIFF-Map-Figure).
+
+\FloatBarrier
+
+```{r Tees-Valley-Table}
+Tees_Valley_data <- read_csv(here("data_analysis/TIFF/Tees_Valley_data.csv"))
+
+Tees_Valley_tab <- kable(Tees_Valley_data,
+      format = 'latex',
+      digits = 0,
+      format.args = list(big.mark = ","),
+      caption = "Calculated TIFF and area for the NUTS Level 2 Region 'Tees Valley and Durham' based
+                on corresponding Level 3 subregions.",
+      booktabs = T,
+      linesep = "")
+
+Tees_Valley_tab %>%
+  kable_styling(latex_options = c("striped", "hold_position"), font_size = 10, full_width = F) %>%
+  row_spec(4, hline_after = TRUE)
+```
+
+\FloatBarrier
+\newpage
+
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ----------------------------- Seq Methods ----------------------------- -->
+
+<!-- ----------------------------------------------------------------------- -->
+
+## Sequestration Rates {#Seq-Methods}
+
+Natural England estimates an average rate of sequestration for English broadleaf woodland of 7 tCO2/ha/year, with an expected range of 2 to 13 tCO2/ha/year [@naturalenglandCarbonStorageSequestration2021]. Since this rate of sequestration only applies to broadleaf woodlands in England, however, it was necessary to find rates of sequestration applicable to Scotland (which were expected to also more closely apply to the uplands of Wales).
+
+### Sequestration Rates in Scotland {#Seq-Scot-Methods}
+
+Under the Woodland Carbon Code (WCC), all PIUs are publicly listed on the UK Land Carbon Registry (managed by IHS Markit [-@ihsmarkitUKLandCarbon2022]), meaning that the exact number of issued Units and the amount of land associated with each project can be extracted. Since each PIU represents an expectation that 1 tCO2 will be sequestered, and since the project length and area are known, it is possible to calculated the average sequestration rate for every WCC project, as in Equation \@ref(eq:Average-Sequestration),
+
+```{=tex}
+\begin{equation}
+\ \alpha = \beta_i / \delta_i
+(\#eq:Average-Sequestration)
+\end{equation}
+```
+
+where $\alpha$ is equal to the average rate of sequestration ($tCO_2e/ha$) for the project, $\beta$ is equal to the project's total expected sequestration ($tCO_2e$), and $\delta$ is equal to total project area (ha). Results for the 16 projects are recorded in Table \@ref(tab:Presentable-WCC-BP-data).
+
+For the purposes of this dissertation, it was decided to focus on WCC certified projects owned by the Scottish Forest Alliance, a partnership formed in the late 1990s between BP Exploration Operating Company Limited, Forestry Commission Scotland, RSPB Scotland and Woodland Trust Scotland [@scottishforestallianceCreatingWoodlandsWildlife2010].
+
+\FloatBarrier
+\newpage
+
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- --------------------------- Grant - Methods --------------------------- -->
+
+<!-- ----------------------------------------------------------------------- -->
+
+## Sources of Funding {#SoF-Methods}
+
+Each of the four constituent countries of the UK provide their own woodland creation grant schemes. Due to time limitations, only the Scottish Forestry Grant Scheme was included in the profitability calculations, and all regional calculations have used these grant income values. This will introduce an unknown error to the regions of England, Wales and Northern Ireland, although it is expected that all grant schemes will provide broadly similar levels of funding.
+
+Information for the four woodland creation grants schemes can be found below.
+
+- Scotland - Forestry Grant Scheme [@scottishgovernmentForestryGrantScheme2022]
+- England - Woodland Creation Offer [@forestrycommissionEnglandWoodlandCreation2022]
+- Wales - Glastir Woodland Creation [@welshgovernmentGlastirWoodlandCreation2021]
+- Northern Ireland - DAERA Forestry Grants [@daeraDAERAForestryGrants2022]
+
+An example section of the Scottish Forestry Grant Scheme payment data is recorded in Table \@ref(tab:Scottish-Grant-Table).
+
+```{r Scottish-Grant-Table}
+
+Scottish_Grant_Data <- read_csv(here("data_analysis/Grants/Scottish Forestry Grant Scheme.csv"))
+
+Scottish_Grant_Tab <- kable(Scottish_Grant_Data,
+      format = 'latex',
+      digits = 0,
+      # format.args = list(big.mark = ","),
+      caption = "Grant payment rates for differing woodland types under the Scottish Forestry Grant Scheme.",
+      booktabs = T,
+      linesep = "")
+
+column_spec(Scottish_Grant_Tab, c(2,3), width = "1.8cm") %>%
+  column_spec(4 , width = "2.5cm") %>%
+  kable_styling(latex_options = c("striped", "hold_position"), font_size = 8, full_width = F) %>%
+  footnote(general_title = "Source:",
+           general = "Scottish Government, 2022",
+           footnote_as_chunk = TRUE) %>% # This line inserts the note on one line instead of two.
+  footnote(number_title = "Note:",
+           number = "Payment rates displayed here relate to woodland projects of under 300ha in 'Standard Areas' that do not plough the land during establishment. Different rates apply to projects outside of these parameters.",
+           footnote_as_chunk = TRUE, # This line inserts the note on one line instead of two.
+           threeparttable = TRUE) # This wraps the note onto multiple lines.
+```
+
+\FloatBarrier
+\newpage
+
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- --------------------------- Costs - Methods --------------------------- -->
+
+<!-- ----------------------------------------------------------------------- -->
+
+## Costs of Afforestation {#Nix-Methods}
+
+### Establishment Costs
+
+Estimated costs of woodland establishment were sourced from the John Nix Pocketbook [@redmanJohnNixFarm2021] and are displayed in Table \@ref(tab:Nix-Costs-Table).
+
+```{r Nix-Costs-Table}
+
+Nix_Costs_Data <- read_csv(here("data_analysis/Costs/Nix_Pocketbook.csv"))
+
+Nix_Costs_Tab <- kable(Nix_Costs_Data,
+      format = 'latex',
+      digits = 2,
+      # format.args = list(big.mark = ","),
+      caption = "Afforestation establishment costs.",
+      booktabs = TRUE,
+      linesep = "")
+
+column_spec(Nix_Costs_Tab, c(2,3,4), width = "1.5cm") %>%
+  kable_styling(latex_options = c("striped", "hold_position"), font_size = 8, full_width = F) %>%
+  footnote(general_title = "Source:",
+           general = "Redman, 2021.",
+           footnote_as_chunk = TRUE, # This line inserts the note on one line instead of two.
+           threeparttable = TRUE) %>% # This wraps the note onto multiple lines.
+  add_header_above(c(" " = 1, "Estimated Cost Range" = 2, " " = 1))
+```
+
+There is some difficulty in estimating costs without knowing the specific requirements of a project. For example, fencing is one of the primary costs but the length of fencing required can vary greatly; for the purposes of this dissertation, projects are assumed to be perfectly square with a continuous perimeter fence equal to four times the square root of the area. In reality, this is highly unlikely, since few landowners are likely to have either the space or inclination to allow for perfectly square projects, and regular shapes are forbidden under the conditions of establishment grants [@scottishforestryCostsCreatingManaging2010]. Other cost inputs are subject to similar levels of uncertainty.
+
+### Maintenance Costs {#Maintenance-Costs-Methods}
+
+Establishing ongoing maintenance costs is also difficult. The John Nix Pocketbook [@redmanJohnNixFarm2021] provides an estimated range for maintenance costs of up to £30/ha/year for sporting and amenity woodland, and £600-900/ha/year for timber production. It is expected that woodland for carbon capture would fall towards the lower end of this spectrum but correspondence with a representative of the UK Forestry Commission revealed that, due the number of variables, including soil type, local climate, local biodiversity, tree species mix, and past management, it is not possible to give an average estimate of typical maintenance costs. To simplify the calculation, maintenance costs of £100/ha/year have been used (sourced from a document detailing "Indicative Green Infrastructure Costs" provided by Worcestershire County Council [-@worcestershirecountycouncilIndicativeGreenInfrastructure2016]), however, it is important to note that it is not known how close this value is to the true average cost.
+
+### Management Costs {#Management-Costs-Methods}
+
+Management costs also needed to be considered. The only such cost included here was that of ascertaining certification under the Woodland Carbon Code. The SRUC Farm Management Handbook suggests that these costs could range from £3,875 to £9,900 [@srucFarmManagementHandbook2021]. SRUC provides these values as rough estimates, so a value of £7,000, close to the mid point, was chosen. It is not know how accurate this value represents the true cost.
+
+\FloatBarrier
+
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ------------------------------- TAX ----------------------------------- -->
+
+<!-- ----------------------------------------------------------------------- -->
+
+```{=tex}
+\FloatBarrier
+```
+
+## How to Tax a Woodland
+
+The relationship between tax and woodlands in the UK is quite complex and has not been considered in this dissertation.
+
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ------------------------- NET PRESENT VALUE --------------------------- -->
+
+<!-- ----------------------------------------------------------------------- -->
+
+```{=tex}
+\FloatBarrier
+```
+
+## Net Present Value (NPV)
+
+Some consideration was given to the inclusion of Net Present Value (NPV) calculations, however, due to time constraints and the fact that the two competing land uses being considered, agriculture and afforestation, would be considered over the same time period, 100 years, it was assumed that there is a good chance the NPV affects would cancel out - so I skipped it.
+
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ------------------------------ RESULTS -------------------------------- -->
+
+<!-- ----------------------------------------------------------------------- -->
+
+```{=tex}
+\FloatBarrier
+\newpage
+\fancyhead[C]{Part 4 - Results}
+```
+
+# Results {#Results}
+
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ---------------------------- TIFF Results ----------------------------- -->
+
+<!-- ----------------------------------------------------------------------- -->
+
+## Total Income from Farming {#TIFF-Results}
+
+Total Income from Farming (TIFF) values were collected and calculated according to Section \@ref(TIFF-Methods) and are plotted according to Section \@ref(NUTS-Methods) in Figure \@ref(fig:TIFF-Map-Figure). See Table \@ref(tab:TIFF-Table) for tabular results.
+
+```{r TIFFcalc, include = FALSE}
+
+# THIS SECTION IS CACHED SO WILL NOT UPDATE IF CHANGED (change to 'cache = FALSE')
+
+
+# rm(list=ls())  # Clear rstudio environemnt
+# cat("\014") # Clear console
+# gc() # Free up unused memory
+# dev.off(dev.list()["RStudioGD"]) # Clear all plots
+
+# SOURCE OF SHAPEFILE: httpshttps://geoportal.statistics.gov.uk/datasets/ons::nuts-level-2-january-2018-full-clipped-boundaries-in-the-united-kingdom/about
+
+# Website used to reduce size of shape file: https://mapshaper.org/
+# The original is way larger than needed which makes plotting slow
+# I've shrunk it down to
+
+shapefile_location <- "data_analysis/NUTS/NUTS_Level_2_0.03"
+
+shapefile_name <- 'NUTS_Level_2_0.03'
+
+# Define path to shapefile and look inside, you need to copy the shapefile title
+list.files(here(shapefile_location))
+
+# Read shapefile (note, dsn is the folder path, layey is the name of the shape file WITHOUT .shp)
+UK_Shape <- readOGR(
+  dsn= here(shapefile_location),
+  layer=shapefile_name)
+
+# plot() is a quicker way than ggplot to test the data
+# plot(UK_Shape)
+
+# UK_Shape.df <- as(UK_Shape, "data.frame")
+#
+# write_csv(UK_Shape.df, "/Users/dylan/Library/CloudStorage/OneDrive-UniversityofEdinburgh/Global_Agriculture/Assessment/Y4 - S2/Dissertation/Data Analysis/iMac_v2/gadm40_GBR_2.csv")
+
+# Check the size of the shape file - less than 1Mb will load quite quickly, >50 will take forever...
+# humanReadable(object.size(UK_Shape), units="auto")
+
+# Check the name of the column that includes the region data
+glimpse(UK_Shape)
+
+# Using ggplot requires that the data be in the form of a table, use tidy() to do this. Also include the region data (above).
+UK_Shape_Tidy <- tidy(UK_Shape, region = "nuts218nm")
+
+# The code below was included to pull out a list of regions, don't think this is needed anymore
+# UK_Regions <- unique(UK_Shape_Tidy[c("id")])
+# write_csv(UK_Regions, "/Users/dylan/Library/CloudStorage/OneDrive-UniversityofEdinburgh/Global_Agriculture/Assessment/Y4 - S2/Dissertation/Data Analysis/COMBINED DATA/regions.csv")
+
+# Make a simle plot of the data...
+# ggplot() +
+#   geom_polygon(data = UK_Shape_Tidy, aes( x = long, y = lat, group = group), fill="white", color="grey") +
+#   theme_void()
+
+# Read in the output of the calculations:
+NUTS_2_Data <- read_csv(here("data_analysis/TIFF/TIFF_by_NUTS.csv"))
+
+NUTS_2_TIFF <- NUTS_2_Data %>% select("NUTS Level 2 Subregion", "TIFF (£/ha)")
+
+UK_Shape_Tidy <- UK_Shape_Tidy %>%
+  left_join(. , NUTS_2_TIFF, by=c("id"="NUTS Level 2 Subregion"))
+
+UK_Shape_Tidy <- rename(UK_Shape_Tidy, "TIFF_per_ha" = "TIFF (£/ha)")
+
+# UK_Shape_Tidy %>%
+#   ggplot(aes(x=TIFF_per_ha) +
+#   geom_histogram(bins=20, fill='skyblue', color='#69b3a2') + scale_x_log10())
+
+# ggplot() +
+#   geom_polygon(data = UK_Shape_Tidy, aes(fill = TIFF_per_ha, x = long, y = lat, group = group)) +
+#   theme_void()
+
+# ggsave("UK_Map.png",
+#        plot = UK_Map,
+#        width = 13,
+#        height = 20,
+#        units = "cm",
+#        bg = "transparent",
+#        device='png',
+#        dpi=700)
+
+# The plot below was superceded since the scale  isn't as clear as the one that replaced it...
+#
+# UK_TIFF_map <- ggplot(data = UK_Shape_Tidy, mapping = aes(x = long, y = lat, group = group)) +
+#   coord_fixed(1.25) +
+#   theme_void() +
+#   geom_polygon(aes(fill = TIFF_per_ha)) +
+#   scale_fill_gradient(
+#     low = Primary_Colour,
+#     high = Secondary_Colour,
+#     guide = "legend",
+#     na.value = "grey",
+#     name="£/ha",
+#     breaks = c(12,100,250,500,750,1000),
+#     labels = c(10,100,250,500,750,1000)) +
+#
+#   theme(
+#     text = element_text(color = "black"),
+#     plot.background = element_rect(fill = "transparent", color = NA),
+#     panel.background = element_rect(fill = "transparent", color = NA),
+#     legend.background = element_rect(fill = "transparent", color = NA),
+#     legend.title = element_text(size=10),
+#     legend.text = element_text(size=10),
+#
+#     # legend.position="none",
+#     legend.position = c(1.2, 0.6))
+
+UK_TIFF_map <- ggplot() +
+  geom_polygon(data = UK_Shape_Tidy, aes(fill = TIFF_per_ha, x = long, y = lat, group = group),
+               size=0.01,
+               alpha=1,
+               colour = 'black') +
+  coord_fixed(1) +
+  theme_void() +
+  scale_fill_viridis(trans = "log",
+                     option = "D", # Sets the colour scale. Choose A-H. Only D really works without borders.
+                     breaks=c(12,100,250,500,750,1000),
+                     name="Total Income\nfrom Farming\n(£/ha/year)",
+                     guide = guide_legend( keyheight = unit(3, units = "mm"),
+                                           keywidth=unit(12, units = "mm"),
+                                           label.position = "bottom",
+                                           title.position = 'top',
+                                           nrow=6)) # Controls the key row length, 1 = horizontal, n = vertical.
+```
+
+```{r TIFF-Map-Figure, fig.cap = "Total Income From Farming (TIFF) for UK NUTS level 2 regions.", out.width = '60%',  fig.align = 'center'}
+UK_TIFF_map
+```
+
+\FloatBarrier
+\newpage
+
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ------------ WOODLAND CARBON CODE CALCULATIONS AND RESULTS ------------ -->
+
+<!-- ----------------------------------------------------------------------- -->
+
+```{r PIU-Calculations, include = FALSE}
+
+# -----------------------------------------------------
+# -----------------------------------------------------
+# -----------------------------------------------------
+
+BP_Summary <- read_csv(here("data_analysis/WCC/BP_Summary.csv"))
+
+BP_Summary <- clean_names(BP_Summary)
+
+# -----------------------------------------------------
+# -----------------------------------------------------
+# -----------------------------------------------------
+
+# Plot of PIU per year per hectare
+
+# -----------------------------------------------------
+# -----------------------------------------------------
+# -----------------------------------------------------
+
+# Pull in only the columns we need
+BP_PIU_per_ha <- BP_Summary[,c(1,2,7)]
+
+# Add another column to be used as 'group' - not sure why, following this:
+# https://www.data-to-viz.com/caveat/spaghetti.html
+BP_PIU_per_ha <- BP_PIU_per_ha %>%
+  mutate(project_site2=project_site)
+
+# Plot the graph... (see here for themes: https://r-charts.com/ggplot2/themes/)
+BP_PIU_per_ha_plot <- BP_PIU_per_ha %>%
+  ggplot(aes(x=years_since_start_date, y=piu_project_per_ha)) +
+  geom_line( data=BP_PIU_per_ha %>% dplyr::select(-project_site), aes(group=project_site2), color="grey", size=0.5, alpha=0.5) +
+  geom_line( aes(color=project_site), color=Primary_Colour, size=0.5 )+
+  scale_colour_viridis_d() +
+  theme_light() +
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=14),
+    panel.grid = element_blank()) +
+  labs(x = "Years Since Project Start Date", y = "PIU per Hectare per Vintage") +
+  facet_wrap(~project_site)
+
+# -----------------------------------------------------
+# -----------------------------------------------------
+# -----------------------------------------------------
+
+# Plot of cumulative PIU by year
+
+# -----------------------------------------------------
+# -----------------------------------------------------
+# -----------------------------------------------------
+
+# Pull in only the columns we need
+BP_PIU_total <- BP_Summary[,c(1,2,5)]
+
+# pivot the table so that data is sorted by project site
+BP_PIU_total <- pivot_wider(BP_PIU_total, names_from = project_site, values_from = piu_project)
+
+# Create a new object containing the cumulative value for each project site
+# Careful not to include a cumulative count of the years since start date (col 1)
+BP_PIU_cumu_total <- cumsum(BP_PIU_total[,2:ncol(BP_PIU_total)])
+
+# add years since start date (col 1) back in
+BP_PIU_cumu_total <- BP_PIU_cumu_total %>%
+  add_column("years_since_start_date" = BP_PIU_total$years_since_start_date, .before = "Crossrigg")
+
+# pivot it back again to make plotting easier
+BP_PIU_cumu_total <- BP_PIU_cumu_total %>%
+  pivot_longer(!years_since_start_date, names_to = "project_site", values_to = "cumulative_PIU_value")
+
+# Add another column to be used as 'group' - not sure why, following this:
+# https://www.data-to-viz.com/caveat/spaghetti.html
+BP_PIU_cumu_total <- BP_PIU_cumu_total %>%
+  mutate(project_site2=project_site)
+
+# PLOT it... (see here for themes: https://r-charts.com/ggplot2/themes/)
+BP_PIU_cumu_total_plot <- BP_PIU_cumu_total %>%
+  ggplot(aes(x=years_since_start_date, y=cumulative_PIU_value)) +
+  geom_line( data=BP_PIU_cumu_total %>% dplyr::select(-project_site), aes(group=project_site2), color="grey", size=0.5, alpha=0.5) +
+  geom_line( aes(color=project_site), color=Primary_Colour, size=0.5 )+
+  scale_colour_viridis_d() +
+  theme_light() +
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=14),
+    panel.grid = element_blank()) +
+  labs(x = "Years Since Project Start Date", y = "Cumulative PIU") +
+  facet_wrap(~project_site)
+
+# -----------------------------------------------------
+# -----------------------------------------------------
+# -----------------------------------------------------
+
+# Plot of cumulative PIU per hectare by year
+
+# -----------------------------------------------------
+# -----------------------------------------------------
+# -----------------------------------------------------
+
+# Pull in only the columns we need
+BP_PIU_cumu_total_plot_per_ha <- BP_Summary[,c(1,2,7)]
+
+# pivot the table so that data is sorted by project site
+BP_PIU_cumu_total_plot_per_ha_wide <- pivot_wider(BP_PIU_cumu_total_plot_per_ha, names_from = project_site, values_from = piu_project_per_ha)
+
+# Create a new object containing the cumulative value for each project site
+# Careful not to include a cumulative count of the years since start date (col 1)
+BP_PIU_cumu_total_plot_per_ha_wide <- cumsum(BP_PIU_cumu_total_plot_per_ha_wide[,2:ncol(BP_PIU_cumu_total_plot_per_ha_wide)])
+
+# add years since start date (col 1) back in
+BP_PIU_cumu_total_plot_per_ha_wide <- BP_PIU_cumu_total_plot_per_ha_wide %>%
+  add_column("years_since_start_date" = BP_PIU_total$years_since_start_date, .before = "Crossrigg")
+
+# pivot it back again to make plotting easier
+BP_PIU_cumu_total_plot_per_ha <- BP_PIU_cumu_total_plot_per_ha_wide %>%
+  pivot_longer(!years_since_start_date, names_to = "project_site", values_to = "cumulative_PIU_value")
+
+# Add another column to be used as 'group' - not sure why, following this:
+# https://www.data-to-viz.com/caveat/spaghetti.html
+BP_PIU_cumu_total_plot_per_ha <- BP_PIU_cumu_total_plot_per_ha %>%
+  mutate(project_site2=project_site)
+
+# The PLOT thickens... (see here for themes: https://r-charts.com/ggplot2/themes/)
+BP_PIU_cumu_total_plot_per_ha <- BP_PIU_cumu_total_plot_per_ha %>%
+  ggplot(aes(x=years_since_start_date, y=cumulative_PIU_value)) +
+  geom_line( data=BP_PIU_cumu_total_plot_per_ha %>% dplyr::select(-project_site), aes(group=project_site2), color="grey", size=0.5, alpha=0.5) +
+  geom_line( aes(color=project_site), color=Primary_Colour, size=0.5 )+
+  scale_colour_viridis_d() +
+  theme_light() +
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=14),
+    panel.grid = element_blank()) +
+  labs(x = "Years Since Project Start Date", y = "Cumulative PIU per Hectare") +
+  facet_wrap(~project_site)
+
+# -----------------------------------------------------
+# -----------------------------------------------------
+# -----------------------------------------------------
+
+# Cumulative Plot of All BP PIU
+
+# -----------------------------------------------------
+# -----------------------------------------------------
+# -----------------------------------------------------
+
+# Select the data
+BP_PIU_TOTAL <- BP_Summary[,c(1,2,5)]
+
+# Fetch project start dates
+Project_Start <- unique(BP_Summary[,c(1,8)])
+
+# Join 'em up
+BP_PIU_TOTAL <- left_join(Project_Start, BP_PIU_TOTAL, by = "project_site")
+
+# Calculation absolute year
+BP_PIU_TOTAL <- BP_PIU_TOTAL %>%
+  add_column("Year" = BP_PIU_TOTAL$first_planting_year + BP_PIU_TOTAL$years_since_start_date)
+
+# Sort by year
+BP_PIU_TOTAL <- arrange(BP_PIU_TOTAL, Year)
+
+# Pivot so we can calculate the sum of all projects by vintage
+BP_PIU_TOTAL <- pivot_wider(BP_PIU_TOTAL, names_from = Year, values_from = piu_project)
+
+# Take out the first 3 columns as we don't want to add them up
+BP_PIU_TOTAL_sum <- BP_PIU_TOTAL[,4:ncol(BP_PIU_TOTAL)]
+
+# Calculate a sum value for each column
+BP_PIU_TOTAL_sum <- BP_PIU_TOTAL_sum %>% summarise_if(is.numeric, sum, na.rm = TRUE)
+
+# add a first column back iin (not 100% sure why this is needed, I picture it as being the pivot point but who knows...)
+BP_PIU_TOTAL_sum <- BP_PIU_TOTAL_sum %>%
+  add_column("TOTAL" = "TOTAL", .before = "2006")
+
+# Pivot long again (makes it ready to plot)
+BP_PIU_TOTAL_sum <- pivot_longer(BP_PIU_TOTAL_sum, !TOTAL, names_to = "Vintage", values_to = "PIU_per_Year")
+
+# Make the column "Vintage" back into an integer (becomes a 'char' for some reason)
+BP_PIU_TOTAL_sum <- BP_PIU_TOTAL_sum %>% mutate(across(Vintage, as.integer))
+
+# Create a new column that cumulatively counts the PIU per year
+BP_PIU_TOTAL_sum$Cumulative_PIU = cumsum(BP_PIU_TOTAL_sum$PIU_per_Year)
+
+# set the line colour for the horizontal lines in the following plot
+horizontal_line_colour <- "black"
+
+# Gunpowder, Treason and PLOT... (see here for themes: https://r-charts.com/ggplot2/themes/)
+BP_PIU_TOTAL_plot <- BP_PIU_TOTAL_sum %>%
+  ggplot(aes(x = Vintage, y = Cumulative_PIU)) +
+  geom_line(color = Primary_Colour) +
+  xlim(2000,2115) +
+  scale_y_continuous(labels = function(x) format(x, scientific = TRUE)) +
+
+  geom_hline(yintercept=23845, color=horizontal_line_colour, size=.25, alpha = 0.75) +
+  annotate(geom="text", x=2106, y=43845,
+           label="2022", size = 3) +
+  annotate(geom="text", x=2006.5, y=43845,
+           label="23,845", size = 3) +
+  annotate(geom="point", x=2022, y=23845, size=2.5, shape=1, fill="transparent") +
+
+  geom_hline(yintercept=64749, color=horizontal_line_colour, size=.25, alpha = 0.75) +
+  annotate(geom="text", x=2106, y=86749,
+           label="2025", size = 3) +
+  annotate(geom="text", x=2006.5, y=86749,
+           label="64,749", size = 3) +
+  annotate(geom="point", x=2025, y=64749, size=2.5, shape=1, fill="transparent") +
+
+  geom_hline(yintercept=238743, color=horizontal_line_colour, size=.25, alpha = 0.75) +
+  annotate(geom="text", x=2106, y=258743,
+           label="2030", size = 3) +
+  annotate(geom="text", x=2006.5, y=258743,
+           label="238,743", size = 3) +
+  annotate(geom="point", x=2030, y=238743, size=2.5, shape=1, fill="transparent") +
+
+  geom_hline(yintercept=744144, color=horizontal_line_colour, size=.25, alpha = 0.75) +
+  annotate(geom="text", x=2106, y=769144,
+           label="2050", size = 3) +
+  annotate(geom="text", x=2006.5, y=769144,
+           label="744,144", size = 3) +
+  annotate(geom="point", x=2050, y=744144, size=2.5, shape=1, fill="transparent") +
+
+  geom_hline(yintercept=1174975, color=horizontal_line_colour, size=.25, alpha = 0.75) +
+  annotate(geom="text", x=2106, y=1144975,
+           label="2100", size = 3) +
+  annotate(geom="text", x=2006.5, y=1144975,
+           label="1,174,975", size = 3) +
+  annotate(geom="point", x=2100, y=1174975, size=2.5, shape=1, fill="transparent") +
+
+  labs(x = "Year",
+       y = "Total Number of PIUs Issued",
+       caption = "Source: (IHS-Markit, 2022b)") +
+
+  theme_minimal() +
+
+  theme(
+    axis.title.x = element_text(color = "black", size = 10, hjust = 0.5, vjust = -1),
+    axis.title.y = element_text(color = "black", size = 10, hjust = 0.5, vjust = 3))
+
+# -----------------------------------------------------
+# -----------------------------------------------------
+# -----------------------------------------------------
+
+# Comparative Plot of BP vs WCC PIU
+
+# -----------------------------------------------------
+# -----------------------------------------------------
+# -----------------------------------------------------
+
+
+# Import the PIU data
+# source: https://mer.markit.com/br-reg/public/index.jsp?entity=issuance&acronym=WCC&categoryId=100000000000001&standardId=100000000000042&unitClass=&sort=holding_quantity&dir=DESC&srd=true&name=
+WCC_PIU <- read_csv(here("data_analysis/WCC/PIU_Listings.csv"))
+
+# Clean the names up
+WCC_PIU <- clean_names(WCC_PIU)
+
+# Pull in only the data we need to a new variable
+WCC_PIU_pivot <- WCC_PIU[,c(1,7)]
+
+# Arrange by vintage
+WCC_PIU_pivot <- WCC_PIU_pivot %>% arrange(WCC_PIU_pivot$vintage)
+
+# Since we're only interested in the year that the units become available, split the vintage column in two
+WCC_PIU_pivot[,3:4] <- str_split_fixed(WCC_PIU_pivot$vintage, " - ", 2)
+
+# And select just the columns that we want again
+WCC_PIU_pivot <- WCC_PIU_pivot[,c(3,2)]
+
+# Add an 'id' column, nothing fancy, but pivot_wider() seems to like having it there for some reason
+WCC_PIU_pivot <- WCC_PIU_pivot %>%
+  add_column(id = 1:nrow(WCC_PIU_pivot), .before = "V1")
+
+# pivot that variable so that row values (nuts2_official_name) become column names
+WCC_PIU_pivot <- pivot_wider(WCC_PIU_pivot, names_from = V1, values_from = units)
+
+# Calculate a sum value for each column
+WCC_PIU_sum <- WCC_PIU_pivot %>% summarise_if(is.numeric, sum, na.rm = TRUE)
+
+# Rotate the data frame so that col titles and row 1 become columns
+WCC_PIU_sum <- WCC_PIU_sum %>%
+  pivot_longer(!id, names_to = "vintage", values_to = "PI_units")
+
+# Delete that pesky id column
+WCC_PIU_sum <- WCC_PIU_sum %>%
+  select(vintage, PI_units)
+
+# Calculate the new total
+WCC_PIU_new_total <- WCC_PIU_sum %>% summarise_if(is.numeric, sum, na.rm = TRUE)
+
+# Calculate the old total
+WCC_PIU_old_total <- colSums(WCC_PIU[,7])
+
+# Makes sure they're the same (should return 'TRUE')
+WCC_PIU_new_total == WCC_PIU_old_total
+
+# Add a new column that calculates the cumulative value of "PI_units"
+WCC_PIU_sum$Cumu_PI_units = cumsum(WCC_PIU_sum$PI_units)
+
+# For some reason, pivoting the table makes 'vintage' type character, change it back to 'integer'
+WCC_PIU_sum <- WCC_PIU_sum %>% mutate(across(vintage, as.integer))
+
+# Extract the cumulative column and vintage for WCC data
+WCC_Data <- WCC_PIU_sum[,c(1,3)]
+
+# Rename the column to be more informative
+WCC_Data <- rename(WCC_Data, WCC_PIU = Cumu_PI_units)
+
+# clean the names (need to make sure this and the next dataset have matching 'vintage' name)
+WCC_Data <- clean_names(WCC_Data)
+
+# Extract only the cumulative column and vintage for BP data
+BP_Data <- BP_PIU_TOTAL_sum[,c(2,4)]
+
+# Rename the column to be more informative
+BP_Data <- rename(BP_Data, BP_PIU = Cumulative_PIU)
+
+# clean the names (need to make sure this and the previous dataset have matching 'vintage' name)
+BP_Data <- clean_names(BP_Data)
+
+# Join the two new data sets together
+Data_Combined <- left_join(WCC_Data, BP_Data, by = "vintage")
+
+# WHAT ARE YOU PLOTTING!!!!!!!!!!!!
+WCC_and_BP_plot <- Data_Combined %>%
+  ggplot(aes(x = vintage)) +
+  geom_line(aes(y=bp_piu), color = "black", linetype = "dashed") +
+  geom_line(aes(y=wcc_piu), color = "black") +
+  xlim(2000,2115) +
+  scale_y_continuous(labels = function(x) format(x, scientific = TRUE)) +
+
+  annotate(geom="text", x=2109, y=6108404,
+           label="All WCC Projects",
+           size = 3) +
+  
+    annotate(geom="text", x=2105, y=998999,
+           label="Scottish Forest Alliance",
+           size = 3,
+           color = "black") +
+
+  labs(x = "Year",
+       y = "Total Number of PIUs Issued",
+       caption = "Source: (IHS-Markit, 2022a)") +
+
+  theme_minimal() +
+
+  theme(
+    legend.position="bottom",
+    axis.title.x = element_text(color = "black", size = 10, hjust = 0.5, vjust = -1),
+    axis.title.y = element_text(color = "black", size = 10, hjust = 0.5, vjust = 3))
+  # axis.text.y=element_blank())
+
+# -----------------------------------------------------
+# -----------------------------------------------------
+# -----------------------------------------------------
+
+ # ---------------------------------------------------------------------------------
+# Calculate the 100 year TIFF
+# ---------------------------------------------------------------------------------
+
+# Import TIFF data
+TIFF_by_NUTS <- read_csv(here("data_analysis/TIFF/TIFF_by_NUTS.csv"))
+
+# Select only the important bits
+TIFF_by_NUTS <- TIFF_by_NUTS[1:3]
+
+# clean the column names
+TIFF_by_NUTS <- clean_names(TIFF_by_NUTS)
+
+# Add a column representing the total income over 100 years
+TIFF_by_NUTS <- TIFF_by_NUTS %>%
+  add_column("tiff_100" = TIFF_by_NUTS$tiff_ha * 100)
+
+# ---------------------------------------------------------------------------------
+# Calculate the PIU / ha for all projects collectively
+# ---------------------------------------------------------------------------------
+
+# Import the BP WCC project data
+BP_data <- read_csv(here("data_analysis/WCC/BP_Summary.csv"))
+
+# Select only the important data
+PIU_Collective <- BP_data[,c(1,5,6)]
+
+# Clean the column names
+PIU_Collective <- clean_names(PIU_Collective)
+
+# Calculate the total number of PIU
+Total_PIU <- colSums(PIU_Collective[,2])
+
+# Pull out unique area values (each value is repeated once for every PIU vintage)
+Total_Area <- unique(PIU_Collective[,3])
+
+# Calculate the total area
+Total_Area <- colSums(Total_Area)
+
+# Calculate PIU per hectare for all projects collectively...
+PIU_per_ha <- Total_PIU / Total_Area
+
+# ---------------------------------------------------------------------------------
+# Calculate the PIU / ha for each project individually
+# ---------------------------------------------------------------------------------
+
+# Pull in only the columns we need
+PIU_Individual <- BP_data[,c(1,5,2)]
+
+# clean the column names
+PIU_Individual <- clean_names(PIU_Individual)
+
+# pivot the table so that data is sorted by project site
+PIU_Individual <- pivot_wider(PIU_Individual, names_from = project_site, values_from = piu_project)
+
+# Create a new object containing the sum of PIUs for each project site
+PIU_Individual <- PIU_Individual %>% summarise_if(is.numeric, sum, na.rm = TRUE)
+
+# Pivot it back again
+PIU_Individual <- pivot_longer(PIU_Individual, !years_since_start_date, names_to = "project_site", values_to = "total_piu")
+
+# Remove the first nonsense column
+PIU_Individual <- PIU_Individual[,2:3]
+
+# Pull out a list of areas
+Area_data <- unique(BP_data[,c(1,6)])
+
+# clean the names again
+Area_data <- clean_names(Area_data)
+
+# Join the two data sets up
+PIU_Individual <- left_join(PIU_Individual, Area_data, by = "project_site")
+
+# Calculate PIU per hectare
+PIU_Individual <- PIU_Individual %>%
+  add_column("piu_per_ha" = PIU_Individual$total_piu / PIU_Individual$area)
+
+# Save this for later use (plotting broadleaf ratio against PIU/ha)
+PIU_broadleaf <- PIU_Individual
+
+# Calculate total income at multiple carbon prices
+PIU_Individual <- PIU_Individual %>%
+  add_column("10" = PIU_Individual$piu_per_ha * 10,
+             "20" = PIU_Individual$piu_per_ha * 20,
+             "30" = PIU_Individual$piu_per_ha * 30,
+             "40" = PIU_Individual$piu_per_ha * 40,
+             "50" = PIU_Individual$piu_per_ha * 50,
+             "60" = PIU_Individual$piu_per_ha * 60,
+             "70" = PIU_Individual$piu_per_ha * 70,
+             "80" = PIU_Individual$piu_per_ha * 80)
+
+# Pull out total PIT per project data
+PIU_Individual_Total <- PIU_Individual[,1:4]
+
+# And remove the data from the larger data set since it isn't needed for plotting
+PIU_Individual <- PIU_Individual[,c(1,5:ncol(PIU_Individual))]
+
+# pivot it back again to make ready for plotting
+PIU_Individual <- PIU_Individual %>%
+  pivot_longer(!project_site, names_to = "carbon_price", values_to = "total_income")
+
+# Add another column to be used as 'group' - not sure why, but it doesn't work if you use name as group...
+# following this: https://www.data-to-viz.com/caveat/spaghetti.html
+PIU_Individual <- PIU_Individual %>%
+  mutate(project_site2=project_site)
+
+# Make the column "carbon_price" back into an integer (becomes a 'char' for some reason)
+PIU_Individual <- PIU_Individual %>% mutate(across(carbon_price, as.double))
+
+# Set the primary colour to be used by the plot (this was included so that all plot colours could be changed at once)
+Primary_Colour <- "#6600cc"
+
+# make the plot
+PIU_Individual_plot <- PIU_Individual %>%
+  ggplot(aes(x=carbon_price, y=total_income)) +
+  geom_line( data=PIU_Individual %>% dplyr::select(-project_site), aes(group=project_site2), color="grey", size=0.5, alpha=0.5) +
+  geom_line( aes(color=project_site), color=Primary_Colour, size=0.5 )+
+  scale_colour_viridis_d() +
+  theme_light() +
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=14),
+    panel.grid = element_blank()) +
+  labs(x = "Price received per unit sold (£)", y = "Total income received over 100 years (£/ha)") +
+  facet_wrap(~project_site)
+
+# plot the plot
+PIU_Individual_plot
+
+# ---------------------------------------------------------------------------------
+# Trees by project
+# ---------------------------------------------------------------------------------
+
+# Read the data, sourced from: https://mer.markit.com/br-reg/public/master-project.jsp?project_id=103000000000757
+trees_by_project <- read_csv(here("data_analysis/WCC/BP_Tree_Data.csv"))
+
+# clean the names
+trees_by_project <- clean_names(trees_by_project)
+
+# need to sort the names out...
+unique_trees <- as_tibble(unique(trees_by_project$species))
+
+# There must be a better way to do this, but I wasn't sure, and sometimes it's easier just to work hard not smart...
+trees_by_project[trees_by_project == "Aspen"] <- "Aspen"
+trees_by_project[trees_by_project == "Birch"] <- "Birch"
+trees_by_project[trees_by_project == "Rowan"] <- "Rowan"
+trees_by_project[trees_by_project == "Scots pine"] <- "Scots Pine"
+trees_by_project[trees_by_project == "Alder"] <- "Alder"
+trees_by_project[trees_by_project == "Ash"] <- "Ash"
+trees_by_project[trees_by_project == "Downy birch"] <- "Birch"
+trees_by_project[trees_by_project == "Downy Birch"] <- "Birch"
+trees_by_project[trees_by_project == "Gean / wild cherry"] <- "Cherry"
+trees_by_project[trees_by_project == "Oak (sessile)"] <- "Oak"
+trees_by_project[trees_by_project == "Sessile Oak"] <- "Oak"
+trees_by_project[trees_by_project == "Willow"] <- "Willow"
+trees_by_project[trees_by_project == "Wych Elm"] <- "Elm"
+trees_by_project[trees_by_project == "Bird Cherry"] <- "Cherry"
+trees_by_project[trees_by_project == "Common Alder"] <- "Alder"
+trees_by_project[trees_by_project == "Scots Pine"] <- "Scots Pine"
+trees_by_project[trees_by_project == "Ash (MB)"] <- "Ash"
+trees_by_project[trees_by_project == "Common Alder (MB)"] <- "Alder"
+trees_by_project[trees_by_project == "Downy Birch (MB)"] <- "Birch"
+trees_by_project[trees_by_project == "Rowan (MB)"] <- "Rowan"
+trees_by_project[trees_by_project == "Sessile Oak (MB)"] <- "Oak"
+trees_by_project[trees_by_project == "Wild Cherry (MB)"] <- "Cherry"
+trees_by_project[trees_by_project == "Wych Elm (MB)"] <- "Elm"
+trees_by_project[trees_by_project == "Birch (betula sp.)"] <- "Birch"
+trees_by_project[trees_by_project == "Hybrid Poplar (Populus serotina/trichocarpa)"] <- "Poplar"
+trees_by_project[trees_by_project == "Oak (MB)"] <- "Oak"
+trees_by_project[trees_by_project == "Oak (Quercus sp.)"] <- "Oak"
+trees_by_project[trees_by_project == "Oak (XB)"] <- "Oak"
+trees_by_project[trees_by_project == "Scots pine (Pinus sylvestris)"] <- "Scots Pine"
+trees_by_project[trees_by_project == "Silver Birch (MB)"] <- "Birch"
+trees_by_project[trees_by_project == "Alder(MB)"] <- "Alder"
+trees_by_project[trees_by_project == "Alder(XB)"] <- "Alder"
+trees_by_project[trees_by_project == "Ash(MB)"] <- "Ash"
+trees_by_project[trees_by_project == "Ash(XB)"] <- "Ash"
+trees_by_project[trees_by_project == "Birch (XB)"] <- "Birch"
+trees_by_project[trees_by_project == "Birch(MB)"] <- "Birch"
+trees_by_project[trees_by_project == "Bird Cherry(MB)"] <- "Cherry"
+trees_by_project[trees_by_project == "Hybrid Poplar"] <- "Poplar"
+trees_by_project[trees_by_project == "Oak"] <- "Oak"
+trees_by_project[trees_by_project == "Rowan(MB)"] <- "Rowan"
+trees_by_project[trees_by_project == "Rowan(XB)"] <- "Rowan"
+trees_by_project[trees_by_project == "Silver Birch (XB)"] <- "Birch"
+trees_by_project[trees_by_project == "Downy Birch(MB)"] <- "Birch"
+trees_by_project[trees_by_project == "Downy Birch(XB)"] <- "Birch"
+trees_by_project[trees_by_project == "Sessile Oak(MB)"] <- "Oak"
+trees_by_project[trees_by_project == "Sessile Oak(XB)"] <- "Oak"
+trees_by_project[trees_by_project == "Bird Cherry (MB)"] <- "Cherry"
+trees_by_project[trees_by_project == "Common Alder(MB)"] <- "Alder"
+trees_by_project[trees_by_project == "Hybrid Larch"] <- "Larch"
+trees_by_project[trees_by_project == "Sitka Spruce"] <- "Sitka"
+trees_by_project[trees_by_project == "Birch (silver)"] <- "Birch"
+trees_by_project[trees_by_project == "Birch downy (Betula pubescens)"] <- "Birch"
+trees_by_project[trees_by_project == "Elm (MB)"] <- "Elm"
+trees_by_project[trees_by_project == "Oak sessile (Quercus petraea)"] <- "Oak"
+trees_by_project[trees_by_project == "Oak, Pedunculate (Quercus robur)"] <- "Oak"
+trees_by_project[trees_by_project == "Wild cherry (gean)"] <- "Cherry"
+trees_by_project[trees_by_project == "Willow (grey)"] <- "Willow"
+trees_by_project[trees_by_project == "Aspen (MB)"] <- "Aspen"
+trees_by_project[trees_by_project == "Birch (silver and downy)"] <- "Birch"
+trees_by_project[trees_by_project == "Bird cherry"] <- "Cherry"
+trees_by_project[trees_by_project == "Gean"] <- "Cherry"
+trees_by_project[trees_by_project == "Oak (sessile and pedunculate)"] <- "Oak"
+trees_by_project[trees_by_project == "Oak (sessile and pedunculate"] <- "Oak"
+trees_by_project[trees_by_project == "Willow (MB)"] <- "Willow"
+trees_by_project[trees_by_project == "Birch, Black/Downy(Betula pubescens)"] <- "Birch"
+trees_by_project[trees_by_project == "Birch, Silver (Betula pendula)"] <- "Birch"
+trees_by_project[trees_by_project == "Birch,Black/downy (Betula pubescens)"] <- "Birch"
+trees_by_project[trees_by_project == "bird cherry (MB)"] <- "Cherry"
+trees_by_project[trees_by_project == "Oak, Sessile (Quercus petraea)"] <- "Oak"
+trees_by_project[trees_by_project == "Scots Pine (Pinus sylvestris s sp. scotica)"] <- "Scots Pine"
+trees_by_project[trees_by_project == "Willow (salix sp.)"] <- "Willow"
+trees_by_project[trees_by_project == "Willow spp."] <- "Willow"
+trees_by_project[trees_by_project == "Alder (Common)"] <- "Alder"
+trees_by_project[trees_by_project == "Birch (downy)"] <- "Birch"
+trees_by_project[trees_by_project == "Birch(Downy)"] <- "Birch"
+trees_by_project[trees_by_project == "Oak (Sessile)"] <- "Oak"
+trees_by_project[trees_by_project == "Cherry"] <- "Cherry"
+trees_by_project[trees_by_project == "Elm"] <- "Elm"
+trees_by_project[trees_by_project == "Grey willow"] <- "Willow"
+trees_by_project[trees_by_project == "Birch (downy/silver)"] <- "Birch"
+trees_by_project[trees_by_project == "Common alder"] <- "Alder"
+trees_by_project[trees_by_project == "Hazel"] <- "Hazel"
+trees_by_project[trees_by_project == "Mixed broadleaves"] <- "Mixed Broadleaf"
+trees_by_project[trees_by_project == "Mixed conifers"] <- "Mixed Conifers"
+trees_by_project[trees_by_project == "Oak (robur/petraea)"] <- "Oak"
+trees_by_project[trees_by_project == "other broadleaves"] <- "Mixed Broadleaf"
+trees_by_project[trees_by_project == "Other Conifer"] <- "Mixed Conifers"
+trees_by_project[trees_by_project == "other conifers"] <- "Mixed Conifers"
+trees_by_project[trees_by_project == "Silver birch"] <- "Birch"
+trees_by_project[trees_by_project == "Wild cherry/gean"] <- "Cherry"
+
+# For some reason the rows below won't rename, so do it manually...
+trees_by_project[191,2] <- "Birch"
+trees_by_project[192,2] <- "Oak"
+trees_by_project[55,2] <- "Oak"
+
+unique_trees_2 <- as_tibble(unique(trees_by_project$species))
+
+# Select only the relevant columns
+trees_by_project <- trees_by_project[,c(1,2,7)]
+
+# Sort by project again so you can make some spot checks
+trees_by_project <- trees_by_project[order(trees_by_project$project_site), ]
+
+# Combine each species within a given area
+trees_by_project <- as_tibble(aggregate(x = trees_by_project$area_ha,
+                                        by = list(project_site = trees_by_project$project_site,
+                                                  species = trees_by_project$species),
+                                        FUN = sum))
+
+# Sort by project again so you can make some spot checks
+# E.g., The total area of Birch in project Abernethy should be 3.93 + 3.48 + 0.484 = 7.894 (expect some rounding error)
+trees_by_project <- trees_by_project[order(trees_by_project$project_site),]
+
+# Make a plot
+trees_by_project_absolute_plot <- ggplot(trees_by_project, aes(fill=species, y=x, x=project_site)) +
+  geom_bar(position="stack", stat="identity") +
+  scale_fill_viridis(discrete = T,
+                     name="Species")+
+  ylab("Area (ha)") +
+  xlab("") +
+  theme(legend.key.size = unit(5, 'mm'),
+        axis.text.x = element_text(angle = 30, hjust = 1))
+
+# plot the plot
+# trees_by_project_absolute_plot
+
+# save the data as a new dataframe as trees_by_project is about to get modified further
+trees_by_project_absolute_data <- trees_by_project
+
+# Could be interesting to compare broadleaf to conifer...
+
+trees_by_project[trees_by_project == "Aspen"] <- "Broadleaf"
+trees_by_project[trees_by_project == "Birch"] <- "Broadleaf"
+trees_by_project[trees_by_project == "Rowan"] <- "Broadleaf"
+trees_by_project[trees_by_project == "Alder"] <- "Broadleaf"
+trees_by_project[trees_by_project == "Ash"] <- "Broadleaf"
+trees_by_project[trees_by_project == "Elm"] <- "Broadleaf"
+trees_by_project[trees_by_project == "Cherry"] <- "Broadleaf"
+trees_by_project[trees_by_project == "Oak"] <- "Broadleaf"
+trees_by_project[trees_by_project == "Willow"] <- "Broadleaf"
+trees_by_project[trees_by_project == "Poplar"] <- "Broadleaf"
+trees_by_project[trees_by_project == "Hazel"] <- "Broadleaf"
+trees_by_project[trees_by_project == "Mixed Broadleaf"] <- "Broadleaf"
+
+trees_by_project[trees_by_project == "Scots Pine"] <- "Conifer"
+trees_by_project[trees_by_project == "Larch"] <- "Conifer"
+trees_by_project[trees_by_project == "Sitka"] <- "Conifer"
+trees_by_project[trees_by_project == "Mixed Conifers"] <- "Conifer"
+
+# Make a plot
+trees_by_project_percentage_plot <- ggplot(trees_by_project, aes(fill=species, y=x, x=project_site)) +
+  geom_bar(position="fill", stat="identity") +
+  scale_fill_viridis(discrete = T,
+                     name="",
+                     guide = guide_legend( keyheight = unit(3, units = "mm"),
+                                           keywidth=unit(12, units = "mm"),
+                                           label.position = "bottom",
+                                           title.position = 'top',
+                                           nrow=2)) +
+  scale_y_continuous(labels = scales::percent) +
+  ylab("Conifer vs Broadleaf") +
+  xlab("") +
+  theme(axis.text.x = element_text(angle = 30, hjust = 1))
+
+# plot the plot
+# trees_by_project_percentage_plot
+
+# ---------------------------------------------------------------------------------
+# Scatter plot showing total income VS broadleaf %
+# ---------------------------------------------------------------------------------
+
+# https://r-graph-gallery.com/scatterplot.html
+
+# aggregate data for each project by species (i.e., add up all the broadleaf etc)
+trees_by_project_percentage_data <- as_tibble(aggregate(x = trees_by_project$x,
+                                                        by = list(project_site = trees_by_project$project_site,
+                                                                  species = trees_by_project$species),
+                                                        FUN = sum))
+
+# rename x, that isn't very informative
+trees_by_project_percentage_data <- rename(trees_by_project_percentage_data, area = x)
+
+# Pivot the data to seperate out broadleaf and conifer data
+trees_by_project_percentage_data <- pivot_wider(trees_by_project_percentage_data, names_from = species, values_from = area)
+
+# Change NA values to 0
+trees_by_project_percentage_data[is.na(trees_by_project_percentage_data)] <- 0
+
+# calculate the total area of all species
+trees_by_project_percentage_data <- trees_by_project_percentage_data %>%
+  add_column("total_tree_area" = trees_by_project_percentage_data$Broadleaf + trees_by_project_percentage_data$Conifer)
+
+# calculate the percentage of broadleaf
+trees_by_project_percentage_data <- trees_by_project_percentage_data %>%
+  add_column("broadleaf_percentage" = trees_by_project_percentage_data$Broadleaf / trees_by_project_percentage_data$total_tree_area)
+
+# Pull in the piu/ha data calculated earlier
+PIU_broadleaf
+
+# join em up
+trees_by_project_ratio_piu <- left_join(trees_by_project_percentage_data, PIU_broadleaf, by = "project_site")
+
+# Create the scatter plot...
+trees_by_project_scatter_plot <- ggplot(trees_by_project_ratio_piu, aes(x=broadleaf_percentage, y=piu_per_ha)) +
+  geom_point() +
+  theme_light() +
+  ylab("PIU per Hectare") +
+  xlab("Ration of Confier to Broadleaf, where 1 = 100% Broadleaf") +
+  geom_smooth(method=lm , color="black", se=TRUE) # se=TRUE adds the confidence interval
+
+# Well that's now very enlightening...
+# trees_by_project_scatter_plot
+
+# ---------------------------------------------------------------------------------
+# Previous land use and soil type
+# ---------------------------------------------------------------------------------
+
+# Make a table showing all the data
+
+presentable_data <- trees_by_project_ratio_piu[,c(1, 7, 6, 8, 5)]
+
+presentable_data <- presentable_data %>%
+  add_column("broadleaf_percent" = presentable_data$broadleaf_percentage * 100)
+
+presentable_data <- presentable_data[,c(1, 2, 3, 4, 6)]
+
+BP_data_presentable <- unique(BP_data[,c(1,9,10)])
+
+BP_data_presentable <- clean_names(BP_data_presentable)
+
+presentable_data <- left_join(presentable_data, BP_data_presentable, by = "project_site")
+
+presentable_data <- presentable_data[order(presentable_data$piu_per_ha),]
+
+presentable_data_average <- presentable_data %>% summarise_if(is.numeric, mean, na.rm = TRUE)
+
+Presentable_WCC_BP_data <- presentable_data %>%
+  add_row("project_site" = "AVERAGE",
+          "area" = presentable_data_average$area,
+          "total_piu" = presentable_data_average$total_piu,
+          "piu_per_ha" = presentable_data_average$total_piu / presentable_data_average$area,
+          "broadleaf_percent" = presentable_data_average$broadleaf_percent,
+          "previous_landuse" = "--",
+          "soil_group" = "--",)
+
+Presentable_WCC_BP_data <- Presentable_WCC_BP_data %>%
+  rename("Project Site" = project_site,
+         "Area (ha)" = area,
+         "Total Sequestration (tCO2)" = total_piu,
+         "Sequestration per Hectare (tCO2/ha)" = piu_per_ha,
+         "Amount of Broadleaf (%)" = broadleaf_percent,
+         "Previous Landuse" = previous_landuse,
+         "Soil Group" = soil_group)
+
+# Presentable_WCC_BP_data
+
+# Reference list of plots:
+
+# -----------------------------------------------------
+# -----------------------------------------------------
+# -----------------------------------------------------
+
+# # Plot of PIU per year per hectare
+# BP_PIU_per_ha_plot
+#
+# # Plot of cumulative PIU by year
+# BP_PIU_cumu_total_plot
+#
+# # Plot of cumulative PIU per hectare by year
+# BP_PIU_cumu_total_plot_per_ha
+#
+# # Cumulative Plot of All BP PIU
+# BP_PIU_TOTAL_plot
+#
+# # Comparative Plot of BP vs WCC PIU
+# WCC_and_BP_plot
+```
+
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ----------------------------- WCC Results ----------------------------- -->
+
+<!-- ----------------------------------------------------------------------- -->
+
+## The Woodland Carbon Code {#WCC-Results}
+
+The Scottish Forest Alliance owns 16 Woodland Carbon Code (WCC) certified projects across Scotland, as shown in Figure \@ref(fig:WCC-Project-Locations-Fig), totalling 4,802 hectares, for which the partnership has been issued 1,210,513 PIUs (excluding 341,572 units issued to the buffer account), collectively representing an expectation that the projects will sequester 1,552,085 $tCO_2$ [@ihsmarkitRegistryProjectDetails2022].
+
+\FloatBarrier
+
+```{r WCC-Project-Locations-Code, include = FALSE}
+# ---------------------------------------------------------------------------------
+# Plot a map showing the project sites
+# ---------------------------------------------------------------------------------
+
+  # THIS SECTION IS CACHED SO WILL NOT UPDATE IF CHANGED (change to 'cache = FALSE')
+
+
+  # rm(list=ls())  # Clear rstudio environemnt
+  # cat("\014") # Clear console
+  # gc() # Free up unused memory
+  # dev.off(dev.list()["RStudioGD"]) # Clear all plots
+
+  # SOURCE OF SHAPEFILE: httpshttps://geoportal.statistics.gov.uk/datasets/ons::nuts-level-2-january-2018-full-clipped-boundaries-in-the-united-kingdom/about
+
+# Website used to reduce size of shape file: https://mapshaper.org/
+# The original is way larger than needed which makes plotting slow
+# I've shrunk it down to
+
+shapefile_location <- "data_analysis/Shapefiles/Scotland/Constituencies 2.5 percent"
+
+shapefile_name <- 'Constituencies 2.5 percent'
+
+# Define path to shapefile and look inside, you need to copy the shapefile title
+list.files(here(shapefile_location))
+
+# Read shapefile (note, dsn is the folder path, layey is the name of the shape file WITHOUT .shp)
+UK_Shape <- readOGR(
+  dsn= here(shapefile_location),
+  layer=shapefile_name)
+
+# plot() is a quicker way than ggplot to test the data
+# plot(UK_Shape)
+
+# UK_Shape.df <- as(UK_Shape, "data.frame")
+#
+# write_csv(UK_Shape.df, "/Users/dylan/Library/CloudStorage/OneDrive-UniversityofEdinburgh/Global_Agriculture/Assessment/Y4 - S2/Dissertation/Data Analysis/iMac_v2/gadm40_GBR_2.csv")
+
+# Check the size of the shape file - less than 1Mb will load quite quickly, >50 will take forever...
+# humanReadable(object.size(UK_Shape), units="auto")
+
+# Check the name of the column that includes the region data
+glimpse(UK_Shape)
+
+# Using ggplot requires that the data be in the form of a table, use tidy() to do this. Also include the region data (above).
+UK_Shape_Tidy <- tidy(UK_Shape, region = "spc16nm")
+
+BP_Project_Location <- read_csv(here("data_analysis/WCC/BP_Project_Location.csv"))
+
+BP_Project_Map <- ggplot() +
+  geom_polygon(data = UK_Shape_Tidy, aes(fill = NA, x = long, y = lat, group = group),
+               fill = "grey") +
+  coord_fixed(1) +
+  theme_void() +
+  scale_fill_viridis(trans = "log",
+                     option = "D", # Sets the colour scale. Choose A-H. Only D really works without borders.
+                     breaks=c(12,100,250,500,750,1000),
+                     name="Total Income\nfrom Farming\n(£/ha/year)",
+                     guide = guide_legend( keyheight = unit(3, units = "mm"),
+                                           keywidth=unit(12, units = "mm"),
+                                           label.position = "bottom",
+                                           title.position = 'top',
+                                           nrow=6)) + # Controls the key row length, 1 = horizontal, n = vertical.
+
+  # The code below adds all the labels to the map.
+  # I wasn't sure how to do this automatically so did it manually.
+  # Reference data can be found in the dataframe "BP_Project_Location" above...
+
+  annotate(geom="point", x=283700, y=668600, size=3, shape=6, colour='black') +
+  annotate(geom="point", x=50000, y=1200000, size=2, shape=6, colour='black') +
+  annotate(geom="text", x=70000, y=1200000, label="Crossrigg & Drumbow", size = 2.5, hjust = 0) +
+
+  annotate(geom="point", x=246000, y=710900, size=3, shape=2, colour='black') +
+  annotate(geom="point", x=50000, y=1175000, size=2, shape=2, colour='black') +
+  annotate(geom="text", x=70000, y=1175000, label="Loch Katrine, Glen Fin & Inversnaid", size = 2.5, hjust = 0) +
+
+  annotate(geom="point", x=342500, y=826000, size=3, shape=3, colour='black') +
+  annotate(geom="point", x=50000, y=1150000, size=2, shape=3, colour='black') +
+  annotate(geom="text", x=70000, y=1150000, label="Darroch Wids, x3 ", size = 2.5, hjust = 0) +
+
+  annotate(geom="point", x=175000, y=820900, size=3, shape=1, colour='black') +
+  annotate(geom="point", x=50000, y=1025000, size=2, shape=1, colour='black') +
+  annotate(geom="text", x=70000, y=1025000, label="Kinloch Hills", size = 2.5, hjust = 0) +
+
+  annotate(geom="point", x=297000, y=807300, size=3, shape=4, colour='black') +
+  annotate(geom="point", x=50000, y=1100000, size=2, shape=4, colour='black') +
+  annotate(geom="text", x=70000, y=1100000, label="Glenmore Forest Park & Abernethy", size = 2.5, hjust = 0) +
+
+  annotate(geom="point", x=239500, y=569500, size=3, shape=5, colour='black') +
+  annotate(geom="point", x=50000, y=1075000, size=2, shape=5, colour='black') +
+  annotate(geom="text", x=70000, y=1075000, label="Barclye", size = 2.5, hjust = 0) +
+
+  annotate(geom="point", x=234700, y=827500, size=3, shape=9, colour='black') +
+  annotate(geom="point", x=50000, y=1050000, size=2, shape=9, colour='black') +
+  annotate(geom="text", x=70000, y=1050000, label="Corrimony", size = 2.5, hjust = 0) +
+
+  annotate(geom="point", x=294000, y=702600, size=3, shape=10, colour='black') +
+  annotate(geom="point", x=50000, y=1125000, size=2, shape=10, colour='black') +
+  annotate(geom="text", x=70000, y=1125000, label="Glen Sherup, Glen Quey & Geordies Wood", size = 2.5, hjust = 0)
+```
+
+\FloatBarrier
+
+```{r WCC-Project-Locations-Fig, fig.cap = "Locations of Scottish Forest Alliance projects.", out.width = '70%',  fig.align = 'center'}
+BP_Project_Map
+```
+
+\FloatBarrier
+\newpage
+
+The 16 Scottish Forest Alliance projects represent roughly one quarter off all Units issued under the WCC (1,552,085 of 6,427,819 units [@ihsmarkitRegistryProjectDetails2022]), as shown in Figure \@ref(fig:All-WCC-PIU-Plot).
+
+\FloatBarrier
+
+```{r All-WCC-PIU-Plot, fig.cap = "All currently issued PIUs under the Woodland Carbon Code and when they become available for use as offsets."}
+WCC_and_BP_plot
+```
+
+\FloatBarrier
+\newpage
+
+As outlined in Section \@ref(Seq-Methods), PIUs issued to a project directly correlate to the expected total sequestration, with 1 PIU issued per tonne of CO2 sequestered. For each of the 16 Scottish Forest Alliance projects, total PIUs issued per year were extracted and plotted in Figure \@ref(fig:PIU-per-HA).
+
+\FloatBarrier
+
+```{r PIU-per-HA, fig.cap = "example caption"}
+BP_PIU_per_ha_plot
+```
+
+\FloatBarrier
+\newpage
+
+PIU per year was then plotted cumulatively and divided by total project area to give the cumulative PIU per hectare, a more accurate metric for comparing expected rates of sequestration between projects, as shown in Figure \@ref(fig:cumulative-PIU-per-HA-plot).
+
+\FloatBarrier
+
+```{r cumulative-PIU-per-HA-plot, fig.cap = "example caption"}
+BP_PIU_cumu_total_plot_per_ha
+```
+
+\FloatBarrier
+\newpage
+
+To explore the large variation in expected total sequestration shown in Figure \@ref(fig:cumulative-PIU-per-HA-plot),  cumulative area under each tree species was calculated for each project, shown in Figure \@ref(fig:Trees-By-Project-Plot).
+
+\FloatBarrier
+
+```{r Trees-By-Project-Plot, fig.cap = "example caption"}
+trees_by_project_absolute_plot
+```
+
+\FloatBarrier
+\newpage
+
+Trees species were then categorised as broadleaf or conifer to test if the ratio of these two types explained the variation in sequestration rate seen in Figure \@ref(fig:cumulative-PIU-per-HA-plot). The ratio of broadleaf to conifer for each project is plotted in Figure \@ref(fig:Trees-By-Project-Percentage-Plot).
+
+\FloatBarrier
+
+```{r Trees-By-Project-Percentage-Plot, fig.cap = "example caption"}
+trees_by_project_percentage_plot
+```
+
+\FloatBarrier
+\newpage
+
+The total number of PIUs issued to the project were then plotted against the ratio of broadleaf to conifer. The large confidence interval suggests that, at least for these projects, broadleaf to conifer ratio is not the primary driver of increased sequestration.
+
+\FloatBarrier
+
+```{r Trees-Scatter-Plot, fig.cap = "example caption"}
+trees_by_project_scatter_plot
+```
+
+\FloatBarrier
+\newpage
+
+The average rate of sequestration for each project was calculated from total expected sequestration and total area, as in Section \@ref(Seq-Scot-Methods). These values, along with broadleaf ratio, previous land use and soil types (sourced from [@ihsmarkitRegistryProjectDetails2022]) were recorded in Table \@ref(tab:Presentable-WCC-BP-data).
+
+\FloatBarrier
+
+```{r Presentable-WCC-BP-data}
+
+Presentable_WCC_BP_data_tab <- kable(Presentable_WCC_BP_data,
+      format = 'latex',
+      digits = 0,
+      format.args = list(big.mark = ","),
+      caption = "Project information for the 16 Woodland Carbon Code certified projects owned by the Scottish Forest Alliance.",
+      booktabs = TRUE,
+      linesep = "")
+
+Presentable_WCC_BP_data_tab %>%
+  kable_styling(latex_options = c("striped", "hold_position"), font_size = 8, full_width = F) %>%
+  column_spec(3:4 , width = "1.8cm") %>%
+  column_spec(1 , width = "1.9cm") %>%
+  column_spec(2 , width = "1cm") %>%
+  column_spec(5 , width = "1.5cm") %>%
+  column_spec(6 , width = "1.7cm") %>%
+  row_spec(16, hline_after = TRUE) %>%
+    footnote(general_title = "Note:",
+             general = "Sequestration values refer to the total after 100 years.",
+             footnote_as_chunk = T) # This line inserts the note on one line instead of two...
+```
+
+
+\FloatBarrier
+
+Based on this table, it appears that neither broadleaf ratio, previous land use or soil group directly control expected sequestration rate.
+
+\FloatBarrier
+\newpage
+
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ------------------- Profitability of Afforestation -------------------- -->
+
+<!-- ----------------------------------------------------------------------- -->
+
+## Profitability of Afforestation {#Profitability-Afforestation-Results}
+
+```{r Required-Carbon-Price, include = FALSE}
+
+# This section and the following two sections were written below including the cost of afforestation establishment and the income from grants. The code might come in useful later on but the content isn't worth including.
+
+# # Import TIFF data
+# TIFF_by_NUTS <- read_csv(here("data_analysis/TIFF/TIFF_by_NUTS.csv"))
+# 
+# # Select only the important bits
+# TIFF_by_NUTS <- TIFF_by_NUTS[1:3]
+# 
+# # clean the column names
+# TIFF_by_NUTS <- clean_names(TIFF_by_NUTS)
+# 
+# # Add a column representing the total income over 100 years
+# TIFF_by_NUTS <- TIFF_by_NUTS %>%
+#   add_column("tiff_100" = TIFF_by_NUTS$tiff_ha * 100)
+# 
+# # Import the BP WCC project data
+# BP_data <- read_csv(here("data_analysis/WCC/BP_Summary.csv"))
+# 
+# # Select only the important data
+# PIU_Collective <- BP_data[,c(1,5,6)]
+# 
+# # Clean the column names
+# PIU_Collective <- clean_names(PIU_Collective)
+# 
+# # Calculate the total number of PIU
+# Total_PIU <- colSums(PIU_Collective[,2])
+# 
+# # Pull out unique area values (each value is repeated once for every PIU vintage)
+# Total_Area <- unique(PIU_Collective[,3])
+# 
+# # Calculate the total area
+# Total_Area <- colSums(Total_Area)
+# 
+# # Calculate PIU per hectare for all projects collectively...
+# PIU_per_ha <- Total_PIU / Total_Area
+# 
+# TIFF_by_NUTS <- TIFF_by_NUTS %>%
+#   add_column("a" = TIFF_by_NUTS$tiff_100 / 9,
+#              "b" = TIFF_by_NUTS$tiff_100 / 150,
+#              "c" = TIFF_by_NUTS$tiff_100 / 250,
+#              "d" = TIFF_by_NUTS$tiff_100 / 350,
+#              "e" = TIFF_by_NUTS$tiff_100 / 525)
+# 
+# TIFF_by_NUTS <- TIFF_by_NUTS[,c(1,2,5,6,7,8,9)]
+# 
+# TIFF_Scot <- TIFF_by_NUTS[order(TIFF_by_NUTS$region), ]
+# 
+# TIFF_Scot <- TIFF_Scot[31:35,]
+# 
+# TIFF_Scot <- TIFF_Scot[,c(2,4,5,6,7)]
+# 
+# TIFF_Scot <- pivot_longer(TIFF_Scot, !nuts_level_2_subregion, names_to = "seq_rate", values_to = "carbon_price")
+# 
+# TIFF_Scot <- TIFF_Scot[order(TIFF_Scot$nuts_level_2_subregion, decreasing = FALSE), ]
+# 
+# TIFF_by_NUTS <- TIFF_by_NUTS[order(TIFF_by_NUTS$c), ]
+# 
+# TIFF_by_NUTS <- rename(TIFF_by_NUTS, "NUTS 2 Subregion" = "nuts_level_2_subregion")
+# 
+# TIFF_by_NUTS <- TIFF_by_NUTS %>% mutate_if(is.numeric, round, 2)
+```
+
+```{r Carbon-Price-Scot-Plot, fig.cap = "EXAMPLE CAPTION", out.width = '90%',  fig.align = 'center'}
+# barplot(height=TIFF_Scot$carbon_price,
+#         names=TIFF_Scot$nuts_level_2_subregion,
+#         density=c(0,20,40,20,20,200),
+#         angle=c(0,45,90,135,180,90),
+#         col="#6600cc",
+#         ylab = "Unit Price (£/tCO2e)",
+#         xlab = "Region",
+#         legend = unique(TIFF_Scot$seq_rate))
+```
+
+```{r Carbon-Price-UK-tab, fig.cap = "EXAMPLE CAPTION", out.width = '60%',  fig.align = 'center'}
+# 
+# TIFF_by_NUTS$a = cell_spec(TIFF_by_NUTS$a, color = ifelse(TIFF_by_NUTS$a < 65, "red", "black"))
+# TIFF_by_NUTS$b = cell_spec(TIFF_by_NUTS$b, color = ifelse(TIFF_by_NUTS$b < 65, "red", "black"))
+# TIFF_by_NUTS$c = cell_spec(TIFF_by_NUTS$c, color = ifelse(TIFF_by_NUTS$c < 65, "red", "black"))
+# TIFF_by_NUTS$d = cell_spec(TIFF_by_NUTS$d, color = ifelse(TIFF_by_NUTS$d < 65, "red", "black"))
+# TIFF_by_NUTS$e = cell_spec(TIFF_by_NUTS$e, color = ifelse(TIFF_by_NUTS$e < 65, "red", "black"))
+# 
+# TIFF <- read_csv(here("data_analysis/TIFF/TIFF_by_NUTS.csv"))
+# 
+# TIFF <- TIFF[,2:3]
+# 
+# TIFF <- rename(TIFF, "NUTS 2 Subregion" = "NUTS Level 2 Subregion")
+# 
+# TIFF_by_NUTS <- left_join(TIFF_by_NUTS, TIFF, by = "NUTS 2 Subregion")
+# 
+# TIFF_by_NUTS <- TIFF_by_NUTS %>% relocate("TIFF (£/ha)", .before = "a")
+# 
+# TIFF_by_NUTS <- TIFF_by_NUTS[,2:8]
+# 
+# TIFF_and_Carbon_Price <- TIFF_by_NUTS %>%
+#   kable(format = 'latex',
+#         escape = FALSE, # This line is important for colour formatting - doesn't work without.
+#         digits = 2, # For some reason this stopped working so I edited the source data above.
+#         format.args = list(big.mark = ","),
+#         caption = "Price per unit (£/tCO2e) required for afforestation to become more profitable current farming method, based on regional average Total Income from Farming (TIFF) and broken down by NUTS 2 region.",
+#         booktabs = TRUE,
+#         linesep = "")
+# 
+# TIFF_and_Carbon_Price %>%
+#   kable_styling(latex_options = c("striped", "hold_position"), font_size = 7, full_width = F) %>%
+#   footnote(general = "Red values highlight those that are below the reported maximum WCU price of £65/unit, suggesting it may already be more profitable to grow trees than food on farms in those regions, assuming they produce less income than the regional average TIFF and if their potential rate of sequestration is sufficiently high.",
+#            number = c("TIFF data is sourced in Table A.1",
+#                       "Columns a to e have been calculated using Equation 4, and posses such uninspired titles due to formatting issues...      --------------------------------------------------------------------------------------------------------------------------------------------------------"),
+#            alphabet = c("Column 'a' has been calculated using a sequestration rate of of 9 tCO2e/ha",
+#                         "Column 'b' has been calculated using a sequestration rate of of 150 tCO2e/ha",
+#                         "Column 'c' has been calculated using a sequestration rate of of 250 tCO2e/ha",
+#                         "Column 'd' has been calculated using a sequestration rate of of 350 tCO2e/ha",
+#                         "Column 'e' has been calculated using a sequestration rate of of 525 tCO2e/ha"),
+#            threeparttable = TRUE)
+
+```
+
+<!-- ----------------------------------------------------------------------- -->
+
+Afforestation profitability was calculated in an Excel spreadsheet and includes the option to use any subset of inputs as laid out in the Methods above, including establishment costs, grant incomes, project size and period, species mix, and sequestration rate. A subset of inputs based on an estimated UK average was selected then optimised for profitability: for example, a sequestration rate of 6 tCO2/ha/year, slightly below the English broadleaf average (see Section \@ref(Seq-Methods) for details), was selected, along with a grant income based on a 100% broadleaf woodland of <300ha, the maximum grant funding available from the Scottish Forestry Grant Scheme (Table \@ref(tab:Scottish-Grant-Table)). These baseline inputs are shown in Table \@ref(tab:Final-Calc-Inputs-Table). A sensitivity analysis was then conducted and subsequent comparative calculations were performed, as laid out in Table \@ref(tab:Sensitivity-Analysis-Table) and Figures \@ref(fig:Transition-Price-Var-Seq-Min-Plot) to \@ref(fig:Transition-Price-Var-Siz-Plot).
+
+```{r Final-Calc-Inputs-Table}
+
+Final_Calc_Inputs <- read_csv(here("data_analysis/Calcs/Final_Lookup_input_data.csv"))
+
+Final_Calc_Inputs_Tab <- kable(Final_Calc_Inputs,
+      format = 'latex',
+      digits = 0,
+      # format.args = list(big.mark = ","),
+      caption = "TIFF and Area by NUTS Level 2 region",
+      booktabs = T,
+      linesep = "")
+
+column_spec(Final_Calc_Inputs_Tab, c(4), width = "2.5cm") %>%
+  kable_styling(latex_options = c("striped", "hold_position"), font_size = 8, full_width = F) %>%
+  footnote(general_title = "Note:",
+           general = "Sequestration rate refers to the 100 year average.",
+           footnote_as_chunk = T) %>% # This line inserts the note on one line instead of two...
+  row_spec(14, hline_after = TRUE)
+```
+
+\FloatBarrier
+
+Calculation of the transition price displayed in Table \@ref(tab:Final-Calc-Inputs-Table), based on Equation \@ref(eq:Carbon-Price), is shown in Equation \@ref(eq:Transition-Price-Example),
+
+\FloatBarrier
+
+```{=tex}
+\begin{equation}
+\ 38.98 = \frac{( ( 100 \times 110 \times 100 ) + 626,639.98 + 7,000 + 1,170,950 ) - 846,256.38}{6 \times 110 \times 100 \times 0.8 }
+(\#eq:Transition-Price-Example)
+\end{equation}
+```
+
+\FloatBarrier
+
+This calculation was repeated for a number of TIFF values and plotted in Figure \@ref(fig:Transition-Price-EXAMPLE-Plot), showing that, as expected, the greater the profitability of farming, the greater the carbon price required for the profitibility of afforestation to match it. 
+
+\FloatBarrier
+
+```{r Transition-Price-EXAMPLE-Calc, include = FALSE}
+
+# var_seq means varied sequestration rate, i.e., these 6 lines represent the same data but using a different seq. rate.
+
+Final_Lookup_var_seq_min <- read_csv(here("data_analysis/Calcs/Final_Lookup_var_seq_min.csv"))
+
+Final_Lookup_var_seq_min <- clean_names(Final_Lookup_var_seq_min)
+
+Final_Lookup_var_seq_min <- rename(Final_Lookup_var_seq_min, "02" = "a")
+Final_Lookup_var_seq_min <- rename(Final_Lookup_var_seq_min, "04" = "b")
+Final_Lookup_var_seq_min <- rename(Final_Lookup_var_seq_min, "06" = "c")
+Final_Lookup_var_seq_min <- rename(Final_Lookup_var_seq_min, "08" = "d")
+Final_Lookup_var_seq_min <- rename(Final_Lookup_var_seq_min, "10" = "e")
+Final_Lookup_var_seq_min <- rename(Final_Lookup_var_seq_min, "12" = "f")
+
+Final_Lookup_var_seq_min <- Final_Lookup_var_seq_min %>%
+  pivot_longer(!tiff_ha, names_to = "sequestration_rate", values_to = "transition_price")
+
+# Sort by seq rate
+Final_Lookup_var_seq_min <- Final_Lookup_var_seq_min[order(Final_Lookup_var_seq_min$sequestration_rate), ]
+
+# These two lines pull out a single line's data set to be used for the red line
+Final_Lookup_var_seq_min_2 <- Final_Lookup_var_seq_min
+Final_Lookup_var_seq_min_2 <- Final_Lookup_var_seq_min_2[Final_Lookup_var_seq_min_2$sequestration_rate == '06', ]
+
+Final_Lookup_var_seq_min_2 <- Final_Lookup_var_seq_min_2 %>%
+  mutate(sequestration_rate2=sequestration_rate)
+
+# Plot the graph... (see here for themes: https://r-charts.com/ggplot2/themes/)
+Final_Lookup_var_seq_min_plot <- Final_Lookup_var_seq_min_2 %>%
+  ggplot(aes(x=tiff_ha, y=transition_price, group=sequestration_rate)) +
+  geom_line(colour = 'black', size = 0.5) +
+  geom_point(aes(shape=sequestration_rate), shape=15, size=2) +
+  ylim(0, 120) +
+  xlim(0, 750) +
+  theme_light() +
+  labs(x = "Total Income from Farming (£/ha/yr)", y = "Transition Price (£)") +
+  annotate(geom="point", x=100, y=38.98, size=5, shape=1, colour="red") +
+  theme(legend.position = "none")
+
+```
+
+```{=latex}
+\begin{figure}
+```
+```{r Transition-Price-EXAMPLE-Plot, echo=FALSE, fig.height=3.5}
+Final_Lookup_var_seq_min_plot
+```
+```{=latex}
+\caption{Transition price at multiple TIFF levels. \label{fig:Transition-Price-EXAMPLE-Plot}}
+\vspace{1.5 mm}
+\scriptsize{A plot of transition price calculated using Equation 5 and input data from Table 4.3 at multiple Total Income from Farming (TIFF) levels. The value circled in red, for example, represents a hypothetical farm with a TIFF of £100/ha. At that TIFF level, a price recieved per tonne of CO2 sequestered (i.e., carbon price) of £38.98 would be needed for income from afforestation to match that of farming, assuming all other inputs were correct.}
+\end{figure}
+```
+
+\FloatBarrier
+
+A simple, one-at-a-time sensitivity analysis was conducted using the Table \@ref(tab:Final-Calc-Inputs-Table) inputs as a baseline. Each value was independently increased by 1% and the subsequent variation in output was recorded; this allowed for the calculation of variation in output due to a 1% increase in the input, referred to as relative sensitivity. The baseline was then reset and the next input modified. The results of all relative sensitivities greater than 0.1% are recorded in Table \@ref(tab:Sensitivity-Analysis-Table).
+
+```{r Sensitivity-Analysis-Table}
+
+Sensitivity_Analysis_data <- read_csv(here("data_analysis/Calcs/Sensitivity_Analysis.csv"))
+
+Sensitivity_Analysis_Tab <- kable(Sensitivity_Analysis_data,
+      format = 'latex',
+      digits = 2,
+      # format.args = list(big.mark = ","),
+      caption = "TIFF and Area by NUTS Level 2 region",
+      booktabs = T,
+      linesep = "")
+
+column_spec(Sensitivity_Analysis_Tab, c(2,3,4,5), width = "1cm") %>%
+  kable_styling(latex_options = c("striped", "hold_position"), font_size = 8, full_width = F) %>%
+  footnote(general_title = "Note:",
+           general = "Sequestration rate refers to the 100 year average.",
+           footnote_as_chunk = T) %>% # This line inserts the note on one line instead of two...
+  column_spec(7 , width = "1.5cm")
+```
+
+\FloatBarrier
+
+```{r Transition-Price-Var-Seq-Min-Calc, include = FALSE}
+
+# var_seq means varied sequestration rate, i.e., these 6 lines represent the same data but using a different seq. rate.
+
+Final_Lookup_var_seq_min <- read_csv(here("data_analysis/Calcs/Final_Lookup_var_seq_min.csv"))
+
+Final_Lookup_var_seq_min <- clean_names(Final_Lookup_var_seq_min)
+
+Final_Lookup_var_seq_min <- rename(Final_Lookup_var_seq_min, "02" = "a")
+Final_Lookup_var_seq_min <- rename(Final_Lookup_var_seq_min, "04" = "b")
+Final_Lookup_var_seq_min <- rename(Final_Lookup_var_seq_min, "06" = "c")
+Final_Lookup_var_seq_min <- rename(Final_Lookup_var_seq_min, "08" = "d")
+Final_Lookup_var_seq_min <- rename(Final_Lookup_var_seq_min, "10" = "e")
+Final_Lookup_var_seq_min <- rename(Final_Lookup_var_seq_min, "12" = "f")
+
+Final_Lookup_var_seq_min <- Final_Lookup_var_seq_min %>%
+  pivot_longer(!tiff_ha, names_to = "sequestration_rate", values_to = "transition_price")
+
+# Sort by seq rate
+Final_Lookup_var_seq_min <- Final_Lookup_var_seq_min[order(Final_Lookup_var_seq_min$sequestration_rate), ]
+
+# These two lines pull out a single line's data set to be used for the red line
+Final_Lookup_var_seq_min_2 <- Final_Lookup_var_seq_min
+Final_Lookup_var_seq_min_2 <- Final_Lookup_var_seq_min_2[Final_Lookup_var_seq_min_2$sequestration_rate == '06', ]
+
+Final_Lookup_var_seq_min_2 <- Final_Lookup_var_seq_min_2 %>%
+  mutate(sequestration_rate2=sequestration_rate)
+
+# Plot the graph... (see here for themes: https://r-charts.com/ggplot2/themes/)
+Final_Lookup_var_seq_min_plot <- Final_Lookup_var_seq_min %>%
+  ggplot(aes(x=tiff_ha, y=transition_price, group=sequestration_rate)) +
+  geom_line(colour = 'black', size = 0.25, linetype='dashed') +
+  # # Add a red line so that it can be referred to in the text
+  geom_line(data=Final_Lookup_var_seq_min_2 %>% dplyr::select(-sequestration_rate), aes(group=sequestration_rate2), size=0.5, color="black",  alpha=1) +
+  geom_point(aes(shape=sequestration_rate), size=2) +
+  ylim(0, 120) +
+  xlim(0, 750) +
+  theme_light() +
+  labs(x = "Total Income from Farming (£/ha/yr)", y = "Transition Price (£)", shape='Sequestration Rate (tCO2/ha/year)') +
+  
+  theme(legend.position = "bottom")
+
+```
+
+\newpage
+
+Sequestration rate was the primary driver of variation identified during sensitivity analysis, with a relative sensitivity of 0.99%. Sequestration rate also appears to be among the most variable inputs, with a range of 0.09 to 5.25 tCO2/ha/year calculated from Scottish Forest Alliance projects (Table \@ref(tab:Presentable-WCC-BP-data)) and a range of 2 to 13 tCO2/ha/year identified by Natural England [@naturalenglandCarbonStorageSequestration2021].
+
+\FloatBarrier
+
+```{=latex}
+\begin{figure}
+```
+```{r Transition-Price-Var-Seq-Min-Plot, echo=FALSE}
+Final_Lookup_var_seq_min_plot
+```
+```{=latex}
+\caption{Transition price with varied sequestration rate. \label{fig:Transition-Price-Var-Seq-Min-Plot}}
+\vspace{1.5 mm}
+\scriptsize{A plot of calculated transition price at different TIFF levels using Equation 5 and input data from Table 4.3, with 5 additional calculations using a varied sequestration rate. Each marker corresponds to the transition price at which afforestation becomes equally profitable to farming at the associated TIFF level. The solid line with square markers corresponds to that shown in Figure 4.6.}
+\end{figure}
+```
+
+\FloatBarrier
+
+```{r Transition-Price-Var-Seq-Max-Calc, include = FALSE}
+
+Final_Lookup_var_seq_min <- read_csv(here("data_analysis/Calcs/Final_Lookup_var_seq_min.csv"))
+
+Final_Lookup_var_seq_min <- clean_names(Final_Lookup_var_seq_min)
+
+Final_Lookup_var_seq_min <- rename(Final_Lookup_var_seq_min, "02" = "a")
+Final_Lookup_var_seq_min <- rename(Final_Lookup_var_seq_min, "04" = "b")
+Final_Lookup_var_seq_min <- rename(Final_Lookup_var_seq_min, "06" = "c")
+Final_Lookup_var_seq_min <- rename(Final_Lookup_var_seq_min, "08" = "d")
+Final_Lookup_var_seq_min <- rename(Final_Lookup_var_seq_min, "10" = "e")
+Final_Lookup_var_seq_min <- rename(Final_Lookup_var_seq_min, "12" = "f")
+
+Final_Lookup_var_seq_min <- Final_Lookup_var_seq_min %>%
+  pivot_longer(!tiff_ha, names_to = "sequestration_rate", values_to = "transition_price")
+
+Final_Lookup_var_seq_max <- read_csv(here("data_analysis/Calcs/Final_Lookup_var_seq_max.csv"))
+
+Final_Lookup_var_seq_max <- clean_names(Final_Lookup_var_seq_max)
+
+Final_Lookup_var_seq_max <- rename(Final_Lookup_var_seq_max, "02" = "a")
+Final_Lookup_var_seq_max <- rename(Final_Lookup_var_seq_max, "04" = "b")
+Final_Lookup_var_seq_max <- rename(Final_Lookup_var_seq_max, "06" = "c")
+Final_Lookup_var_seq_max <- rename(Final_Lookup_var_seq_max, "08" = "d")
+Final_Lookup_var_seq_max <- rename(Final_Lookup_var_seq_max, "10" = "e")
+Final_Lookup_var_seq_max <- rename(Final_Lookup_var_seq_max, "12" = "f")
+
+Final_Lookup_var_seq_max <- Final_Lookup_var_seq_max %>%
+  pivot_longer(!tiff_ha, names_to = "sequestration_rate", values_to = "transition_price")
+
+Final_Lookup_var_seq_min <- add_column(Final_Lookup_var_seq_min, "test" = "min")
+
+Final_Lookup_var_seq_max <- add_column(Final_Lookup_var_seq_max, "test" = "max")
+
+Final_Lookup_var_seq <- rbind(Final_Lookup_var_seq_max, Final_Lookup_var_seq_min)
+
+Final_Lookup_var_seq_2 <- Final_Lookup_var_seq %>%
+  unite(group, c("sequestration_rate", "test"))
+
+Final_Lookup_var_seq_2 <- Final_Lookup_var_seq_2 %>%
+  mutate(group2=group)
+
+# These two lines pull out a single line's data set to be used for the red line
+Final_Lookup_var_seq_3 <- Final_Lookup_var_seq_2
+Final_Lookup_var_seq_3 <- Final_Lookup_var_seq_3[Final_Lookup_var_seq_3$group == '06_min', ]
+
+tab <- tibble(
+  tiff_ha = c(1, 2),
+  transition_price = c(1, 2),
+  name = c("a. Minimum", "b. Maxaximum"))
+
+
+# Plot the graph... (see here for themes: https://r-charts.com/ggplot2/themes/)
+Final_Lookup_var_seq_plot <- Final_Lookup_var_seq_2 %>%
+  ggplot(aes(x=tiff_ha, y=transition_price)) +
+  geom_line(data=Final_Lookup_var_seq_max, aes(group=sequestration_rate,), color='black', size=0.3, linetype='dashed') +
+  geom_line(data=Final_Lookup_var_seq_min, aes(group=sequestration_rate,), color='black', size=0.3, linetype='solid') +
+  # made up data set just to get the line type legend to work:
+  geom_line(data=tab, aes(linetype=name), color='black', size=0.5) +
+  geom_line(data=Final_Lookup_var_seq_3, aes(group=group,), color='black', size=0.5, linetype='solid') +
+  geom_point(data=Final_Lookup_var_seq_3, shape=15, color='black', size=2) +
+  ylim(0, 120) +
+  xlim(0, 750) +
+  theme_light() +
+  labs(x = "Total Income from Farming (£/ha/yr)", y = "Transition Price (£)", linetype = "Establishment Cost") +
+  
+  theme(legend.position = "bottom",
+        legend.direction = "horizontal")
+
+```
+
+\newpage
+
+As highlighted in Table \@ref(tab:Nix-Costs-Table), the Nix Pocketbook (SOURCE) provides a range for each woodland establishment cost estimate. All calculations in this dissertation have used the minimum cost estimate. Figure \@ref(fig:Transition-Price-Var-Seq-Max-Plot) shows the variation in transition price for a range of sequestration rates using both minimum and maximum establishment cost estimates. Relative sensitivity was not calculated for this variation.
+
+\FloatBarrier
+
+```{=latex}
+\begin{figure}
+```
+```{r Transition-Price-Var-Seq-Max-Plot, echo=FALSE}
+Final_Lookup_var_seq_plot
+```
+```{=latex}
+\caption{Transition price with varied establishment cost. \label{fig:Transition-Price-Var-Seq-Max-Plot}}
+\vspace{1.5 mm}
+\scriptsize{A plot of calculated transition price at different TIFF levels using Equation 5 and input data from Table 4.3, with 5 additional calculations using a varied sequestration rate, at 2 different establishment cost levels. Each marker corresponds to the transition price at which afforestation becomes equally profitable to farming at the associated TIFF level. The solid line with square markers corresponds to that shown in Figure 4.6.}
+\end{figure}
+```
+
+\FloatBarrier
+
+```{r Transition-Price-Var-Cos-Calc, include = FALSE}
+
+# var_cost means varied cost, i.e., these 6 items represent the same data but using a different maintenance costs
+
+Final_Lookup_var_cost <- read_csv(here("data_analysis/Calcs/Final_Lookup_var_cost.csv"))
+
+Final_Lookup_var_cost <- clean_names(Final_Lookup_var_cost)
+
+Final_Lookup_var_cost <- rename(Final_Lookup_var_cost, "050" = "a")
+Final_Lookup_var_cost <- rename(Final_Lookup_var_cost, "100" = "b")
+Final_Lookup_var_cost <- rename(Final_Lookup_var_cost, "150" = "c")
+Final_Lookup_var_cost <- rename(Final_Lookup_var_cost, "200" = "d")
+Final_Lookup_var_cost <- rename(Final_Lookup_var_cost, "250" = "e")
+Final_Lookup_var_cost <- rename(Final_Lookup_var_cost, "300" = "f")
+
+Final_Lookup_var_cost <- Final_Lookup_var_cost %>%
+  pivot_longer(!tiff_ha, names_to = "maintenance_costs", values_to = "transition_price")
+
+# Sort by seq rate
+Final_Lookup_var_cost <- Final_Lookup_var_cost[order(Final_Lookup_var_cost$maintenance_costs), ]
+
+# Plot the graph... (see here for themes: https://r-charts.com/ggplot2/themes/)
+Final_Lookup_var_cost_plot <- Final_Lookup_var_cost %>%
+  ggplot(aes(x=tiff_ha, y=transition_price, group=maintenance_costs)) +
+  geom_line(colour = 'black', size = 0.25, linetype='dashed') +
+    # Add a red line so that it can be referred to in the text
+  geom_line(data=Final_Lookup_var_seq_3 %>% dplyr::select(-group), aes(group=group2), size=0.5, color="black",  alpha=1) +
+  geom_point(aes(shape=maintenance_costs), size=2) +
+  ylim(0, 120) +
+  xlim(0, 750) +
+  theme_light() +
+  labs(x = "Total Income from Farming (£/ha/yr)", y = "Transition Price (£)", shape='Mantenance Costs (£/ha/year)') +
+  
+  theme(legend.position = "bottom")
+
+```
+
+\newpage
+
+Variation in maintenance costs was found to be the second most impactful input variable during sensitivity analysis (0.53% relative sensitivity), and is the input subject to the greatest uncertainty. As discussed in Section \@ref(Other-Costs-Methods), the 2022 Nix Pocketbook estimates woodland maintenance costs of <£30 to £900/ha/year depending on intended use. More accurate estimates of this input could strongly impact the interpretation of results.
+
+\FloatBarrier
+
+```{=latex}
+\begin{figure}
+```
+```{r Transition-Price-Var-Cos-Plot, echo=FALSE}
+Final_Lookup_var_cost_plot
+```
+```{=latex}
+\caption{Transition price with varied woodland maintenance costs. \label{fig:Transition-Price-Var-Cos-Plot}}
+\vspace{1.5 mm}
+\scriptsize{A plot of calculated transition price at different TIFF levels using Equation 5 and input data from Table 4.3, with 5 additional calculations using a varied level of maintenance cost. Each marker corresponds to the transition price at which afforestation becomes equally profitable to farming at the associated TIFF level. The solid line with triangle markers corresponds to that shown in Figure 4.6.}
+\end{figure}
+```
+
+\FloatBarrier
+
+```{r Transition-Price-Woodland-Calc, include = FALSE}
+
+# var_cost means varied cost, i.e., these 6 items represent the same data but using a different maintenance costs
+
+Final_Lookup_woodland_type <- read_csv(here("data_analysis/Calcs/Final_Lookup_woodland_type.csv"))
+
+Final_Lookup_woodland_type <- Final_Lookup_woodland_type %>%
+  pivot_longer(!tiff_ha, names_to = "woodland_type", values_to = "transition_price")
+
+# Sort by seq rate
+Final_Lookup_woodland_type <- Final_Lookup_woodland_type[order(Final_Lookup_woodland_type$woodland_type), ]
+
+Final_Lookup_woodland_type_2 <- read_csv(here("data_analysis/Calcs/Final_Lookup_woodland_type_2.csv"))
+
+Final_Lookup_woodland_type_2 <- Final_Lookup_woodland_type_2 %>%
+  pivot_longer(!tiff_ha, names_to = "woodland_type", values_to = "transition_price")
+
+# Plot the graph... (see here for themes: https://r-charts.com/ggplot2/themes/)
+Final_Lookup_woodland_type_plot <- Final_Lookup_woodland_type %>%
+  ggplot(aes(x=tiff_ha, y=transition_price, group=woodland_type)) +
+  geom_line(colour = 'black', size = 0.25, linetype='dashed') +
+  # Add a red line so that it can be referred to in the text
+  geom_line(data=Final_Lookup_var_seq_3 %>% dplyr::select(-group), aes(group=group2), size=0.5, color="black",  alpha=1) +
+  geom_point(data=Final_Lookup_woodland_type, aes(shape=woodland_type), size=2) +
+  geom_point(data=Final_Lookup_woodland_type_2, aes(shape=woodland_type), shape=15, size=3, colour = "lightgrey") +
+  geom_point(data=Final_Lookup_woodland_type_2, aes(shape=woodland_type), size=2) +
+  ylim(0, 120) +
+  xlim(0, 750) +
+  theme_light() +
+  labs(x = "Total Income from Farming (£/ha/yr)", y = "Transition Price (£)", shape='Woodland Type') +
+  
+  theme(legend.position = "bottom")
+
+```
+
+\newpage
+
+Variation in woodland type, though producing the fourth highest relative sensitivity during analysis (0.15%), resulted in a comparatively small variation in estimated transition price when using supplied grant payment rates for different woodland types. Payment rates are largely fixed and based on primary woodland type, with some variation as described in Section \@ref(SoF-Methods).
+
+\FloatBarrier
+
+```{=latex}
+\begin{figure}
+```
+```{r Transition-Price-Woodland-Plot, echo=FALSE}
+Final_Lookup_woodland_type_plot
+```
+```{=latex}
+\caption{Transition price under different types of woodland. \label{fig:Transition-Price-Woodland-Plot}}
+\vspace{1.5 mm}
+\scriptsize{A plot of calculated transition price at different TIFF levels using Equation 5 and input data from Table 4.3, with 5 additional calculations using different woodland type, which impacts the amount of grant money received. Each marker corresponds to the transition price at which afforestation becomes equally profitable to farming at the associated TIFF level. The solid line with circle markers corresponds to that shown in Figure 4.6.}
+\end{figure}
+```
+
+\FloatBarrier
+
+```{r Transition-Price-Var-Len-Calc, include = FALSE}
+
+# var_cost means varied cost, i.e., these 6 items represent the same data but using a different maintenance costs
+
+Final_Lookup_var_length <- read_csv(here("data_analysis/Calcs/Final_Lookup_var_length.csv"))
+
+Final_Lookup_var_length <- read_csv(here("data_analysis/Calcs/Final_Lookup_var_length.csv"))
+
+Final_Lookup_var_length <- clean_names(Final_Lookup_var_length)
+
+Final_Lookup_var_length <- rename(Final_Lookup_var_length, "025" = "a")
+Final_Lookup_var_length <- rename(Final_Lookup_var_length, "040" = "b")
+Final_Lookup_var_length <- rename(Final_Lookup_var_length, "055" = "c")
+Final_Lookup_var_length <- rename(Final_Lookup_var_length, "070" = "d")
+Final_Lookup_var_length <- rename(Final_Lookup_var_length, "085" = "e")
+Final_Lookup_var_length <- rename(Final_Lookup_var_length, "100" = "f")
+
+Final_Lookup_var_length <- Final_Lookup_var_length %>%
+  pivot_longer(!tiff_ha, names_to = "project_length", values_to = "transition_price")
+
+Final_Lookup_var_length_2 <- read_csv(here("data_analysis/Calcs/Final_Lookup_var_length_v2.csv"))
+
+Final_Lookup_var_length_2 <- rename(Final_Lookup_var_length_2, "025" = "a")
+Final_Lookup_var_length_2 <- rename(Final_Lookup_var_length_2, "040" = "b")
+Final_Lookup_var_length_2 <- rename(Final_Lookup_var_length_2, "055" = "c")
+Final_Lookup_var_length_2 <- rename(Final_Lookup_var_length_2, "070" = "d")
+Final_Lookup_var_length_2 <- rename(Final_Lookup_var_length_2, "085" = "e")
+Final_Lookup_var_length_2 <- rename(Final_Lookup_var_length_2, "100" = "f")
+
+Final_Lookup_var_length_2 <- Final_Lookup_var_length_2 %>%
+  pivot_longer(!tiff_ha, names_to = "project_length", values_to = "transition_price")
+
+# Plot the graph... (see here for themes: https://r-charts.com/ggplot2/themes/)
+Final_Lookup_var_length_plot <- Final_Lookup_var_length %>%
+  ggplot(aes(x=tiff_ha, y=transition_price, group=project_length)) +
+  geom_line(colour = 'black', size = 0.25, linetype='dashed') +
+  # Add a red line so that it can be referred to in the text
+  geom_line(data=Final_Lookup_var_seq_3 %>% dplyr::select(-group), aes(group=group2), size=0.5, color="black",  alpha=1) +
+  geom_point(aes(shape=project_length), size=2) +
+  geom_point(data=Final_Lookup_var_length_2, aes(shape=project_length), shape=15, size=3, colour = "lightgrey") +
+  geom_point(data=Final_Lookup_var_length_2, aes(shape=project_length), size=2, colour = "black") +
+  ylim(0, 120) +
+  xlim(0, 750) +
+  theme_light() +
+  labs(x = "Total Income from Farming (£/ha/yr)", y = "Transition Price (£)", shape='Project Length (years)') +
+  
+  theme(legend.position = "bottom")
+
+```
+
+\newpage
+
+Variation in project period from 25 years, around the time required to reach peak sequestration, to 100 years, the maximum project length permitted under the Woodland Carbon Code, produced a comparatively small impact of the project's estimated transition price. Relative sensitivity was 0.07%.
+
+\FloatBarrier
+
+```{=latex}
+\begin{figure}
+```
+```{r Transition-Price-Var-Len-Plot, echo=FALSE}
+Final_Lookup_var_length_plot
+```
+```{=latex}
+\caption{Transition price with varied project length. \label{fig:Transition-Price-Var-Len-Plot}}
+\vspace{1.5 mm}
+\scriptsize{A plot of calculated transition price at different TIFF levels using Equation 5 and input data from Table 4.3, with 5 additional calculations using a varied project length. Each marker corresponds to the transition price at which afforestation becomes equally profitable to farming at the associated TIFF level. The solid line with star markers corresponds to that shown in Figure 4.6.}
+\end{figure}
+```
+
+\FloatBarrier
+
+```{r Transition-Price-Var-Siz-Calc, include = FALSE}
+
+# var_cost means varied cost, i.e., these 6 items represent the same data but using a different maintenance costs
+
+Final_Lookup_var_size <- read_csv(here("data_analysis/Calcs/Final_Lookup_var_size.csv"))
+
+Final_Lookup_var_size <- clean_names(Final_Lookup_var_size)
+
+Final_Lookup_var_size <- rename(Final_Lookup_var_size, "0010" = "a")
+Final_Lookup_var_size <- rename(Final_Lookup_var_size, "0050" = "b")
+Final_Lookup_var_size <- rename(Final_Lookup_var_size, "0100" = "c")
+Final_Lookup_var_size <- rename(Final_Lookup_var_size, "0200" = "d")
+Final_Lookup_var_size <- rename(Final_Lookup_var_size, "0500" = "e")
+Final_Lookup_var_size <- rename(Final_Lookup_var_size, "1000" = "f")
+
+Final_Lookup_var_size <- Final_Lookup_var_size %>%
+  pivot_longer(!tiff_ha, names_to = "project_size", values_to = "transition_price")
+
+Final_Lookup_var_size_2 <- read_csv(here("data_analysis/Calcs/Final_Lookup_var_size_v2.csv"))
+
+Final_Lookup_var_size_2 <- clean_names(Final_Lookup_var_size_2)
+
+Final_Lookup_var_size_2 <- rename(Final_Lookup_var_size_2, "0010" = "a")
+Final_Lookup_var_size_2 <- rename(Final_Lookup_var_size_2, "0050" = "b")
+Final_Lookup_var_size_2 <- rename(Final_Lookup_var_size_2, "0100" = "c")
+Final_Lookup_var_size_2 <- rename(Final_Lookup_var_size_2, "0200" = "d")
+Final_Lookup_var_size_2 <- rename(Final_Lookup_var_size_2, "0500" = "e")
+Final_Lookup_var_size_2 <- rename(Final_Lookup_var_size_2, "1000" = "f")
+
+Final_Lookup_var_size_2 <- Final_Lookup_var_size_2 %>%
+  pivot_longer(!tiff_ha, names_to = "project_size", values_to = "transition_price")
+
+# Plot the graph... (see here for themes: https://r-charts.com/ggplot2/themes/)
+Final_Lookup_var_size_plot <- Final_Lookup_var_size %>%
+  ggplot(aes(x=tiff_ha, y=transition_price, group=project_size)) +
+  geom_line(colour = 'black', size = 0.25, linetype='dashed') +
+  # Add a red line so that it can be referred to in the text
+  geom_line(data=Final_Lookup_var_seq_3 %>% dplyr::select(-group), aes(group=group2), size=0.5, color="black",  alpha=1) +
+  geom_point(aes(shape=project_size), size=2) +
+  geom_point(data=Final_Lookup_var_size_2, aes(shape=project_size), shape=15, size=3, colour = "lightgrey") +
+  geom_point(data=Final_Lookup_var_size_2, aes(shape=project_size), size=2, colour = "black") +
+  ylim(0, 120) +
+  xlim(0, 750) +
+  theme_light() +
+  labs(x = "Total Income from Farming (£/ha/yr)", y = "Transition Price (£)", shape='Project Area (Hectares)') +
+  
+  theme(legend.position = "bottom")
+
+```
+
+\newpage
+
+As seems intuitive, increasing the size of the project reduces the carbon price required for profitability of afforestation to match that of farming, however, the impact is far smaller than all others ananlysed in this dissertation, with a relative sensitivity of 0.01%.
+
+\FloatBarrier
+
+```{=latex}
+\begin{figure}
+```
+```{r Transition-Price-Var-Siz-Plot, echo=FALSE}
+Final_Lookup_var_size_plot
+```
+```{=latex}
+\caption{Transition price with varied project size. \label{fig:Transition-Price-Var-Siz-Plot}}
+\vspace{1.5 mm}
+\scriptsize{A plot of calculated transition price at different TIFF levels using Equation 5 and input data from Table 4.3, with 5 additional calculations using a varied project area. Each marker corresponds to the transition price at which afforestation becomes equally profitable to farming at the associated TIFF level. The solid line with square markers corresponds to that shown in Figure 4.6.}
+\end{figure}
+```
+
+\FloatBarrier
+\newpage
+
+Transition prices, based on a range of sequestration rates and inputs from Table \@ref(tab:Final-Calc-Inputs-Table), are provided for each UK NUTS Level 2 region in Table \@ref(tab:Calcs-TIFF-Output-Table).
+
+\FloatBarrier
+
+```{r Calcs-TIFF-Output-Table}
+Calcs_TIFF_Output <- read_csv(here("data_analysis/Calcs/Transition_Price_at_TIFF.csv"))
+
+Calcs_TIFF_Output_tab <- kable(Calcs_TIFF_Output,
+      format = 'latex',
+      digits = 2,
+      format.args = list(big.mark = ","),
+      caption = "Transition price by NUTS 2 region at multiple sequestration rates.",
+      booktabs = T,
+      linesep = "")
+
+Calcs_TIFF_Output_tab %>%
+  kable_styling(latex_options = c("striped", "hold_position"), font_size = 8, full_width = F) %>%
+  footnote(general_title = "Note:",
+           general = "Sequestration rate refers to the 100 year average.",
+           footnote_as_chunk = T) %>% # This line inserts the note on one line instead of two...
+  add_header_above(c(" " = 2, "Sequestration Rate (tCO2/ha)" = 6))  %>%
+  column_spec(c(2,4,5,6,7,8) , width = "0.7cm") %>%
+  column_spec(c(3) , width = "0.9cm")
+```
+
+\FloatBarrier
+\newpage
+
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ----------------------------- DISCUSSION ------------------------------ -->
+
+<!-- ----------------------------------------------------------------------- -->
+
+```{=tex}
+\fancyhead[C]{Part 5 - Discussion}
+```
+# Discussion {#SectionDiscussion}
+
+The primary finding of this dissertation is that the publicly available secondary data included here is insufficient to accurately calculate the exact price at which it becomes more profitable to grow trees for carbon sales than to continue with current farming practices on UK agricultural land. The uncertainty of calculation inputs available from publicly available data found during this dissertation, such as costs of establishment, costs of maintenance, expected sequestration rate, and current income from farming, mean that it is only possible to estimate a range of output values within which the true value is likely to fall. As shown in Table \@ref(tab:Calcs-TIFF-Output-Table), the price received per unit at which it becomes equally profitable to plant trees and sell carbon credits or to continue with existing farm practices ranges from £9.53 to £123.90 per unit in the Highlands and Islands, depending on the sequestration rate that the farm is able to achieve, and assuming that the TIFF received by the farm matches the 2019 regional average and that all other calculation inputs are identical to those shown in Table \@ref(tab:Final-Calc-Inputs-Table). In practice, there is a large variation in TIFF between farms, as highlighted by SOURCE, and the values for other inputs, such as establishment costs, maintenance costs, species choice and planting density (both of which impact expected sequestration rate), are also likely to vary greatly between projects; for example, between the 16 Scottish Forest Alliance projects, average sequestration rates range from 0.09 to 5.25 tCO2/ha/year (Table \@ref(tab:Presentable-WCC-BP-data)).
+
+Given the range of values provided in Table \@ref(tab:Calcs-TIFF-Output-Table), it seems reasonable to assume that some farms in some regions will fall within the complete spectrum of transition prices identified; for example, it is likely that there are farms in the Highlands and Islands whose TIFF is $\le$ £12/ha/year, and whose sequestration rate is $\ge$ 2.5 tCO2/ha/year (the Kinloch Hills project, located on the Isle of Skye, has an estimated sequestration rate of 2.43 tCO2/ha/year (See Table \@ref(tab:Presentable-WCC-BP-data)). If such a farm does exist, and the other calculation inputs identified in Table \@ref(tab:Final-Calc-Inputs-Table) are broadly similar, that indicates that the transition price for that farm would be around £49.56/unit. So how close is this to the going rate for WCC carbon units?
+
+\FloatBarrier
+
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+
+## The Current Price of Carbon {#CurrentPriceDiscussion}
+
+Knowing the exact sale price of either PCUs or WCUs under the Woodland Carbon Code at any given time is difficult since, unlike the almost all other information about woodland projects, sales prices do not need to be publicly listed. Trading of units currently appears to occur between actors with little knowledge of the wider market: sale prices are not tracked or reported by any official body, can be subject to non-disclosure agreements, and appear to be strongly influenced by imperfect information, perceived co-benefits (biodiversity, social value, etc.), and unit location. As of May 2022, the Woodland Carbon Code advice on buying carbon units states that "companies are paying between £10 and £20" per PIU [@wccHowBuyWoodland2022], however, in April 2022, The Scotsman reported that the Trees for Life project in the Scottish Highlands has sold units for £40 each [@amosUKFirstCommunity2022]. Given that WCUs take a minimum of 5 years to be issued and that the WCC has only been running for around 10 years, there are comparatively few WCUs currently available to purchase (just 2,700 compared to 1,640,000 PIUs, as of May 2022 [@wccUKLandCarbon2022]), however, in consideration of the fact that WCUs, unlike PIUs, can be used immediately as carbon offsets, it is likely that WCUs will demand a premium over PIUs, suggesting reported price per PIU can be used as a baseline for either unit type.
+
+Based on a price per unit of £20, as stated by the WCC, only those farms with the highest sequestration rate and lowest TIFF in Table \@ref(tab:Presentable-WCC-BP-data) are likely to currently be more profitable under woodland than existing production systems - and such farms, with sequestration rates of $\ge$ 7 tCO2/ha/yea but a TIFF of $\le$ 12 £/ha/year, are unlikely to exist anywhere, since sequestration rate and TIFF positively correlate. However, once the price received per unit rises to £40, the transition to woodland being more profitable begins to look more likely in more locations. For example, the average income of Welsh farms was £134/ha/year in 2021 [@scottishgovernmentTotalIncomeFarming2021], and the average rate of sequestration for broadleaf woodland in England is 7 tCO2/ha/year [@naturalenglandCarbonStorageSequestration2021]. No secondary data on sequestration rates in Wales could be found, but using the English average as an input (and assuming costs etc match those in \@ref(tab:Final-Calc-Inputs-Table)), the price required for afforestation to become more profitable than the previous farm system on the average Welsh farm is £39.49/unit - below the £40/unit reported to have been received by Trees for Life [@amosUKFirstCommunity2022].
+
+As stated in Section \@ref(SectionDiscussion), there is a large amount of uncertainty surrounding the inputs to the calculation behind Table \@ref(tab:Calcs-TIFF-Output-Table), for example ongoing woodland maintenance costs are very difficult to estimate, however, the fact that the four NUTS 2 regions highlighted by Table \@ref(tab:Presentable-WCC-BP-data) as the most likely candidates where profitability of afforestation is begin to surpass the profitability of conventional farming, namely the Scottish Highlands and Islands, West Central Scotland, East Wales, and West Wales, are the very same regions where land purchases by non-farm actors expressly for purposes of afforestation are reported to be occurring [@caseWelshGovernmentAccused2022; @garsideTreeplantingWhyAre2021; @jamesProductiveFarmsBeing2021; @scottishlandcomissionMajorReportShows2022], suggests that the calculations are likely reasonably accurate.
+
+(NOTE: I have also been told of confirmed sales of "well over £60/unit" and rumoured sales of £80/unit, but I didn't get HERC approval so I'm not allowed to tell you that...)
+
+\FloatBarrier
+
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+
+## The Future Price of Carbon {#FuturePriceDiscussion}
+
+Currently, only a small portion of total emissions are capable of being offset through carbon credits in the UK. The WCC has issued a little over 6 million carbon units representing an expectation that 6 million tonnes of CO2 will be sequestered in WCC projects over the next 100 years [@wccUKLandCarbon2022]. This reflects around 5 days worth of the UK's total GHG emissions [@dbeis2021UKGreenhouse2022]. However, Working Group III of the IPCC have stated that limiting global warming to 1.5 $^{\circ}C$ cannot be achieved without carbon removals [@ipccClimateChange20222022], and the framework governing international trade of carbon offsets, Article 6 of the Paris Agreement, was finally agreed at COP26 in 2021 [@carbonbriefIndepthHowArticle2019]. Both of these events suggest a coming expansion in the use of carbon offsets both nationally and globally, but what can we say about the future price of carbon units?
+
+Carbon storage in the biosphere, such as through afforestation, is rivalled by carbon storage outside of the biosphere, primarily through artificial Carbon Capture and Storage (CCS) technologies, such as Direct Air Carbon Capture and Storage (DACCS) and Bioenergy with Carbon Capture and Storage (BECCS). It seems reasonable to posit that if storage within and without the biosphere offer the same solution, removal of CO2 from the atmosphere, the price demanded by both solutions per tonne of CO2 removed will begin to align, meaning the stated aspirational price of CCS technologies could inform where biosphere-based carbon pricing will eventually peak.
+
+In 2019, Stripe, one of the world's largest providers of "secure online payment processing", made a commitment to spend 1 million USD per year purchasing "negative $CO_2$ emissions [from CCS projects] at any price per t$CO_2$ [removed]" [@stripeDecrementCarbonStripe2019], in an attempt to kickstart the CCS industry. In 2020, Stripe announced that it had invested in 4 carbon removal projects that had declared an expectation to be able to provide carbon removal at < 100 USD/tCO2 by 2040 [@stripeStripeFirstCarbon2020]; in spring 2021 announced 6 more projects with the same expectation [@stripeStripeNewsroomStripe2021]; and in autumn 2021 announced 3 more projects for which the stated year in which the sub 100 USD target would be met was considered in their funding application [@stripeEbbCarbonRemoval2021; @stripeEionCarbonRemoval2021; @stripeSustaeraCarbonRemoval2021]. Relevant details of these investment are displayed in Table \@ref(tab:Stripe-Investments-Table). In April 2022, Stripe and three other Big-Tech companies announced an intention to spend 925 USD over 8 years on CCS technologies [@meyerWeVeNever2022].
+
+```{r Stripe-Investments-Table}
+
+Stripe_Investmens <- read_csv(here("data_analysis/Carbon Price/Stripe_Investments.csv"))
+
+Stripe_Investmens_Tab <- kable(Stripe_Investmens,
+      format = 'latex',
+      digits = 0,
+      # format.args = list(big.mark = ","),
+      caption = "2020 and 2021 Stripe investments in CCS technologies.",
+      booktabs = T,
+      linesep = "")
+
+column_spec(Stripe_Investmens_Tab, c(3, 4), width = "2.5cm") %>%
+  kable_styling(latex_options = c("striped", "hold_position"), font_size = 8, full_width = F) %>%
+  footnote(general_title = "Source:",
+           general = "See Stripe sources in text above.",
+           footnote_as_chunk = T)
+
+```
+
+While the price per tonne of $CO_2$ paid to these projects - over 2000 $USD/tCO_2$ in one case - is far higher than the current price offered by carbon storage in the biosphere, such as through the Woodland Carbon Code, Stripe has stated that it is paying these prices with the explicit intention of being an early adopter in what it expects to become "a trillion dollar industry by the end of the century" once the price approaches 100 $USD/tCO_2$ [@stripeDecrementCarbonStripe2019]. A value of 100 $USD/tCO_2$ also features in other sources. Based on a review of relevant papers, Broehm et al. [-@broehmTechnoEconomicReviewDirect2015] estimate that a reasonable long term range for the cost of DACCS is between 40 and 140 $USD/tCO_2$; the IPCC WG III Sixth Assessment Report [-@ipccClimateChange20222022] states that anything under USD 100 /tCO2e is "economical"; and the CCC's *Sixth Carbon Budget* expects that carbon removal through new broadleaf woodland will cost £105/tCO2e by 2035 [@cccSectorSummaryAgriculture2020].
+
+In an imagined world where TIFF remained fixed over the next 20+ years, selling carbon units at £100/tCO2 at an average sequestration rate of 7 tCO2/ha/yr would mean it were more profitable across much of the UK to plant trees than food, based on the results shown in Table \@ref(tab:Calcs-TIFF-Output-Table).
+
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+
+## Implications {#ImplicationsDiscussion}
+
+The plot below builds on \@ref(fig:All-WCC-PIU-Plot) and shows the amount of sequestration that will be achieved in 4 milestone years: 2022, 2025, 2030, 2050, 2100.
+
+\FloatBarrier
+
+```{r BP-PIU-plot, fig.cap = "example caption"}
+BP_PIU_TOTAL_plot
+```
+
+\FloatBarrier
+
+The IPCC have stated that Land-based sequestration “cannot be used to compensate for delayed emission reductions in other sectors” (IPCC, 2022). As explained in Section \@ref(WCC-Methods), PIUs cannot be used as offsests until they mature, meaning the vast majority of this sequestration cannot yet be claimed as an offset. There is still time to regulate the industry further and limit offsets to those industries that cannot reduce their emissions.
+
+---
+
+Also talk about
+- the risk to tenant farmers
+  + It isn't just food security that is affected by high carbon prices, but also job security - 30% of farms in wales are run by tenent farmers and already they are concerned about losing their lease to tree planting
+  + "Tenant warning on notices to quit for landlord tree planting" [@jamesTenantWarningNotices2021]
+- food security implications
+  + if it is more profitable to plant trees than food is there a risk of farmers stopping food production? Presumably market would respond.
+- Land use change
+  + as above, if it is more profitable to plant trees than food is there a risk of exporting food production to regions with lower environmetal standards.
+- Own farm net zero ambitions
+  + if farmers plant trees and sell all their C credits, what happens if regulations/market forces change and they need to offset their own emissions but have no on farm capacity to do so?
+
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+
+## Limitations {#LimitsDiscussion}
+### Maps
+
+A lot of effort was put in to developing a method to plot all results in the format of a map, as in Figure \@ref(fig:TIFF-Map-Figure), since it was initially thought that this would be the most suitable way to convey results. However, since the profitability of afforestation directly corresponds to the profitability of farming, the maps all end up looking identical to Figure \@ref(fig:TIFF-Map-Figure), except with different values displayed in the legend. A number of variant methods for using the map format were considered, but due to time constraints, none have been implemented.
+
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+
+### Profitability
+
+Changes in land price between different land use were not considered, although it is expected that land price will fall considerably if land is taken out of agricultural production.
+
+Changes in labour requirement have also not been considered, although it is expected that managing a woodland for 100 years would require considerably less labour than 100 years of farming.
+
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+
+### Assumptions
+
+This dissertation assumes that TIFF will be fixed over the next 100 years, which it presumably won't.
+
+This dissertation assumes that there will not be a carbon tax introduced, which may happen, and may limit the profitability of high emitting farm systems, such as ruminant livestock and peatland agricuture (i.e., the Fens).
+
+This dissertation assumes that meat consumption will remain at current levels, although if there is a considerable reduction there may be a dramatic increase in upload areas upon which afforestation will be comparatively profitable. 
+
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+
+## Further Questions
+
+This dissertation highlights two key areas to question going forward, one supply side, one demand side.
+
+### Supply side
+
+> Who is selling the carbon credits and does it matter?
+
+The lack of transparency in carbon markets seems to be disadvantaging actors without extensive market knowledge, primarily farmers. Do we want to maximise cross-benefits of afforestation (erosion protection, biodiversity, etc), if so we need to convince farmers to start planting trees, or do we want to maximise carbon removals to improve our chances of limiting warming to 1.5 degC, regardless of who profits? Are these binary options, or can we have both?
+
+### Demand side
+
+> Who is buying the credits and does it matter?
+
+As stated in Section \@ref(TheoryofCMarkets), the IPCC and CCC have said that carbon offsets should be reserved for residual emissions, but the UK Government is encouraging open markets that will sell offsets to anyone. Why has the UK Government taken this approach? How much will this approach impact ambitions to limit warming?
+
+<!-- ----------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------- -->
+
+## Conclusion
+
+...Sum up the dissertation...
+
+Giulio Boccaletti has written that water utilities "are natural monopolies tasked with managing a public good... what is being paid for is not the commodity (water) but the social outcome (water security).” [@boccalettiNewLandEconomy2022]. The same is true of organisations paid to remove carbon from our atmosphere, but researching this dissertation has revealed an industry, designed ostensibly to mitigate climate change, but steeped in 'commercial interests' and secrecy. The UK Government is encouraging the exchange of commodities (carbon offsets) with seemingly little regard for the necessary social outcome (mitigation of emissions). We are wasting our offset potential on everyday emissions, when we should be reserving offsets for those few sources that are truly infeasible to eliminate.
+
+One of the highest forms of charity, according to the Jewish philosopher by Maimonides, is to give to an unknown recipient, and to receive from an unknown benefactor [@maimonidesLawsCharity1180], and we are "the unlucky [generation] who must fix a problem [we] did not entirely cause to help save people [we] will never meet from disasters [we] can scarcely imagine" [@clarkBestNewBooks2022]. We can't afford to waste the few oppertunities we have left. 
+
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ------------------------------ APPENDIX ------------------------------- -->
+
+<!-- ----------------------------------------------------------------------- -->
+
+```{=tex}
+\FloatBarrier
+\newpage
+\fancyhead[C]{Appendices}
+```
+\appendix
+
+# Appendicies {#Appendicies}
+
+```{=tex}
+\section*{Appendix 1 - R Packages Used}
+\label{Appendix-1}
+```
+
+\begingroup
+\fontsize{8}{10}\selectfont
+
+| Package Name   | Description                                                    | Reference                                    |
+|----------------|----------------------------------------------------------------|----------------------------------------------|
+| bookdown       | Authoring Books and Technical Documents with R Markdown        | [@xieBookdownAuthoringBooks2016]             |
+| broom          | Convert statistical objects into tidy tibbles                  | [@robinsonBroomConvertStatistical2022]       |
+| ggplot2        | Elegant graphics for data analysis                             | [@wickhamGgplot2ElegantGraphics2016]         |
+| here           | A Simpler Way to Find Your Files                               | [@mullerHereSimplerWay2020]                  |
+| janitor        | Simple tools for examining and cleaning dirty data             | [@firkeJanitorSimpleTools2021]               |
+| kableExtra     | Construct complex table with 'kable' and pipe syntax           | [@zhuKableExtraConstructComplex2021]         |
+| knitr          | A General-Purpose Package for Dynamic Report Generation in R   | [@xieKnitrGeneralPurposePackage2022]         |
+| plotly         | Interactive web-based data visualization with R                | [@sievertPlotlyInteractiveWebbased2020]      |
+| rgdal          | Bindings for the 'geospatial' data abstraction library         | [@bivandRgdalBindingsGeospatial2022]         |
+| scales         | Scale functions for visualization                              | [@wickhamScalesScaleFunctions2020]           |
+| tidyverse      | Welcome to the Tidyverse                                       | [@wickhamTidyverseWelcomeTidyverse2019]      |
+| viridis        | Colorblind-Friendly Color Maps for R                           | [@garnierViridisColorblindFriendlyColor2021] |
+| wordcountaddin | Word counts and readability statistics in R markdown documents | [@marwickWordcountaddinWordCounts2022]       |
+
+\endgroup
+
+```{=tex}
+\newpage
+\section*{Appendix 2 - Total Income From Farming Data}
+\label{Appendix-2}
+```
+
+```{r, echo = FALSE, results = "asis"}
+# cat("\\newgeometry{top = 2.5cm, left = 3cm, bottom = 2.5cm, right = 3cm}")
+# USED TO CHANGE MARGIN SIZE
+```
+
+Table \@ref(tab:TIFF-Table) is plotted in Figure \@ref(fig:TIFF-Map-Figure).
+
+```{r TIFF-Table}
+TIFF_by_NUTS <- read_csv(here("data_analysis/TIFF/TIFF_by_NUTS.csv"))
+
+TIFF_by_NUTS <- TIFF_by_NUTS[1:6]
+
+TIFF_by_NUTS <- TIFF_by_NUTS[order(TIFF_by_NUTS$Region, TIFF_by_NUTS$`TIFF (£/ha)`), ]
+
+TIFF_by_NUTS_tab <- kable(TIFF_by_NUTS,
+      format = 'latex',
+      digits = 0,
+      format.args = list(big.mark = ","),
+      caption = "TIFF and Area by NUTS Level 2 region",
+      booktabs = T,
+      linesep = "")
+
+column_spec(TIFF_by_NUTS_tab, c(1,3,4), width = "1.22cm") %>%
+  kable_styling(latex_options = c("striped", "hold_position"), font_size = 8, full_width = F) %>%
+  footnote(alphabet_title = "Source:",
+           alphabet = c("DEFRA, 2022",
+                        "Scottish Government, 2019",
+                        "Scottish Government, 2021",
+                        "Welsh Government, 2019",
+                        "DAERA, 2021"),
+           threeparttable = TRUE) %>%
+  row_spec(29, hline_after = TRUE) %>%
+  row_spec(30, hline_after = TRUE) %>%
+  row_spec(35, hline_after = TRUE)
+```
+
+```{=tex}
+\newpage
+\section*{Appendix 3}
+```
+Appendix 3 could be a list of transition price by NUTS 3 region in England.
+
+NOTE: Remember to include sessioninfo() somewhere at the end!
+
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ----------------------------- REFERENCES ------------------------------ -->
+
+<!-- ----------------------------------------------------------------------- -->
+
+```{=tex}
+\FloatBarrier
+\newpage
+\fancyhead[C]{References}
+\footnotesize
+\singlespacing
+```
+# References

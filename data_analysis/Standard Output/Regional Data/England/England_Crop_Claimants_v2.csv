@@ -1,0 +1,127 @@
+﻿Region,Subregion,Total,Wheat,Winter Barley,Spring Barley,Oats,Other cereals (excluding maize),Potatoes,Beet,Oilseed Rape,Other arable crops not for stockfeeding,Field beans (includes field beans not for stockfeeding),Peas (includes peas not for stockfeeding),Maize,Other crops mainly for stockfeeding,Fruit & Veg (excludes peas and field beans),Flowers,Fallow,Permanent Grassland,Temporary Grassland,Woodland,Non-agricultural land
+North_East,Hartlepool and Stockton-on-Tees,186,103,46,52,17,0,NA,5,33,13,22,NA,NA,NA,NA,0,49,164,76,88,157
+North_East,South Teesside,162,63,41,36,NA,NA,NA,NA,23,9,18,0,0,0,8,NA,37,155,56,75,144
+North_East,Darlington,187,98,60,54,22,5,NA,6,27,21,23,NA,NA,NA,NA,NA,57,175,70,103,162
+North_East,Durham CC,"1,532",303,251,221,103,18,18,NA,139,107,57,10,19,10,30,NA,183,"1,512",338,901,"1,386"
+North_East,Northumberland,"1,781",505,398,366,232,25,45,19,289,219,129,48,NA,29,81,NA,361,"1,753",561,"1,270","1,664"
+North_East,Tyneside,163,57,38,37,21,NA,NA,NA,21,19,NA,0,NA,NA,5,NA,39,151,57,80,139
+North_East,Sunderland,63,26,12,8,NA,0,0,0,8,9,NA,0,0,0,0,0,19,57,18,35,56
+North_West,West Cumbria,"1,647",117,158,361,19,17,25,12,19,124,NA,NA,40,NA,39,NA,50,"1,630",496,959,"1,456"
+North_West,East Cumbria,"3,503",157,223,423,33,8,30,87,19,142,6,NA,75,9,93,NA,94,"3,484",710,"2,212","3,133"
+North_West,Manchester,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,NA,NA
+North_West,Greater Manchester South West,81,25,13,24,6,0,10,NA,NA,5,NA,0,NA,NA,13,NA,20,68,27,34,65
+North_West,Greater Manchester South East,147,NA,0,0,0,0,0,0,0,0,0,0,NA,0,NA,0,0,146,5,81,126
+North_West,Greater Manchester North West,230,35,18,32,10,0,NA,NA,12,NA,5,0,5,NA,NA,NA,23,224,49,94,189
+North_West,Greater Manchester North East,318,0,0,NA,NA,0,0,0,0,0,0,0,NA,0,NA,0,0,317,NA,116,271
+North_West,Blackburn with Darwen,115,0,0,0,0,0,0,0,0,NA,0,0,0,0,0,0,0,114,NA,60,100
+North_West,Blackpool,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,NA,NA
+North_West,Lancaster and Wyre,907,73,23,74,18,0,23,6,NA,23,NA,0,59,NA,21,0,21,889,168,463,823
+North_West,Mid Lancashire,"1,149",80,31,50,18,NA,11,7,6,11,NA,0,45,NA,28,NA,33,"1,132",128,620,"1,050"
+North_West,East Lancashire,625,NA,0,0,0,NA,0,0,0,0,0,0,0,0,NA,0,NA,624,6,255,537
+North_West,Chorley and West Lancashire,557,129,47,165,42,NA,121,34,27,39,24,NA,60,NA,164,NA,117,503,163,265,506
+North_West,Warrington,152,49,39,42,23,NA,27,5,7,5,5,NA,15,NA,19,0,36,124,63,59,124
+North_West,Cheshire East,"1,381",175,111,143,50,14,76,19,18,49,27,0,249,NA,41,NA,132,"1,337",483,751,"1,247"
+North_West,Cheshire West and Chester,973,172,73,170,37,13,80,15,20,36,10,NA,254,NA,37,0,109,938,404,516,889
+North_West,East Merseyside,159,75,42,51,25,NA,43,11,12,11,10,0,22,0,25,NA,61,130,53,85,138
+North_West,Liverpool,5,NA,NA,NA,0,0,NA,0,0,0,0,0,0,0,NA,0,NA,5,0,NA,NA
+North_West,Sefton,66,22,6,20,5,0,17,6,5,NA,NA,0,NA,0,16,0,15,51,18,24,55
+North_West,Wirral,54,13,NA,10,NA,0,6,NA,NA,NA,NA,0,7,0,5,NA,8,53,18,35,51
+Yorkshire_and_The_Humber,"Kingston upon Hull, City of",5,NA,NA,NA,0,0,0,0,0,NA,0,0,0,0,0,0,NA,NA,NA,NA,NA
+Yorkshire_and_The_Humber,East Riding of Yorkshire,"1,512","1,015",567,784,167,51,321,117,447,283,242,350,163,31,155,11,592,"1,357",609,823,"1,361"
+Yorkshire_and_The_Humber,North and North East Lincolnshire,494,319,127,211,24,18,99,98,140,101,72,106,89,8,50,9,234,435,204,260,445
+Yorkshire_and_The_Humber,York,304,126,70,108,29,NA,42,29,29,14,35,5,33,NA,15,0,66,263,95,130,253
+Yorkshire_and_The_Humber,North Yorkshire CC,"5,960","1,855","1,355","1,399",455,110,462,368,584,630,455,96,369,52,357,17,"1,099","5,796","1,831","3,595","5,441"
+Yorkshire_and_The_Humber,"Barnsley, Doncaster and Rotherham",710,307,174,204,40,21,70,86,108,72,93,25,91,7,38,0,188,650,251,370,600
+Yorkshire_and_The_Humber,Sheffield,184,17,NA,NA,NA,0,0,NA,NA,0,NA,0,0,0,NA,0,NA,NA,24,110,NA
+Yorkshire_and_The_Humber,Bradford,436,NA,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,436,NA,183,357
+Yorkshire_and_The_Humber,Leeds,359,98,61,81,20,6,34,19,28,33,21,6,19,NA,21,NA,70,332,95,180,298
+Yorkshire_and_The_Humber,Calderdale and Kirklees,730,40,24,29,NA,NA,NA,NA,NA,12,NA,0,5,NA,NA,NA,21,724,58,385,628
+Yorkshire_and_The_Humber,Wakefield,230,126,71,67,14,21,NA,13,44,NA,33,7,10,NA,12,0,64,188,77,NA,195
+East_Midlands,Derby,30,7,0,NA,0,0,0,0,0,NA,0,NA,NA,0,0,0,NA,24,5,8,20
+East_Midlands,East Derbyshire,509,125,89,117,25,5,19,NA,37,NA,25,NA,NA,NA,15,5,76,484,159,276,428
+East_Midlands,South and West Derbyshire,"2,093",257,145,173,52,19,16,23,33,75,44,NA,116,14,48,NA,130,"2,056",353,"1,173","1,877"
+East_Midlands,Nottingham,5,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,0,NA,NA,NA,NA
+East_Midlands,North Nottinghamshire,840,423,186,285,57,53,117,147,84,124,137,32,163,NA,124,NA,320,748,341,442,714
+East_Midlands,South Nottinghamshire,434,206,70,89,41,15,20,36,19,67,69,7,67,NA,32,NA,129,384,170,240,382
+East_Midlands,Leicester,10,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,NA,NA,NA,NA,NA
+East_Midlands,Leicestershire CC and Rutland,"1,960",776,263,353,273,58,31,58,74,219,252,29,227,41,67,6,444,"1,872",711,"1,113","1,779"
+East_Midlands,West Northamptonshire,"1,088",401,152,187,125,17,9,NA,73,164,168,10,80,8,50,NA,271,"1,032",326,647,971
+East_Midlands,North Northamptonshire,519,254,95,126,54,10,8,15,62,120,115,NA,35,14,26,NA,194,482,182,313,475
+East_Midlands,Lincolnshire,"2,849","1,919",604,"1,077",251,121,564,606,576,601,717,380,452,65,603,149,"1,185","2,494","1,058","1,436","2,532"
+West_Midlands,"Herefordshire, County of","2,384",716,255,291,267,41,242,153,286,293,127,48,311,40,519,11,286,"2,330",917,"1,558","2,133"
+West_Midlands,Worcestershire,"1,803",526,161,218,124,24,61,63,80,186,146,28,180,27,278,12,315,"1,721",600,"1,100","1,597"
+West_Midlands,Warwickshire,"1,553",581,235,249,149,39,62,22,97,175,211,45,192,37,107,14,368,"1,483",535,909,"1,390"
+West_Midlands,Telford and Wrekin,201,81,39,30,16,6,47,NA,48,20,10,NA,43,NA,21,NA,51,183,72,99,173
+West_Midlands,Shropshire CC,"3,272",930,461,492,311,83,194,131,336,255,95,15,572,40,193,10,503,"3,188","1,190","2,059","2,982"
+West_Midlands,Stoke-on-Trent,43,NA,0,NA,0,NA,0,0,0,NA,0,0,NA,0,0,0,NA,41,NA,9,25
+West_Midlands,Staffordshire CC,"2,805",485,258,257,108,30,111,56,124,128,77,6,303,25,124,8,303,"2,764",651,"1,506","2,540"
+West_Midlands,Birmingham,30,9,7,NA,NA,0,NA,0,0,NA,5,0,NA,0,NA,0,7,23,NA,11,21
+West_Midlands,Solihull,141,40,22,8,5,NA,NA,NA,7,7,8,NA,13,NA,NA,0,17,126,40,67,120
+West_Midlands,Coventry,37,10,5,NA,0,0,NA,0,NA,0,NA,0,NA,0,0,0,NA,27,9,15,29
+West_Midlands,Dudley,23,5,5,NA,NA,NA,NA,0,0,0,0,0,NA,0,0,0,NA,17,NA,13,19
+West_Midlands,Sandwell,NA,0,0,0,NA,0,0,0,0,0,0,0,0,0,0,NA,0,NA,NA,NA,NA
+West_Midlands,Walsall,33,10,5,7,6,0,NA,0,NA,NA,NA,0,NA,NA,NA,0,6,30,8,15,29
+West_Midlands,Wolverhampton,NA,NA,0,0,0,0,0,0,0,0,0,0,0,0,0,0,NA,NA,NA,NA,NA
+East_of_England,Peterborough,163,108,29,54,17,11,37,45,30,27,53,9,23,NA,18,NA,64,137,47,85,142
+East_of_England,Cambridgeshire CC,"1,620","1,068",343,505,130,45,302,383,242,315,328,115,213,34,255,15,698,"1,333",520,792,"1,427"
+East_of_England,Suffolk,"2,093","1,165",583,748,130,103,231,486,463,393,356,135,346,40,311,25,"1,018","1,880",713,"1,343","1,917"
+East_of_England,Norwich and East Norfolk,480,200,180,193,10,25,128,182,80,96,22,53,117,17,50,6,185,418,170,276,422
+East_of_England,North and West Norfolk,"1,090",611,353,505,32,61,388,486,191,233,125,136,220,27,254,26,536,924,403,603,965
+East_of_England,Breckland and South Norfolk,"1,281",648,409,460,67,96,148,303,273,246,142,94,346,38,156,6,546,"1,156",501,845,"1,181"
+East_of_England,Luton,6,NA,0,0,NA,0,0,0,0,0,NA,0,0,0,0,0,NA,NA,0,NA,NA
+East_of_England,Hertfordshire,720,328,123,143,112,15,7,24,77,135,99,35,64,31,55,14,258,665,252,460,646
+East_of_England,Bedford,260,148,50,62,38,7,NA,NA,27,55,66,9,12,12,24,NA,111,225,93,176,227
+East_of_England,Central Bedfordshire,452,225,81,123,44,22,17,11,26,72,57,20,37,13,52,8,161,390,141,263,395
+East_of_England,Southend-on-Sea,7,NA,NA,0,0,0,0,0,NA,0,NA,0,0,0,0,0,NA,NA,NA,NA,NA
+East_of_England,Thurrock,52,19,NA,8,0,NA,NA,0,NA,NA,NA,NA,NA,NA,5,0,13,46,NA,21,49
+East_of_England,Essex Haven Gateway,713,423,160,216,44,31,85,63,111,188,102,46,108,11,114,19,354,639,266,478,648
+East_of_England,West Essex,514,357,112,142,65,NA,18,22,110,130,132,28,45,NA,37,9,234,446,161,332,462
+East_of_England,Heart of Essex,450,230,59,102,28,5,15,NA,88,82,77,31,41,42,56,NA,150,397,153,257,390
+East_of_England,Essex Thames Gateway,109,43,8,27,NA,NA,NA,0,11,NA,21,NA,NA,NA,5,NA,28,97,37,58,105
+London,Tower Hamlets,NA,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,NA
+London,Hackney and Newham,NA,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,NA,0,NA,NA
+London,Bexley and Greenwich,6,0,0,0,0,0,0,0,0,0,0,0,0,0,NA,0,0,5,NA,NA,5
+London,Barking & Dagenham and Havering,45,13,NA,NA,0,0,NA,0,NA,5,NA,NA,NA,0,NA,NA,11,37,12,25,39
+London,Redbridge and Waltham Forest,8,NA,NA,NA,NA,0,0,0,0,0,0,0,0,0,0,0,NA,8,NA,NA,8
+London,Enfield,12,NA,0,NA,NA,0,0,NA,NA,NA,NA,0,NA,0,NA,0,NA,12,8,7,11
+London,Bromley,55,19,7,NA,NA,NA,0,NA,NA,5,7,0,NA,NA,NA,0,8,46,13,33,42
+London,Croydon,12,NA,0,NA,NA,0,0,0,0,0,0,0,0,0,0,0,NA,6,NA,8,8
+London,"Merton, Kingston upon Thames and Sutton",9,NA,0,0,0,0,0,0,0,0,0,0,0,0,0,0,NA,8,NA,7,8
+London,Barnet,10,NA,0,0,0,0,0,0,0,NA,0,0,NA,0,0,0,NA,10,NA,7,9
+London,Brent,NA,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,NA,0,NA,NA
+London,Ealing,NA,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,NA,0,NA,NA
+London,Harrow and Hillingdon,25,NA,0,0,0,NA,0,0,0,0,0,0,NA,0,0,0,0,21,NA,14,24
+London,Hounslow and Richmond upon Thames,5,NA,NA,0,NA,0,0,0,0,NA,0,0,0,0,0,0,NA,5,NA,NA,5
+South_East,Berkshire,526,146,52,84,42,18,NA,NA,34,79,42,10,91,11,55,12,150,508,173,364,466
+South_East,Milton Keynes,165,78,13,21,17,NA,0,0,21,25,24,NA,15,NA,NA,NA,47,152,49,102,145
+South_East,Buckinghamshire CC,"1,143",337,95,138,96,13,NA,NA,47,128,73,5,113,24,62,7,209,"1,100",347,677,"1,019"
+South_East,Oxfordshire,"1,529",581,282,380,123,40,NA,NA,159,281,214,71,175,62,107,21,484,"1,458",589,"1,072","1,360"
+South_East,Brighton and Hove,17,NA,NA,NA,0,0,0,0,NA,NA,0,NA,NA,0,NA,NA,NA,15,6,8,14
+South_East,East Sussex CC,"1,360",197,55,125,79,8,8,NA,49,125,52,16,104,10,135,NA,170,"1,327",305,990,"1,255"
+South_East,West Surrey,379,33,10,11,15,5,NA,5,5,27,9,NA,32,11,29,NA,42,371,80,241,326
+South_East,East Surrey,371,72,40,18,17,6,0,NA,14,33,12,NA,56,5,19,NA,56,365,99,276,325
+South_East,West Sussex (South West),512,182,45,86,63,8,23,8,43,94,44,25,112,22,71,9,174,488,192,369,465
+South_East,West Sussex (North East),689,106,29,42,36,6,NA,NA,14,79,27,NA,70,9,65,7,114,671,182,477,617
+South_East,Portsmouth,NA,NA,0,NA,0,0,0,0,0,0,0,0,0,0,0,0,NA,NA,0,NA,NA
+South_East,Southampton,NA,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,NA,0,NA,NA
+South_East,Isle of Wight,264,58,19,24,9,24,5,NA,13,38,5,0,64,NA,23,NA,54,258,94,176,237
+South_East,South Hampshire,109,21,NA,9,NA,0,NA,0,NA,NA,7,NA,18,NA,8,NA,23,101,15,57,84
+South_East,Central Hampshire,"1,521",363,141,290,133,13,12,11,135,198,74,47,214,26,101,19,323,"1,468",374,874,"1,232"
+South_East,North Hampshire,415,136,51,86,57,18,12,NA,35,81,39,8,104,NA,47,12,133,389,151,303,354
+South_East,Medway,58,23,NA,10,NA,NA,NA,NA,7,NA,7,0,NA,0,19,0,24,52,16,28,52
+South_East,Kent Thames Gateway,261,101,13,33,9,6,NA,NA,44,35,30,12,30,NA,80,NA,82,235,76,137,221
+South_East,East Kent,504,224,52,65,55,14,46,NA,85,59,99,25,74,13,86,NA,158,468,187,279,455
+South_East,Mid Kent,719,175,47,53,44,7,NA,5,53,62,75,21,58,10,137,NA,136,678,202,456,643
+South_East,West Kent,617,121,36,43,34,5,0,NA,40,56,44,13,72,9,137,NA,121,582,153,438,556
+South_West,"Bristol, City of",26,0,0,0,0,0,0,0,0,0,0,0,0,0,NA,0,0,25,NA,12,20
+South_West,"Bath and North East Somerset, North Somerset and South Gloucestershire","1,315",198,84,146,50,NA,10,NA,19,68,39,10,164,NA,101,5,86,"1,286",358,689,"1,166"
+South_West,Gloucestershire,"2,252",626,237,341,106,39,45,46,137,355,144,32,327,51,226,6,416,"2,178",786,"1,386","1,982"
+South_West,Swindon,134,40,NA,34,8,NA,0,0,NA,22,NA,0,19,NA,NA,0,34,124,52,84,117
+South_West,Wiltshire,"2,295",643,287,484,180,47,10,19,194,328,153,55,405,69,127,16,453,"2,211",724,"1,292","1,812"
+South_West,Bournemouth and Poole,14,NA,0,0,NA,0,0,0,0,NA,0,0,NA,0,0,0,NA,14,NA,6,13
+South_West,Dorset CC,"1,899",391,172,266,92,53,NA,NA,71,213,53,43,364,34,143,21,218,"1,864",654,"1,239","1,737"
+South_West,Somerset,"4,030",672,245,290,117,61,86,48,86,317,130,23,706,49,487,11,264,"3,951","1,251","2,080","3,535"
+South_West,Cornwall and Isles of Scilly,"3,832",334,442,854,174,31,239,117,41,349,30,5,375,62,477,157,302,"3,782","1,612","2,530","3,540"
+South_West,Plymouth,23,NA,0,NA,NA,0,0,0,0,NA,0,0,NA,0,NA,0,NA,19,NA,14,18
+South_West,Torbay,36,6,NA,NA,6,0,NA,NA,NA,NA,NA,0,NA,0,5,0,NA,33,13,17,26
+South_West,Devon CC,"7,858",844,628,"1,033",451,92,80,139,148,634,77,13,986,67,723,15,332,"7,781","2,591","5,589","7,093"

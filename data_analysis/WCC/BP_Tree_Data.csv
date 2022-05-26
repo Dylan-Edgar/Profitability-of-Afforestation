@@ -1,0 +1,260 @@
+﻿project_site,species,yield_class,actual_spacing,lookup_spacing,management,area_ha
+Crossrigg,Ash (MB),6,2.581988897,3,No thin no clearfell,0.613484211
+Crossrigg,Ash (MB),6,1.9,2.5,No thin no clearfell,0.240931579
+Crossrigg,Common Alder (MB),4,2.581988897,3,No thin no clearfell,0.511236842
+Crossrigg,Common Alder (MB),4,1.9,2.5,No thin no clearfell,0.200776316
+Crossrigg,Downy Birch (MB),6,2.581988897,3,No thin no clearfell,0.163595789
+Crossrigg,Downy Birch (MB),6,1.9,2.5,No thin no clearfell,0.011193396
+Crossrigg,Rowan (MB),6,2.581988897,3,No thin no clearfell,0.347641053
+Crossrigg,Rowan (MB),6,1.9,2.5,No thin no clearfell,0.136527895
+Crossrigg,Scots Pine,10,1.9,2,No thin no clearfell,4.4989
+Crossrigg,Scots Pine,8,1.9,2,No thin no clearfell,15.6991
+Crossrigg,Sessile Oak (MB),4,2.581988897,3,No thin no clearfell,0.163595789
+Crossrigg,Sessile Oak (MB),4,1.9,2.5,No thin no clearfell,0.064248421
+Crossrigg,Wild Cherry (MB),4,2.581988897,3,No thin no clearfell,0.163595789
+Crossrigg,Wild Cherry (MB),4,1.9,2.5,No thin no clearfell,0.064248421
+Crossrigg,Wych Elm (MB),4,2.581988897,3,No thin no clearfell,0.081797895
+Drumbow,Sessile Oak (MB),2,2.581988897,3,No thin no clearfell,0.642066393
+Drumbow,Ash (MB),2,2.581988897,3,No thin no clearfell,0.642066393
+Drumbow,Common Alder(MB),2,2.581988897,3,No thin no clearfell,1.92619918
+Drumbow,Downy Birch (MB),2,2.581988897,3,No thin no clearfell,1.92619918
+Drumbow,Bird Cherry (MB),2,2.581988897,3,No thin no clearfell,0.642066393
+Drumbow,Scots Pine,4,2,2,No thin no clearfell,12.05025
+Drumbow,Sitka Spruce,12,2,2,No thin no clearfell,15.8267
+Drumbow,Hybrid Larch,10,1.9,1.7,No thin no clearfell,2.3268
+Loch Katrine,Rowan,4,5.773502692,3,No thin no clearfell,0.0513
+Loch Katrine,Other Conifer ,12,2.5,2,No thin no clearfell,1.23
+Loch Katrine,Scots pine,12,2.5,2,No thin no clearfell,37.47
+Loch Katrine,Alder,2,3.015113446,3,No thin no clearfell,4.05
+Loch Katrine,other broadleaves,4,3.015113446,3,No thin no clearfell,13.7
+Loch Katrine,other conifers,2,3.015113446,2.0,No thin no clearfell,7.74
+Loch Katrine,Birch (downy/silver),2,3.015113446,3,No thin no clearfell,3.2
+Loch Katrine,Birch (downy/silver),4,3.015113446,3,No thin no clearfell,24.55
+Loch Katrine,Scots pine,8,2.5,2,No thin no clearfell,228.5588
+Loch Katrine,Alder,4,3.015113446,3,No thin no clearfell,37.75
+Loch Katrine,Mixed broadleaves,4,3.015113446,3,No thin no clearfell,34.31
+Loch Katrine,Oak (robur/petraea),4,3.015113446,3,No thin no clearfell,71.9636
+Loch Katrine,Mixed conifers,4,3.015113446,2.0,No thin no clearfell,1.5
+Loch Katrine,Ash,4,3.015113446,3,No thin no clearfell,22.84
+Loch Katrine,Scots pine,4,3.015113446,2,No thin no clearfell,3.3634
+Loch Katrine,Oak (robur/petraea),8,3.015113446,3,No thin no clearfell,1.35
+Loch Katrine,Downy birch,4,2.5,2.5,No thin no clearfell,4.58
+Loch Katrine,Downy birch,4,2.886751346,3,No thin no clearfell,6.11
+Loch Katrine,Downy birch,8,2.886751346,3,No thin no clearfell,1.79
+Loch Katrine,other conifers,8,2.5,2,No thin no clearfell,4.61
+Loch Katrine,Common alder,4,3.015113446,3,No thin no clearfell,4.59
+Loch Katrine,Oak (robur/petraea),4,2.5,2.5,No thin no clearfell,6.45
+Loch Katrine,Wild cherry/gean,4,2.886751346,3,No thin no clearfell,4.22
+Loch Katrine,Silver birch,4,4.714045208,3,No thin no clearfell,1.4259
+Loch Katrine,Hazel,4,4.714045208,3.0,No thin no clearfell,7.44
+Loch Katrine,other broadleaves,4,2.5,2.5,No thin no clearfell,1.69
+Loch Katrine,Silver birch,4,2.5,2.5,No thin no clearfell,1.26
+Loch Katrine,Wild cherry/gean,4,2.5,2.5,No thin no clearfell,0.48
+"Darrochwids, Blackmiddens",Birch (betula sp.),6,2.154652068,2.5,No thin no clearfell,11.5423
+"Darrochwids, Blackmiddens",Hybrid Poplar (Populus serotina/trichocarpa),6,2.154652068,2.5,No thin no clearfell,1.8074
+"Darrochwids, Blackmiddens",Scots pine (Pinus sylvestris),8,2.154652068,2,No thin no clearfell,0.6839
+"Darrochwids, Blackmiddens",Oak (Quercus sp.),6,2.154652068,2.5,No thin no clearfell,5.9883
+"Darrochwids, Blackmiddens",Oak (MB),6,2.154652068,2.5,No thin no clearfell,0.584953632
+"Darrochwids, Blackmiddens",Oak (XB),6,2.154652068,2.5,No thin no clearfell,0.031710974
+"Darrochwids, Blackmiddens",Silver Birch (MB),4,2.154652068,2.5,No thin no clearfell,0.584953632
+"Darrochwids, Coynachie",Silver Birch (XB),6,2.154652068,2.5,No thin no clearfell,0.031710974
+"Darrochwids, Coynachie",Ash (MB),4,2.154652068,2.5,No thin no clearfell,0.782188563
+"Darrochwids, Coynachie",Ash(MB),4,2.154652068,2.5,No thin no clearfell,0.387718702
+"Darrochwids, Coynachie",Ash(XB),4,3.131121455,3,No thin no clearfell,0.7265
+"Darrochwids, Coynachie",Alder(MB),4,3.111356956,3,No thin no clearfell,10.7002
+"Darrochwids, Coynachie",Alder(XB),4,3.131121455,3,No thin no clearfell,10.09435
+"Darrochwids, Coynachie",Bird Cherry(MB),4,2.388283836,2,No thin no clearfell,0.9979
+"Darrochwids, Coynachie",Oak,4,2.388283836,2.5,No thin no clearfell,9.20535
+"Darrochwids, Coynachie",Hybrid Poplar,4,2.388283836,2.5,No thin no clearfell,2.03437
+"Darrochwids, Coynachie",Birch (XB),4,2.388283836,2.5,No thin no clearfell,9.113412498
+"Darrochwids, Coynachie",Birch (XB),4,3.131121455,3,No thin no clearfell,5.587887715
+"Darrochwids, Coynachie",Birch(MB),4,2.388283836,2.5,No thin no clearfell,4.150901091
+"Darrochwids, Coynachie",Rowan(XB),4,2.388283836,2.5,No thin no clearfell,7.412937569
+"Darrochwids, Coynachie",Rowan(XB),4,3.131121455,3,No thin no clearfell,4.545241729
+"Darrochwids, Coynachie",Rowan(MB),4,2.388283836,2.5,No thin no clearfell,3.376382958
+"Darrochwids, Coynachie",Ash(XB),4,2.388283836,2.5,No thin no clearfell,0.397121655
+"Darrochwids, Coynachie",Ash(XB),4,3.131121455,3,No thin no clearfell,0.243495093
+"Darrochwids, Coynachie",Ash(MB),4,2.388283836,2.5,No thin no clearfell,0.180877658
+"Darrochwids, Merdrum",Alder,4,1.99601196,2.5,No thin no clearfell,0.3382
+"Darrochwids, Merdrum",Birch,4,2.014534699,2.5,No thin no clearfell,31.44674
+"Darrochwids, Merdrum",Oak,4,2.018657877,2.5,No thin no clearfell,8.40714
+"Darrochwids, Merdrum",Scots Pine,4,1.99601196,2,No thin no clearfell,3.96546
+"Darrochwids, Merdrum",Sessile Oak(XB),4,1.99601196,2.5,No thin no clearfell,1.87516474
+"Darrochwids, Merdrum",Sessile Oak(MB),4,1.99601196,2.5,No thin no clearfell,0.720552468
+"Darrochwids, Merdrum",Downy Birch(XB),4,1.99601196,2.5,No thin no clearfell,4.708294075
+"Darrochwids, Merdrum",Downy Birch(MB),4,1.99601196,2.5,No thin no clearfell,1.809213261
+"Darrochwids, Merdrum",Rowan(XB),4,1.99601196,2.5,No thin no clearfell,0.375440592
+"Darrochwids, Merdrum",Rowan(MB),4,1.99601196,2.5,No thin no clearfell,0.144267135
+Kinloch,Ash,4,2.773500981,3,No thin no clearfell,3.185
+Kinloch,Alder,4,2.773500981,3,No thin no clearfell,8.78
+Kinloch,Cherry,2,2.773500981,3,No thin no clearfell,2.725
+Kinloch,Birch,6,2.773500981,3,No thin no clearfell,24.01
+Kinloch,Birch,2,2.773500981,3,No thin no clearfell,41.405
+Kinloch,Birch (downy),6,2.773500981,3,No thin no clearfell,91.185
+Kinloch,Oak,4,2.773500981,3,No thin no clearfell,20.79
+Kinloch,Oak,2,2.773500981,3,No thin no clearfell,10.71
+Kinloch,Rowan,2,2.773500981,3,No thin no clearfell,8.085
+Kinloch,Rowan,4,2.773500981,3,No thin no clearfell,11.82
+Kinloch,Rowan,6,2.773500981,3,No thin no clearfell,7.065
+Kinloch,Grey willow,6,2.773500981,3,No thin no clearfell,4.44
+Kinloch,Grey willow,4,2.773500981,3,No thin no clearfell,7.525
+Kinloch,Oak (sessile),4,2.773500981,3,No thin no clearfell,15.925
+Kinloch,Elm,6,2.773500981,3,No thin no clearfell,3.185
+Kinloch,Ash,2,3.015113446,3,No thin no clearfell,3.185
+Kinloch,Grey willow,2,3.015113446,3,No thin no clearfell,3.185
+Kinloch,Elm,2,3.015113446,3,No thin no clearfell,3.185
+Glenmore,Rowan,4,10,3.015113446,No thin no clearfell,1.356079744
+Glenmore,Rowan,2,10,3.015113446,No thin no clearfell,0.813647847
+Glenmore,Scots Pine,4,10,2,No thin no clearfell,26.13436883
+Glenmore,Birch,4,10,3.015113446,No thin no clearfell,0.542431898
+Abernethy,Birch,4,4.472135955,3,No thin no clearfell,3.92919669
+Abernethy,Birch,4,3.16227766,2.5,No thin no clearfell,3.484314819
+Abernethy,Birch,4,2.236067977,1.5,No thin no clearfell,0.484031476
+Abernethy,Rowan,2,4.472135955,3,No thin no clearfell,0.854173194
+Abernethy,Rowan,2,3.16227766,2.5,No thin no clearfell,22.86336915
+Abernethy,Rowan,2,2.236067977,1.5,No thin no clearfell,9.831533457
+Abernethy,Rowan,4,4.472135955,3,No thin no clearfell,2.277795183
+Abernethy,Rowan,4,3.16227766,2.5,No thin no clearfell,3.014519562
+Abernethy,Rowan,4,2.236067977,1.5,No thin no clearfell,3.69287544
+Abernethy,Scots pine,6,4.472135955,2,No thin no clearfell,91.95459153
+Abernethy,Scots pine,6,1.825741858,1.4,No thin no clearfell,58.33567451
+Abernethy,Aspen,6,0.503154605,1.5,No thin no clearfell,1.5
+Barclye,Ash,4,3.481553119,3,No thin no clearfell,0.53925
+Barclye,Downy Birch,8,3.481553119,3,No thin no clearfell,29.29384091
+Barclye,Rowan,4,3.481553119,3,No thin no clearfell,1.0785
+Barclye,Oak (sessile),4,3.481553119,3,No thin no clearfell,0.53925
+Barclye,Willow,6,3.481553119,3,No thin no clearfell,2.157
+Barclye,Alder,8,2.581988897,3,No thin no clearfell,1.057
+Barclye,Willow,8,2.581988897,3,No thin no clearfell,0.5285
+Barclye,Ash,8,7.071067812,3,No thin no clearfell,6.942590909
+Barclye,Aspen,10,7.071067812,3,No thin no clearfell,0.016345455
+Barclye,Rowan,8,7.071067812,3,No thin no clearfell,0.575838182
+Barclye,Sessile Oak,4,7.071067812,3,No thin no clearfell,0.723472727
+Barclye,Gean / wild cherry,6,7.071067812,3,No thin no clearfell,0.016345455
+Barclye,Wych Elm,4,7.071067812,3,No thin no clearfell,0.032690909
+Barclye,Alder,8,2.5,2.5,No thin no clearfell,3.61
+Barclye,Downy birch,8,2.5,2.5,No thin no clearfell,30.685
+Barclye,Willow,8,2.5,2.5,No thin no clearfell,1.444
+Barclye,Birch,10,5.773502692,3,No thin no clearfell,0.278181818
+Barclye,Alder,10,7.071067812,3,No thin no clearfell,0.080909091
+Barclye,Downy birch,12,7.071067812,3,No thin no clearfell,0.687727273
+Barclye,Willow,12,7.071067812,3,No thin no clearfell,0.040454545
+Barclye,Aspen,12,2.581988897,3,No thin no clearfell,0.5177
+Barclye,Sessile Oak,6,2.581988897,3,No thin no clearfell,20.708
+Barclye,Gean / wild cherry,8,2.581988897,3,No thin no clearfell,0.5177
+Barclye,Wych Elm,6,2.581988897,3,No thin no clearfell,1.0354
+Barclye,Ash,6,50,3,No thin no clearfell,0.064082182
+Barclye,Birch,8,50,3,No thin no clearfell,0.005572364
+Corrimony,Aspen,8,3.651228268,3.015,No thin no clearfell,0.577287773
+Corrimony,Aspen,4,5.47904671,3.006,No thin no clearfell,0.499525049
+Corrimony,Bird Cherry,2,3.651228268,3.015,No thin no clearfell,0.724314635
+Corrimony,Common Alder,2,3.651228268,3.015,No thin no clearfell,7.272916828
+Corrimony,Common Alder,6,5.47904671,3.012,No thin no clearfell,4.423744256
+Corrimony,Downy Birch,8,3.651228268,3.015,No thin no clearfell,33.25062033
+Corrimony,Rowan,4,3.651228268,3.015,No thin no clearfell,8.051766701
+Corrimony,Rowan,6,5.47904671,3.008,No thin no clearfell,1.063341037
+Corrimony,Scots Pine,8,3.651228268,2,No thin no clearfell,13.36034821
+Corrimony,Birch,6,10,3.015,No thin no clearfell,2.645363109
+Corrimony,Birch,2,10,3.015,No thin no clearfell,3.671921927
+Corrimony,Birch,2,2.5,2.5,No thin no clearfell,0.217156673
+Corrimony,Rowan,4,2.041241452,2.5,No thin no clearfell,0.32573501
+Corrimony,Scots Pine,12,10,2,No thin no clearfell,0.173725338
+Inversnaid,Ash,4,2.46182982,2.5,No thin no clearfell,0.25
+Inversnaid,Alder (Common),6,2.46182982,2.5,No thin no clearfell,0.55
+Inversnaid,Alder (Common),4,2.46182982,2.5,No thin no clearfell,0.7
+Inversnaid,Birch (downy),6,2.46182982,2.5,No thin no clearfell,0.9625
+Inversnaid,Birch(Downy),6,2.46182982,2.5,No thin no clearfell,2.5575
+Inversnaid,Birch(Downy),8,2.46182982,2.5,No thin no clearfell,0.53
+Inversnaid,Rowan,2,2.46182982,2.5,No thin no clearfell,0.075
+Inversnaid,Rowan,4,2.46182982,2.5,No thin no clearfell,0.475
+Inversnaid,Oak (sessile),6,2.46182982,2.5,No thin no clearfell,0.525
+Inversnaid,Oak (sessile),4,2.46182982,2.5,No thin no clearfell,0.5425
+Inversnaid,Oak (Sessile),2,2.46182982,2.5,No thin no clearfell,0.5575
+Glen Sherup,Ash,2,2.819419372,3,No thin no clearfell,9.83
+Glen Sherup,Alder,2,2.819419372,3,No thin no clearfell,19.03
+Glen Sherup,Aspen,6,2.819419372,3,No thin no clearfell,2.79
+Glen Sherup,bird cherry (MB),2,2.819419372,3,No thin no clearfell,0.478571429
+Glen Sherup,"Birch,Black/downy (Betula pubescens)",8,2.819419372,3,No thin no clearfell,77.58
+Glen Sherup,"Oak, Pedunculate (Quercus robur)",2,2.819419372,3,No thin no clearfell,3.58
+Glen Sherup,Rowan,4,2.819419372,3,No thin no clearfell,10.66
+Glen Sherup,Birch (silver),4,2.819419372,3,No thin no clearfell,39.52
+Glen Sherup,Oak sessile (Quercus petraea),2,2.819419372,3,No thin no clearfell,15.27
+Glen Sherup,Scots pine,8,2.819419372,2,No thin no clearfell,6.43
+Glen Sherup,Elm (MB),2,2.819419372,3,No thin no clearfell,0.478571429
+Glen Sherup,Willow (salix sp.),2,2.819419372,3,No thin no clearfell,8.95
+Glen Sherup,Ash,2,2.450715407,2.5,No thin no clearfell,9
+Glen Sherup,Alder,2,2.450715407,2.5,No thin no clearfell,8.1
+Glen Sherup,Aspen,6,2.450715407,2.5,No thin no clearfell,3.56
+Glen Sherup,bird cherry (MB),2,2.450715407,2.5,No thin no clearfell,0.667142857
+Glen Sherup,"Birch, Black/Downy(Betula pubescens)",8,2.450715407,2.5,No thin no clearfell,45
+Glen Sherup,"Oak, Pedunculate (Quercus robur)",2,2.450715407,2.5,No thin no clearfell,23.7
+Glen Sherup,Rowan,4,2.450715407,2.5,No thin no clearfell,7.2
+Glen Sherup,"Birch, Silver (Betula pendula)
+",4,2.450715407,2.5,No thin no clearfell,54.71
+Glen Sherup,"Oak, Sessile (Quercus petraea)
+",2,2.450715407,2.5,No thin no clearfell,18.1
+Glen Sherup,Scots Pine (Pinus sylvestris s sp. scotica),6,2.450715407,2,No thin no clearfell,2.62
+Glen Sherup,Gean,2,2.450715407,2.5,No thin no clearfell,4.73
+Glen Sherup,Elm (MB),2,2.450715407,2.5,No thin no clearfell,0.667142857
+Glen Sherup,Willow spp.,2,2.450715407,2.5,No thin no clearfell,4
+Glen Quey,Ash,6,2.672612419,3,No thin no clearfell,16.09528
+Glen Quey,Alder ,6,2.672612419,3,No thin no clearfell,6.88152
+Glen Quey,Aspen (MB),6,2.672612419,3,No thin no clearfell,2.51352
+Glen Quey,Bird cherry,2,2.672612419,3,No thin no clearfell,6.12544
+Glen Quey,Birch (silver and downy),6,2.672612419,3,No thin no clearfell,169.19288
+Glen Quey,Oak (sessile and pedunculate,2,2.672612419,3,No thin no clearfell,38.99528
+Glen Quey,Rowan,4,2.672612419,3,No thin no clearfell,15.3136
+Glen Quey,Gean,2,2.672612419,3,No thin no clearfell,6.12544
+Glen Quey,Elm (MB),2,2.672612419,3,No thin no clearfell,2.51352
+Glen Quey,Willow (MB),2,2.672612419,3,No thin no clearfell,2.51352
+Geordie's Wood,Ash,2,2.5,2.5,No thin no clearfell,4.5325
+Geordie's Wood,Ash,2,3.015113446,3,No thin no clearfell,0.3575
+Geordie's Wood,Alder,8,2.5,2.5,No thin no clearfell,1.3775
+Geordie's Wood,Alder,8,3.015113446,3,No thin no clearfell,0.715
+Geordie's Wood,Aspen,6,2.5,2.5,No thin no clearfell,1.182
+Geordie's Wood,Aspen,6,3.015113446,3,No thin no clearfell,0.0286
+Geordie's Wood,Birch downy (Betula pubescens),8,2.5,2.5,No thin no clearfell,29.3355
+Geordie's Wood,Birch downy (Betula pubescens),8,3.015113446,3,No thin no clearfell,0.6825
+Geordie's Wood,"Oak, Pedunculate (Quercus robur)",6,2.5,2.5,No thin no clearfell,7.8875
+Geordie's Wood,Rowan,4,2.5,2.5,No thin no clearfell,4.0161
+Geordie's Wood,Rowan,4,3.015113446,3,No thin no clearfell,1.11
+Geordie's Wood,Birch (silver),6,2.5,2.5,No thin no clearfell,11.469
+Geordie's Wood,Willow (grey),2,2.5,2.5,No thin no clearfell,2.0139
+Geordie's Wood,Willow (grey),2,3.015113446,3,No thin no clearfell,0.6377
+Geordie's Wood,Oak sessile (Quercus petraea),2,2.5,2.5,No thin no clearfell,5.91
+Geordie's Wood,Scots pine,12,2.5,2,No thin no clearfell,1.4625
+Geordie's Wood,Wild cherry (gean),2,2.5,2.5,No thin no clearfell,2.619
+Geordie's Wood,Elm (MB),2,2.5,2.5,No thin no clearfell,0.6
+Geordie's Wood,Ash,6,3.015113446,3,No thin no clearfell,4.99
+Geordie's Wood,Ash,6,2.5,2.5,No thin no clearfell,4.233
+Geordie's Wood,Alder,6,2.5,2.5,No thin no clearfell,1.591
+Geordie's Wood,Alder,6,3.015113446,3,No thin no clearfell,1.2974
+Geordie's Wood,Aspen,8,2.5,2.5,No thin no clearfell,0.8466
+Geordie's Wood,Aspen,8,3.015113446,3,No thin no clearfell,0.1996
+Geordie's Wood,"Oak, Pedunculate (Quercus robur)",2,2,2.5,No thin no clearfell,2.6275
+Geordie's Wood,Birch (silver),4,2.5,2.5,No thin no clearfell,10.4965
+Geordie's Wood,Birch (silver),4,3.015113446,3,No thin no clearfell,0.5395
+Geordie's Wood,Oak sessile (Quercus petraea),6,2,2.5,No thin no clearfell,2.642
+Geordie's Wood,Scots pine,8,2,2,No thin no clearfell,0.5353
+Geordie's Wood,Ash,4,2.5,2.5,No thin no clearfell,0.516
+Geordie's Wood,Ash,4,3.015113446,3,No thin no clearfell,0.405
+Geordie's Wood,Alder,4,3.015113446,3,No thin no clearfell,0.162
+Geordie's Wood,Aspen,4,2.5,2.5,No thin no clearfell,0.2064
+Geordie's Wood,Aspen,4,3.015113446,3,No thin no clearfell,0.0162
+Geordie's Wood,"Oak, Pedunculate (Quercus robur)",4,2.5,2.5,No thin no clearfell,2.58
+Geordie's Wood,Oak sessile (Quercus petraea),4,2.5,2.5,No thin no clearfell,1.032
+Geordie's Wood,Oak sessile (Quercus petraea),4,3.015113446,3,No thin no clearfell,0.0405
+Geordie's Wood,Elm (MB),2,3.015113446,3,No thin no clearfell,0.00675
+Glen Finglas,Alder ,2,2.581988897,3,No thin no clearfell,2.5
+Glen Finglas,Birch,6,2.581988897,3,No thin no clearfell,62.02210003
+Glen Finglas,Willow,2,2.581988897,3,No thin no clearfell,11.105
+Glen Finglas,Ash,4,2.581988897,3,No thin no clearfell,0.57588826
+Glen Finglas,Alder ,4,2.581988897,3,No thin no clearfell,11.89894547
+Glen Finglas,Aspen,8,2.581988897,3,No thin no clearfell,1.389701596
+Glen Finglas,Rowan,4,2.581988897,3,No thin no clearfell,6.849472733
+Glen Finglas,Birch,4,2.581988897,3,No thin no clearfell,4.64
+Glen Finglas,Alder ,6,2.581988897,3,No thin no clearfell,2.07
+Glen Finglas,Birch,8,2.581988897,3,No thin no clearfell,8.58
+Glen Finglas,Birch,10,2.581988897,3,No thin no clearfell,0.06
+Glen Finglas,Ash,6,2.581988897,3,No thin no clearfell,0.013902411
+Glen Finglas,Aspen,10,2.581988897,3,No thin no clearfell,0.085034771

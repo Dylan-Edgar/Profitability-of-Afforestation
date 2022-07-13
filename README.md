@@ -1,6 +1,6 @@
 # University of Edinburgh - Final Year Dissertation
 
-This is my 2022 undergraduate dissertation for the University of Edinburgh course, Global Agriculture and Food Security. The dissertation is written in RMarkdown and, in theory, all supporting documentation is provided along with the final output so that the full dissertation, including data analysis, can be reporduced. In practice, I haven't tried to reproduce it with what is provided here...
+This is my 2022 undergraduate dissertation for the University of Edinburgh course, Global Agriculture and Food Security. The dissertation is written in RMarkdown and, in theory, all supporting documentation is provided along with the final output so that the full dissertation, including data analysis, can be fully reporduced. In practice, I haven't tried to reproduce it with what is provided here...
 
 ## Abstract
 
